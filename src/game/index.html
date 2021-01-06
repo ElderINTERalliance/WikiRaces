@@ -1,23 +1,3 @@
-<!--
- Limitations:
-   due to xss, I cannot tell what url an iframe is on without hosting it.
-
-   Design I know will work: Shortest time wins
-   Design I want: get shortest time, and shortest number of links.
-
- Other aspects:
-   I want a leaderboard -> need to host a website
-   I want to tell who won immediately -> I need to host a website
-   I want a timer to count down to event start
-
-  To do:
-    Look into port forwarding with NGINX -> Was I doing something wrong?
-    Create homepage
-    Create game client
-    Create backend (optional??)
-
- -->
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -29,30 +9,21 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
+    <title>Interalliance Wiki Races</title>
+    <meta name="description" content="A website to host challenges where people try to get from one wikipedia page to another, as quick as possible.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="">
+    <link rel="stylesheet" type="text/css" href="index.css">
 </head>
-
-<style>
-    iframe {
-        width: 100%;
-        height: 90vh
-    }
-</style>
 
 <body>
     <iframe src="https://en.wikipedia.org/wiki/Test">
     </iframe>
-    <p>
-        This is where the navigation bar needs to go.
-    </p>
+	<div class="control-buttons"> </div>
     <!--[if lt IE 7]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <!-- <script src="" async defer></script> -->
+	<script src="index.js" async defer></script>
 </body>
 
 </html>
