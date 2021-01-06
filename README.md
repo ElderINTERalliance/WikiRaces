@@ -4,6 +4,10 @@ This is the repository for the interalliance WikiRaces 2021 competition
 Run `npm install` to get started.
 Run `node app.js` to host the site.
 
+---
+
+The main issue right now is that I am unable to detect when a link is clicked.
+
 Limitations:
  - due to xss, I cannot tell what url an iframe is on without hosting it.
 
