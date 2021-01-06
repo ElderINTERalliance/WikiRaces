@@ -4,7 +4,7 @@ var path = require('path');
 
 app.get('/', function(req, res){
    // res.send("This is a test");
-   res.sendFile(path.join(__dirname + '/index.html'));
+   res.sendFile(path.join(__dirname + '/game/index.html'));
 });
 
 app.listen(3000);
