@@ -22,28 +22,8 @@ const log = bunyan.createLogger(bunyanOpts);
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
-const htmlTemplate = `
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js">        <![endif]-->
-
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Interalliance Wiki Races</title>
-    <meta name="description"
-        content="A website to host challenges where people try to get from one wikipedia page to another, as quick as possible.">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="index.css">
-</head>
-
-<body>
-    <div id="content">This is the content</div>
-</body>
-`
+// basic html and css
+const htmlTemplate = require("./template").htmlTemplate
 
 async function getWiki(id) {
     try {
@@ -51,8 +31,22 @@ async function getWiki(id) {
         log.info(`recieved ${id}`);
         return response.text;
     } catch (error) {
-        log.error(error);
+        log.warn(error);
         return undefined;
+    }
+}
+
+async function tryRemoveClass(name, dom) {
+    const ele = dom.window.document.getElementsByClassName(name)[0];
+    if (ele) {
+        ele.remove();
+    }
+}
+
+async function tryRemoveId(id, dom) {
+    const ele = dom.window.document.getElementById(id)
+    if (ele) {
+        ele.remove();
     }
 }
 
@@ -60,7 +54,29 @@ async function generatePage(id) {
     const dom = new JSDOM(htmlTemplate);
     const page = await getWiki(id);
     if (!page) { return "This page does not exist." }
-    dom.window.document.getElementById("content").innerHTML = page;
+    let content = dom.window.document.getElementById("content");
+    // set page
+    content.innerHTML = page;
+
+    tryRemoveId("mw-hidden-catlinks", dom)
+    tryRemoveId("footer", dom)
+    tryRemoveId("catlinks", dom)
+    tryRemoveId("mw-navigation", dom)
+    tryRemoveId("mw-indicator-pp-default", dom)
+    tryRemoveId("References", dom)
+
+    tryRemoveClass("authority-control", dom)
+    tryRemoveClass("printfooter", dom)
+    tryRemoveClass("sistersitebox", dom)
+
+    // Remove references
+    const refs = dom.window.document.getElementsByClassName("reflist")
+    if (refs) {
+        for (let i = 0; i < refs.length; i++) {
+            refs[i].remove()
+        }
+    }
+
     return dom.serialize();
 }
 

@@ -8,7 +8,7 @@ Run `node app.js` to host the site.
 
 The main issue right now is that I am unable to detect when a link is clicked.
 
-Plan: make python script to download the content from wikipedia pages, and then use that for everything.
+Plan: Dynamically fetch wikipedia pages, and break out of the iframe to set variables.
 
 If I can host the page and the game, I shouldn't have issues with XSS
 
@@ -34,6 +34,8 @@ Basic game structure:
 	  - (we should ask they use their real names.)
 
 To do: 
+ - Cache all loaded files -> Store as JSON or as Files?
+    - I assume filesystem is quicker than network
  - get a good server hosting solution.
  - Look into port forwarding with NGINX 
  - Create homepage
