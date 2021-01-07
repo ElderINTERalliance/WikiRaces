@@ -34,10 +34,22 @@ Basic game structure:
 	  - (we should ask they use their real names.)
 
 To do: 
+ - get a good server hosting solution.
  - Look into port forwarding with NGINX 
  - Create homepage
  - Create game client
+	 - remove search boxes and extra stuff from page
 	 - Be able to detect what webpage the user is on.
+		 - How to get info from url?
+		 - Get Wikipedia content and parse it
+		 - How to return content from function with expressjs?
 	 - Time till completion should work by storing a date object at game start, and getting the delta at game over.
  - Create backend (hopefully something better than just a JSON file, but we'll see.)
  - Create python scraper
+
+Online games we can clone:
+  - Wikispedia
+	  - They seemd to have used the same strategy of hosting webpages in an iframe.
+		  - I think they take an article name and automatically generate the html they want from it.
+	  - [see this link](https://dlab.epfl.ch/wikispeedia/play/wiki.php?article=Spanish_conquest_of_the_Inca_Empire) 
+  - [thewikigame](https://www.thewikigame.com) seems to use a parser that returns raw html, which is inserted with JS.

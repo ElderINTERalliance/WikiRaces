@@ -17,6 +17,9 @@
   },
   "homepage": "https://github.com/ElderINTERalliance/WikiRaces2021#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "bunyan": "^1.8.14",
+    "express": "^4.17.1",
+    "jsdom": "^16.4.0",
+    "superagent": "^6.1.0"
   }
 }
