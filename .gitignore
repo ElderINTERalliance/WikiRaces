@@ -1,3 +1,6 @@
+# Game cache
+src/game/cache
+
 # Logs
 logs
 *.log

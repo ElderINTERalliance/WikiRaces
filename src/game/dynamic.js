@@ -18,6 +18,10 @@ const bunyanOpts = {
 };
 const log = bunyan.createLogger(bunyanOpts);
 
+// fs, for caching files
+const fs = require('fs');
+const asyncfs = require('fs').promises;
+
 // jsdom to create and modify the page
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
@@ -28,7 +32,7 @@ const htmlTemplate = require("./template").htmlTemplate
 async function getWiki(id) {
     try {
         const response = await superagent.get(`https://en.wikipedia.org/wiki/${id}`);
-        log.info(`recieved ${id}`);
+        log.info(`Downloaded ${id}`);
         return response.text;
     } catch (error) {
         log.warn(error);
@@ -36,14 +40,14 @@ async function getWiki(id) {
     }
 }
 
-async function tryRemoveClass(name, dom) {
+function tryRemoveClass(name, dom) {
     const ele = dom.window.document.getElementsByClassName(name)[0];
     if (ele) {
         ele.remove();
     }
 }
 
-async function tryRemoveId(id, dom) {
+function tryRemoveId(id, dom) {
     const ele = dom.window.document.getElementById(id)
     if (ele) {
         ele.remove();
@@ -66,6 +70,7 @@ async function generatePage(id) {
     tryRemoveId("footer", dom)
     tryRemoveId("catlinks", dom)
     tryRemoveId("mw-indicator-pp-default", dom)
+    tryRemoveId("mw-indicator-pp-autoreview", dom)
     tryRemoveId("References", dom)
 
     tryRemoveClass("authority-control", dom)
@@ -98,6 +103,49 @@ async function generatePage(id) {
     return dom.serialize();
 }
 
+// make folder if none exists
+const cacheFolder = "./game/cache"
+if (!fs.existsSync(cacheFolder)) {
+    fs.mkdirSync(cacheFolder);
+}
+
+// save file to cache
+async function saveFile(id, content) {
+    fs.writeFile(`${cacheFolder}/${id}.html`, content, (err) => {
+        if (err) return log.error(err);
+        log.info(`saved ${id} to cache.`);
+    });
+}
+
+function isCached(id) {
+    return fs.existsSync(`${cacheFolder}/${id}.html`)
+}
+
+// get file from cache, or return undefined
+async function getCached(id) {
+    try {
+        log.info(`read ${id} from cache`);
+        return asyncfs.readFile(`${cacheFolder}/${id}.html`, "utf-8");
+    } catch (e) {
+        log.error("Error opening cached file: ", e);
+        return undefined
+    }
+}
+
+// gets file from cache if it exists,
+// otherwise it downloads the file from the internet.
+async function getPage(id) {
+    let page = "";
+    if (isCached(id)) {
+        page = await getCached(id)
+    }
+    if (!page) {
+        page = await generatePage(id)
+        saveFile(id, page)
+    }
+    return page
+}
+
 module.exports = {
-    generatePage
+    getPage
 }

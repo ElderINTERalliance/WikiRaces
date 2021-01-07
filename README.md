@@ -55,3 +55,5 @@ Online games we can clone:
 		  - I think they take an article name and automatically generate the html they want from it.
 	  - [see this link](https://dlab.epfl.ch/wikispeedia/play/wiki.php?article=Spanish_conquest_of_the_Inca_Empire) 
   - [thewikigame](https://www.thewikigame.com) seems to use a parser that returns raw html, which is inserted with JS.
+
+This is intended to be run on a linux system.

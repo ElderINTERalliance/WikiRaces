@@ -30,11 +30,11 @@ log.info("Server Started");
 // dynamically generate urls
 app.get('/wiki/:id', async (req, res) => {
    const start = new Date();
-   const page = await dynamic.generatePage(req.params.id);
+   const page = await dynamic.getPage(req.params.id);
    res.send(page);
    const end = new Date();
    const seconds = (end.getTime() - start.getTime()) / 1000;
-   log.info(`Parsed ${req.params.id} in ${seconds} seconds.`);
+   log.info(`Received ${req.params.id} in ${seconds} seconds.`);
 });
 
 // include static game files
