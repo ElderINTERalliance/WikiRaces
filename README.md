@@ -6,6 +6,36 @@ Run `node app.js` to host the site.
 
 ---
 
+## Project Anatomy
+
+```
+. (src)
+├── `app.js`
+│   (the program that runs the server)
+├── `game`
+│   ├── `cache`
+│   │   (cached files, so I don't have to download them again.)
+│   ├── `dynamic.js`
+│   │   (the functions related to generating the pages from wikipedia.)
+│   ├── `game_static`
+│   │   (folder for any file that is not run directly.)
+│   │   ├── `index.css`
+│   │   │   (css for the game client)
+│   │   ├── `index.js`
+│   │   │   (scripts for the game client)
+│   │   └── `logo.png`
+│   │       (interalliance logo)
+│   ├── `index.html`
+│   │   (the game client)
+│   └── `template.js`
+│       (has a base template for each wikipedia page)
+```
+
+
+---
+
+## Random notes, mainly for me
+
 The main issue right now is that I am unable to detect when a link is clicked.
 
 Plan: Dynamically fetch wikipedia pages, and break out of the iframe to set variables.
@@ -34,20 +64,14 @@ Basic game structure:
 	  - (we should ask they use their real names.)
 
 To do: 
- - Cache all loaded files -> Store as JSON or as Files?
-    - I assume filesystem is quicker than network
  - get a good server hosting solution.
  - Look into port forwarding with NGINX 
  - Create homepage
  - Create game client
-	 - remove search boxes and extra stuff from page
 	 - Be able to detect what webpage the user is on.
 		 - How to get info from url?
-		 - Get Wikipedia content and parse it
-		 - How to return content from function with expressjs?
 	 - Time till completion should work by storing a date object at game start, and getting the delta at game over.
  - Create backend (hopefully something better than just a JSON file, but we'll see.)
- - Create python scraper
 
 Online games we can clone:
   - Wikispedia
@@ -57,3 +81,11 @@ Online games we can clone:
   - [thewikigame](https://www.thewikigame.com) seems to use a parser that returns raw html, which is inserted with JS.
 
 This is intended to be run on a linux system.
+
+----
+
+## Completed:
+ - Cache all loaded files -> Store as JSON or as Files?
+ - Get Wikipedia content and parse it
+ - How to return content from function with expressjs?
+ - remove search boxes and extra stuff from page
