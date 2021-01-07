@@ -19,8 +19,8 @@ const htmlTemplate = `
 <body>
     <div id="content">If you're seeing this, something went terribly wrong.</div>
 </body>
-`
+`;
 
 module.exports = {
-    htmlTemplate
-}
+	htmlTemplate,
+};
