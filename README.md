@@ -1,8 +1,9 @@
 # WikiRaces2021
 This is the repository for the interalliance WikiRaces 2021 competition
 
-Run `npm install` to get started.
-Run `node app.js` to host the site.
+Run `npm install` in the project directory to install the dependencies.
+
+Run `npm run-script run` to host the site.
 
 ---
 
@@ -21,6 +22,8 @@ Run `node app.js` to host the site.
 │   │   (folder for any file that is not run directly.)
 │   │   ├── `index.css`
 │   │   │   (css for the game client)
+│   │   ├── `wiki.css`
+│   │   │   (css for the wikipedia pages)
 │   │   ├── `index.js`
 │   │   │   (scripts for the game client)
 │   │   └── `logo.png`
