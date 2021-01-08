@@ -18,6 +18,8 @@ Run `npm run-script run` to host the site.
 │   │   (cached files, so I don't have to download them again.)
 │   ├── `dynamic.js`
 │   │   (the functions related to generating the pages from wikipedia.)
+│   ├── `stats.js`
+│   │   (statistics about how the server is doing)
 │   ├── `game_static`
 │   │   (folder for any file that is not run directly.)
 │   │   ├── `index.css`
