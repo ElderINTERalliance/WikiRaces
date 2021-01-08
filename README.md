@@ -62,6 +62,7 @@ Other aspects:
  - I want a timer to count down to event start
 
 Basic game structure:
+  - Add horizontal history view in bottom bar
   - Before game starts, show timer
   - As game starts: Log Date object to cookies? 
   - Game end is found when the iframe location is equal to the target URL
@@ -69,6 +70,7 @@ Basic game structure:
 	  - (we should ask they use their real names.)
 
 To do: 
+ - Nicely comment everything.
  - get a good server hosting solution.
  - Look into port forwarding with NGINX 
  - Create homepage

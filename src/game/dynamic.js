@@ -1,6 +1,10 @@
 // superagent to get wikipedia pages
 const superagent = require("superagent");
 
+// Statistics
+const stats = require("./stats");
+const avg = new stats.Average();
+
 // Bunyan, for logging
 const bunyan = require("bunyan");
 const bunyanOpts = {
@@ -30,6 +34,9 @@ const { JSDOM } = jsdom;
 // basic html and css
 const htmlTemplate = require("./template").htmlTemplate;
 
+// This gets the raw html from wikipedia.
+// I do not use an API because I want to preserve
+// the look of the website.
 async function getWiki(id) {
 	try {
 		const response = await superagent.get(
@@ -60,6 +67,7 @@ function tryRemoveId(id, dom) {
 async function generatePage(id) {
 	const dom = new JSDOM(htmlTemplate);
 	const document = dom.window.document;
+	// get raw html from wikipedia.
 	const page = await getWiki(id);
 	if (!page) {
 		return "This page does not exist.";
@@ -127,7 +135,7 @@ function isCached(id) {
 // get file from cache, or return undefined
 async function getCached(id) {
 	try {
-		log.info(`read ${id} from cache`);
+		log.info(`read ${id} from cache.`);
 		return asyncfs.readFile(`${cacheFolder}/${id}.html`, "utf-8");
 	} catch (err) {
 		log.error("Error opening cached file: ", err);
@@ -140,12 +148,15 @@ async function getCached(id) {
 async function getPage(id) {
 	let page = "";
 	if (isCached(id)) {
+		avg.add(1);
 		page = await getCached(id);
 	}
 	if (!page) {
+		avg.add(0);
 		page = await generatePage(id);
 		saveFile(id, page);
 	}
+	log.info(`${Number(((await avg.average()) * 100).toFixed(4))}% cached`);
 	return page;
 }
 

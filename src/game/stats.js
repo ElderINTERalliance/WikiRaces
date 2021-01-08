@@ -1,8 +1,10 @@
+// The purpose of this program is to keep metadata about the system
+// with a limit on memory usage.
 class Average {
 	constructor() {
 		this.records = [];
 		this.position = 0;
-		this.limit = 20;
+		this.limit = 50;
 	}
 	async add(data) {
 		if (this.position >= this.limit - 1) {
@@ -19,7 +21,7 @@ class Average {
 	get() {
 		return this.records;
 	}
-	average() {
+	async average() {
 		// sum / number of numbers
 		const rawAverage =
 			this.records.reduce((a, b) => a + b, 0) / this.records.length;

@@ -26,16 +26,18 @@ const avg = new stats.Average();
 
 // Custom functions for generating Wikipedia pages
 const dynamic = require("./game/dynamic");
+const client = require("./game/client/client");
 
 log.info("Server Started");
 
 // Start Server Code: ---------------
 
-// dynamically generate urls
+// dynamically generate wiki pages
 app.get("/wiki/:id", async (req, res) => {
 	const start = new Date();
-	const page = await dynamic.getPage(req.params.id);
 
+	// get page
+	const page = await dynamic.getPage(req.params.id);
 	res.send(page);
 
 	const end = new Date();
@@ -43,7 +45,7 @@ app.get("/wiki/:id", async (req, res) => {
 	avg.add(seconds);
 	log.info(`Received ${req.params.id} in ${seconds} seconds.`);
 
-	let average = avg.average();
+	let average = await avg.average();
 	if (average >= 0.7) {
 		log.warn(`Average time is ${average} seconds.`);
 	} else {
@@ -55,11 +57,18 @@ app.get("/wiki/:id", async (req, res) => {
 app.use("/", express.static(__dirname + "/game/game_static"));
 
 let clientCount = 1;
-app.get("/game", (req, res) => {
+app.get("/game/:level", async (req, res) => {
+	// Send game client
+	const level = await client.loadLevel(req.params.level);
+	res.send(level);
 	log.warn(`Game client #${clientCount} loaded.`);
 	clientCount++;
-	// Send game client
-	res.sendFile(path.join(__dirname + "/game/index.html"));
+	// res.sendFile(path.join(__dirname + "/game/index.html"));
+});
+
+// You need a level name to play the game.
+app.get("/game", function (req, res) {
+	res.redirect("/");
 });
 
 app.get("/", (req, res) => {
