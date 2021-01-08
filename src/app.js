@@ -40,13 +40,20 @@ app.get("/wiki/:id", async (req, res) => {
 // include static game files
 app.use("/", express.static(__dirname + "/game/game_static"));
 
-app.get("/", function (req, res) {
-	// Send index.html
+let clientCount = 1;
+app.get("/game", (req, res) => {
+	log.warn(`Game client #${clientCount} loaded.`);
+	clientCount++;
+	// Send game client
 	res.sendFile(path.join(__dirname + "/game/index.html"));
 });
 
+app.get("/", (req, res) => {
+	res.send("This would be the homepage");
+});
+
 // Other routes here
-app.get("*", function (req, res) {
+app.get("*", (req, res) => {
 	res.send("Sorry, this is an invalid URL.");
 });
 

@@ -21,6 +21,7 @@ const log = bunyan.createLogger(bunyanOpts);
 // fs, for caching files
 const fs = require("fs");
 const asyncfs = require("fs").promises;
+const path = require("path");
 
 // jsdom to create and modify the page
 const jsdom = require("jsdom");
@@ -68,8 +69,6 @@ async function generatePage(id) {
 	content.innerHTML = page;
 
 	tryRemoveId("mw-navigation", dom);
-	// tryRemoveId("mw-head", dom)
-
 	tryRemoveId("mw-hidden-catlinks", dom);
 	tryRemoveId("footer", dom);
 	tryRemoveId("catlinks", dom);
@@ -108,7 +107,7 @@ async function generatePage(id) {
 }
 
 // make folder if none exists
-const cacheFolder = "./game/cache";
+const cacheFolder = path.join(__dirname, "/cache");
 if (!fs.existsSync(cacheFolder)) {
 	fs.mkdirSync(cacheFolder);
 }
@@ -130,8 +129,8 @@ async function getCached(id) {
 	try {
 		log.info(`read ${id} from cache`);
 		return asyncfs.readFile(`${cacheFolder}/${id}.html`, "utf-8");
-	} catch (e) {
-		log.error("Error opening cached file: ", e);
+	} catch (err) {
+		log.error("Error opening cached file: ", err);
 		return undefined;
 	}
 }

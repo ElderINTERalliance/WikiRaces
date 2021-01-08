@@ -1,25 +1,26 @@
 {
-  "name": "wikiraces2021",
-  "version": "1.0.0",
-  "description": "A website to host challenges where people try to get from one wikipedia page to another, as quick as possible.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ElderINTERalliance/WikiRaces2021.git"
-  },
-  "author": "zsarge",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ElderINTERalliance/WikiRaces2021/issues"
-  },
-  "homepage": "https://github.com/ElderINTERalliance/WikiRaces2021#readme",
-  "dependencies": {
-    "bunyan": "^1.8.14",
-    "express": "^4.17.1",
-    "jsdom": "^16.4.0",
-    "superagent": "^6.1.0"
-  }
+	"name": "wikiraces2021",
+	"version": "1.0.0",
+	"description": "A website to host challenges where people try to get from one wikipedia page to another, as quick as possible.",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"run": "node src/app.js | bunyan"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ElderINTERalliance/WikiRaces2021.git"
+	},
+	"author": "zsarge",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/ElderINTERalliance/WikiRaces2021/issues"
+	},
+	"homepage": "https://github.com/ElderINTERalliance/WikiRaces2021#readme",
+	"dependencies": {
+		"bunyan": "^1.8.14",
+		"express": "^4.17.1",
+		"jsdom": "^16.4.0",
+		"superagent": "^6.1.0"
+	}
 }
