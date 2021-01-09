@@ -83,6 +83,7 @@ async function generatePage(id) {
 	tryRemoveId("mw-indicator-pp-default", dom);
 	tryRemoveId("mw-indicator-pp-autoreview", dom);
 	tryRemoveId("References", dom);
+	tryRemoveId("references", dom);
 
 	tryRemoveClass("authority-control", dom);
 	tryRemoveClass("printfooter", dom);
