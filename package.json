@@ -6,7 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"run": "node src/app.js | bunyan",
-		"clear-cache": "rm src/game/cache/ -r; mkdir -p src/game/cache/"
+		"clear-cache": "rm src/game/cache/ -r; mkdir -p src/game/cache/",
+		"clear-then-run": "rm src/game/cache/ -r; mkdir -p src/game/cache/; node src/app.js | bunyan"
 	},
 	"repository": {
 		"type": "git",
