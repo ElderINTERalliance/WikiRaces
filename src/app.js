@@ -55,12 +55,10 @@ app.get("/wiki/:id", async (req, res) => {
 
 // include static game files
 app.use("/", express.static(__dirname + "/game/game_static"));
+app.use("/wiki-races/", express.static(__dirname + "/game/game_static"));
 
 let clientCount = 1;
-app.get("/game/:level", async (req, res) => {
-	// Send game client
-	const level = await client.loadLevel(req.params.level);
-	res.send(level);
+app.get("/wiki-races/game", (req, res) => {
 	log.warn(`Game client #${clientCount} loaded.`);
 	clientCount++;
 	// res.sendFile(path.join(__dirname + "/game/index.html"));
@@ -71,13 +69,13 @@ app.get("/game", function (req, res) {
 	res.redirect("/");
 });
 
-app.get("/", (req, res) => {
+app.get("/wiki-races", (req, res) => {
 	res.send("This would be the homepage");
 });
 
 // Other routes here
-app.get("*", (req, res) => {
-	res.send("Sorry, this is an invalid URL.");
-});
+// app.get("*", (req, res) => {
+// res.send(`Sorry, this is an invalid URL. `);
+// });
 
-app.listen(3000);
+app.listen(8443);

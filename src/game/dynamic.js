@@ -98,7 +98,7 @@ async function generatePage(id) {
 
 	// add logo and text to top left of page
 	const image = document.createElement("img");
-	image.src = "../logo.png";
+	image.src = "../wiki-races/logo.png";
 	image.style.height = "95px";
 	const text = document.createElement("h1");
 	text.textContent = "Wiki Races 2021";
