@@ -26,18 +26,16 @@ const avg = new stats.Average();
 
 // Custom functions for generating Wikipedia pages
 const dynamic = require("./game/dynamic");
-const client = require("./game/client/client");
 
 log.info("Server Started");
 
 // Start Server Code: ---------------
 
-// dynamically generate wiki pages
+// dynamically generate urls
 app.get("/wiki/:id", async (req, res) => {
 	const start = new Date();
-
-	// get page
 	const page = await dynamic.getPage(req.params.id);
+
 	res.send(page);
 
 	const end = new Date();
@@ -61,12 +59,8 @@ let clientCount = 1;
 app.get("/wiki-races/game", (req, res) => {
 	log.warn(`Game client #${clientCount} loaded.`);
 	clientCount++;
-	// res.sendFile(path.join(__dirname + "/game/index.html"));
-});
-
-// You need a level name to play the game.
-app.get("/game", function (req, res) {
-	res.redirect("/");
+	// Send game client
+	res.sendFile(path.join(__dirname + "/game/index.html"));
 });
 
 app.get("/wiki-races", (req, res) => {
