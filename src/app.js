@@ -29,6 +29,9 @@ const dynamic = require("./game/dynamic");
 
 log.info("Server Started");
 
+// My very small custom "database":
+const db = require("./game/database");
+
 // Start Server Code: ---------------
 
 // dynamically generate urls
@@ -61,6 +64,28 @@ app.get("/wiki-races/game/*", (req, res) => {
 	clientCount++;
 	// Send game client
 	res.sendFile(path.join(__dirname + "/game/index.html"));
+});
+
+// main page
+app.get("/wiki-races/", (req, res) => {
+	res.sendFile(path.join(__dirname + "/game/homepage.html"));
+});
+
+// take user submissions:
+app.use(
+	express.urlencoded({
+		extended: true,
+	})
+);
+
+// TODO - Add submission form
+// app.get("/submit-form/", (req, res) => {
+// 	// res.sendFile(path.join(__dirname + "/game/"));
+// });
+
+app.post("/submit", (req, res) => {
+	log.info(`Received post request: ${req.body.username}`);
+	res.end();
 });
 
 // Other routes here
