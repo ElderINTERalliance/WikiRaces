@@ -5,24 +5,23 @@
  * It might also submit but idk I haven't go that far.
  */
 
-// I wanted to dynamically load this,
-// but just keeping it in the file seems more efficient.
-const levels = {
-	level1: {
-		name: "level1",
-		startTime: "2021-01-09T17:50:16.765062",
-		endTime: "2021-01-09T17:56:21.830101",
-		startPage: "C_(programming_language)",
-		endPage: "Sea",
-	},
-	level2: {
-		name: "level2",
-		startTime: "2021-01-09T18:25:52.402911",
-		endTime: "2021-01-09T18:29:52.402911",
-		startPage: "Green",
-		endPage: "John_Green_(author)",
-	},
-};
+const levelsURL = "http://localhost:8443/levels.json";
+
+var resp;
+var xmlHttp;
+
+/* XML Request on main thread is a bad idea. */
+resp = "";
+xmlHttp = new XMLHttpRequest();
+
+if (xmlHttp != null) {
+	xmlHttp.open("GET", levelsURL, false);
+	xmlHttp.send(null);
+	resp = xmlHttp.responseText;
+}
+
+const levels = JSON.parse(resp);
+/* end bad idea */
 
 /* globally accessed variables: */
 const settings = getLevelSettings();
@@ -132,7 +131,6 @@ function reverseHistory(goal) {
 	let index = viewedPages.indexOf(goal);
 	if (index < 0) return undefined;
 	viewedPages.splice(index);
-	console.log(index);
 	goTo(goal);
 }
 
@@ -154,13 +152,11 @@ frame.addEventListener("load", async () => {
 		submit();
 	}
 	totalLinks++;
-	console.log(page, viewedPages[viewedPages.length - 1]);
 	if (page != viewedPages[viewedPages.length - 1]) {
 		viewedPages.push(page);
 	}
 	setHistory();
 	document.getElementById("total").textContent = `Total Links: ${totalLinks}`;
-	console.log(viewedPages);
 });
 
 // navigate to page when history is clicked
