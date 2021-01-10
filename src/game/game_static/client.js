@@ -69,10 +69,7 @@ function goTo(page) {
 	frame.src = `/wiki/${page}`;
 }
 
-// Sets Iframe location on script load, and when `reset` is clicked
-function loadClient() {
-	const level = getLevelSettings();
-	const frame = document.getElementById("wikipedia-frame");
+function startGame(level) {
 	const error = document.getElementById("error-text");
 
 	// Set iframe url:
@@ -88,6 +85,39 @@ function loadClient() {
 	document.getElementById("goal").textContent = `Goal: ${serialize(
 		level.endPage
 	)}`;
+}
+
+// Sets Iframe location on script load, and when `reset` is clicked
+function loadClient() {
+	const level = getLevelSettings();
+	const startDate = Date.parse(level.startTime);
+	const error = document.getElementById("error-text");
+	let countdown = setInterval(function () {
+		const date = new Date();
+		let seconds = (startDate - date) / 1000;
+		let minutes = Math.floor(seconds / 60);
+		seconds = seconds - minutes * 60;
+
+		// Update time on screen
+		if (minutes > 0) {
+			error.textContent = `Starts in ${minutes} minutes ${Math.round(
+				seconds
+			)} seconds.`;
+		} else {
+			error.innerHTML = `Starts in ${
+				Math.round(seconds * 10) / 10
+			} seconds. <br>	Goal: Go from ${serialize(
+				level.startPage
+			)} to ${serialize(level.endPage)}<br><br>
+			Remember that the goal is displayed in the bottom right.`;
+		}
+
+		// start game at correct time.
+		if (Date.now() - startDate >= 0) {
+			startGame(level);
+			clearInterval(countdown);
+		}
+	}, 100);
 }
 
 function submit() {
