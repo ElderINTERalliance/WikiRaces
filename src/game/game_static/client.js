@@ -69,6 +69,39 @@ function goTo(page) {
 	frame.src = `/wiki/${page}`;
 }
 
+function setUpCountDown() {
+	const level = getLevelSettings();
+	const timer = document.getElementById("time-left");
+	const endDate = Date.parse(level.endTime);
+	if (endDate === undefined) return undefined;
+	let timeLeft = setInterval(function () {
+		const date = new Date();
+		let seconds = (endDate - date) / 1000;
+		let minutes = Math.floor(seconds / 60);
+		seconds = seconds - minutes * 60;
+
+		// Update time on screen
+		if (minutes > 0) {
+			timer.textContent = `Time Left: ${minutes} minutes ${Math.round(
+				seconds
+			)} seconds.`;
+		} else if (seconds >= 0) {
+			timer.textContent = `Time Left: ${Math.round(seconds)} seconds.`;
+		} else {
+			timer.textContent = `Time ran out. :(`;
+			clearInterval(timeLeft);
+		}
+
+		// clear interval when time passes
+		if (Date.now() - endDate >= 0) {
+			timer.textContent = `Time ran out. :(`;
+			clearInterval(timeLeft);
+			alert("This level is over.");
+		}
+	}, 400);
+}
+setUpCountDown();
+
 function startGame(level) {
 	const error = document.getElementById("error-text");
 

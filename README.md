@@ -70,6 +70,7 @@ Basic game structure:
 	  - (we should ask they use their real names.)
 
 To do: 
+ - Add link to go back to main page when we run out of time.
  - Disable opening links in new tab?
  - Nicely comment everything.
  - get a good server hosting solution.
