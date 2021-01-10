@@ -63,11 +63,6 @@ app.get("/wiki-races/game/*", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/index.html"));
 });
 
-// app.get("/wiki-races/game/", (req, res) => {
-// 	log.error(`No game url specified.`);
-// 	res.send(`Sorry, this is an invalid URL. `);
-// });
-
 // Other routes here
 app.get("*", (req, res) => {
 	res.send(`Sorry, this is an invalid URL. `);
