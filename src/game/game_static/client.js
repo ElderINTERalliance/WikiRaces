@@ -47,7 +47,7 @@ function validLevel(level) {
 	return false;
 }
 
-// Takes a string, returns last `/` to end
+// Takes a string, returns after last `/` to end
 function parseLevelFromString(str) {
 	const lastSlash = str.lastIndexOf("/") + 1;
 	return str.slice(lastSlash);
@@ -87,9 +87,6 @@ function setUpCountDown() {
 			)} seconds.`;
 		} else if (seconds >= 0) {
 			timer.textContent = `Time Left: ${Math.round(seconds)} seconds.`;
-		} else {
-			timer.textContent = `Time ran out. :(`;
-			clearInterval(timeLeft);
 		}
 
 		// clear interval when time passes
@@ -100,7 +97,6 @@ function setUpCountDown() {
 		}
 	}, 400);
 }
-setUpCountDown();
 
 function startGame(level) {
 	const error = document.getElementById("error-text");
@@ -204,6 +200,7 @@ function setHistory() {
 }
 
 /* Functions that run at script load: */
+setUpCountDown();
 loadClient();
 
 document.getElementById("restart").addEventListener("click", loadClient);
