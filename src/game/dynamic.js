@@ -147,18 +147,22 @@ async function getCached(id) {
 // gets file from cache if it exists,
 // otherwise it downloads the file from the internet.
 async function getPage(id) {
-	let page = "";
-	if (isCached(id)) {
-		avg.add(1);
-		page = await getCached(id);
+	try {
+		let page = "";
+		if (isCached(id)) {
+			avg.add(1);
+			page = await getCached(id);
+		}
+		if (!page) {
+			avg.add(0);
+			page = await generatePage(id);
+			saveFile(id, page);
+		}
+		log.info(`${Number(((await avg.average()) * 100).toFixed(4))}% cached`);
+		return page;
+	} catch (err) {
+		log.error(`Error in page load ${err}`);
 	}
-	if (!page) {
-		avg.add(0);
-		page = await generatePage(id);
-		saveFile(id, page);
-	}
-	log.info(`${Number(((await avg.average()) * 100).toFixed(4))}% cached`);
-	return page;
 }
 
 module.exports = {
