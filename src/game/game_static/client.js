@@ -109,20 +109,18 @@ function visualizeHistory(array) {
 	var list = document.createElement("ul");
 
 	for (var i = 0; i < array.length; i++) {
-		// Create the list item:
+		// Create the list items:
 		var item = document.createElement("li");
 		item.className = "history-element";
-
-		let span = document.createElement("span");
-
+		// let span = document.createElement("span");
 		let border = document.createElement("span");
 		border.className = "history-text";
 		let text = document.createTextNode(serialize(array[i]));
-		border.appendChild(text);
-		span.appendChild(border);
-		item.appendChild(span);
 
-		// Add it to the list:
+		// append them
+		border.appendChild(text);
+		// span.appendChild(border);
+		item.appendChild(border);
 		list.appendChild(item);
 	}
 

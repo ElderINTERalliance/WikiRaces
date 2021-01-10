@@ -70,6 +70,7 @@ Basic game structure:
 	  - (we should ask they use their real names.)
 
 To do: 
+ - Disable opening links in new tab?
  - Nicely comment everything.
  - get a good server hosting solution.
  - Look into port forwarding with NGINX 
