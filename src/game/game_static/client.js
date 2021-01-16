@@ -6,10 +6,7 @@
  */
 
 // Get domain, including port number
-let place = [...window.location.href].join("");
-place = place.slice(place.indexOf("/") + 2);
-place = place.substr(0, place.indexOf("/"));
-const levelsURL = `http://${place}/levels.json`;
+const levelsURL = `http://${window.location.host}/levels.json`;
 
 var resp;
 var xmlHttp;
