@@ -5,7 +5,11 @@
  * It might also submit but idk I haven't go that far.
  */
 
-const levelsURL = "http://localhost:8443/levels.json";
+// Get domain, including port number
+let place = [...window.location.href].join("");
+place = place.slice(place.indexOf("/") + 2);
+place = place.substr(0, place.indexOf("/"));
+const levelsURL = `http://${place}/levels.json`;
 
 var resp;
 var xmlHttp;
