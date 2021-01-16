@@ -44,7 +44,6 @@ Run `npm run-script run` to host the site.
 ### Code maintenance / small changes
 - test to see if not using JSDOM improves performance
 	- I need to stop using JSDOM
-- improve `if (err) return log.error(err);`
 - fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
 - set up nojs and IE support
 - remove if statement in `const refs = document.getElementsByClassName("reflist");`
@@ -111,11 +110,12 @@ This is intended to be run on a linux system.
 ----
 
 ## Completed:
- - Cache all loaded files -> Store as JSON or as Files?
- - Get Wikipedia content and parse it
- - How to return content from function with expressjs?
- - remove search boxes and extra stuff from page
- - The main issue right now is that I am unable to detect when a link is clicked.
- - Plan: Dynamically fetch wikipedia pages, and break out of the iframe to set variables.
- - If I can host the page and the game, I shouldn't have issues with XSS
+- Cache all loaded files -> Store as JSON or as Files?
+- Get Wikipedia content and parse it
+- How to return content from function with expressjs?
+- remove search boxes and extra stuff from page
+- The main issue right now is that I am unable to detect when a link is clicked.
+- Plan: Dynamically fetch wikipedia pages, and break out of the iframe to set variables.
+- If I can host the page and the game, I shouldn't have issues with XSS
 - Autogenerate [url](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L8)
+- improve `if (err) return log.error(err);`
