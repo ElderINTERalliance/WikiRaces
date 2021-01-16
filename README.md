@@ -41,11 +41,30 @@ Run `npm run-script run` to host the site.
 
 ## Random notes, mainly for me
 
-The main issue right now is that I am unable to detect when a link is clicked.
+### Code maintenance / small changes
+- test to see if not using JSDOM improves performance
+- improve `if (err) return log.error(err);`
+- https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/stats.js#L15
+- https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/stats.js#L10
+- Autogenerate [url](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L8)
+- fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
+- set up nojs and IE support
+- remove if statement in `const refs = document.getElementsByClassName("reflist");`
+- add more padding to the bottom of the navbar
+- set github language [with this](https://hackernoon.com/how-to-change-repo-language-in-github-c3e07819c5bb) [or this](https://stackoverflow.com/questions/34713765/github-changes-repository-to-wrong-language)
 
-Plan: Dynamically fetch wikipedia pages, and break out of the iframe to set variables.
+### Design:
+- encode urls properly
+- add loading icon behind Iframe
+- see if I can do anything to make http requests less intensive
+	-  http/2
+- send POST requests on level finish
+- create homepage where you can set your name in a cookie
+	- add this to the post request
+- set up mongodb
+- Make homepage to view submissions
+	- simplified view -> click for more details
 
-If I can host the page and the game, I shouldn't have issues with XSS
 
 Limitations:
  - due to xss, I cannot tell what url an iframe is on without hosting it.
@@ -98,3 +117,6 @@ This is intended to be run on a linux system.
  - Get Wikipedia content and parse it
  - How to return content from function with expressjs?
  - remove search boxes and extra stuff from page
+ - The main issue right now is that I am unable to detect when a link is clicked.
+ - Plan: Dynamically fetch wikipedia pages, and break out of the iframe to set variables.
+ - If I can host the page and the game, I shouldn't have issues with XSS
