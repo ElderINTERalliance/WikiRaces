@@ -167,4 +167,5 @@ async function getPage(id) {
 
 module.exports = {
 	getPage,
+	getCached,
 };
