@@ -12,7 +12,7 @@ class Average {
 		} else {
 			this.position += 1;
 		}
-		if (this.records[this.position] || this.records[this.position] === 0) {
+		if (this.records[this.position] !== undefined) {
 			this.records[this.position] = data;
 		} else {
 			this.records.push(data);
