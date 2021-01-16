@@ -2,54 +2,30 @@ const stats = require("./stats");
 
 test("expect average of one value to be that one value", () => {
 	const avg = new stats.Average();
-	expect(avg).toEqual({ records: [], position: 0, limit: 50 });
+	const LIMIT = avg.limit;
+	expect(avg).toEqual({ records: [], position: 0, limit: LIMIT });
 });
 
 test("expect add to add one element and increase position", () => {
 	const avg = new stats.Average();
+	const LIMIT = avg.limit;
 	avg.add(5);
-	expect(avg).toEqual({ records: [5], position: 1, limit: 50 });
+	expect(avg).toEqual({ records: [5], position: 1, limit: LIMIT });
 });
 
-test("expect add to wrap around limit", () => {
+test("expect add to wrap around bounds", () => {
 	const avg = new stats.Average();
-	for (let i = 0; i <= 30; i++) {
+	const LIMIT = avg.limit;
+	for (let i = 0; i < LIMIT; i++) {
 		avg.add(i);
 	}
-	expect(avg.records).toEqual([
-		0,
-		1,
-		2,
-		3,
-		4,
-		5,
-		6,
-		7,
-		8,
-		9,
-		10,
-		11,
-		12,
-		13,
-		14,
-		15,
-		16,
-		17,
-		18,
-		19,
-		20,
-		21,
-		22,
-		23,
-		24,
-		25,
-		26,
-		27,
-		28,
-		29,
-		30,
-	]);
-	expect(avg.position).toEqual(31);
+	let arr = [];
+	for (let i = 0; i < LIMIT - 1; i++) {
+		arr.push(i);
+	}
+	arr[0] = LIMIT - 1;
+	expect(avg.records).toEqual(arr);
+	expect(avg.position).toEqual(0);
 });
 
 test("expect average of 0 and 10 to be 5", async () => {
