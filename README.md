@@ -10,32 +10,8 @@ Run `npm run-script run` to host the site.
 ## Project Anatomy
 
 ```
-. (src)
-├── `app.js`
-│   (the program that runs the server)
-├── `game`
-│   ├── `cache`
-│   │   (cached files, so I don't have to download them again.)
-│   ├── `dynamic.js`
-│   │   (the functions related to generating the pages from wikipedia.)
-│   ├── `stats.js`
-│   │   (statistics about how the server is doing)
-│   ├── `game_static`
-│   │   (folder for any file that is not run directly.)
-│   │   ├── `index.css`
-│   │   │   (css for the game client)
-│   │   ├── `wiki.css`
-│   │   │   (css for the wikipedia pages)
-│   │   ├── `index.js`
-│   │   │   (scripts for the game client)
-│   │   └── `logo.png`
-│   │       (interalliance logo)
-│   ├── `index.html`
-│   │   (the game client)
-│   └── `template.js`
-│       (has a base template for each wikipedia page)
+TODO - redo project anatomy
 ```
-
 
 ---
 
@@ -46,7 +22,23 @@ Run `npm run-script run` to host the site.
 	- I need to stop using JSDOM
 - fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
 - set up nojs and IE support
-- add more padding to the bottom of the navbar
+
+<!--- TODO -->
+### Order of development:
+------
+- add level view to homepage
+------
+- Forward `/` to `/wiki-races` with NGINX
+------
+- Get backend capable of accepting submissions
+- create homepage that allows users to register username
+  - Takes username in box
+  - generates userid
+  - Submits userid with username to database
+- make levels submit data on level clear
+	- log that data to database
+- create leaderboard that loads level data and views it.
+------
 
 ### Design:
 - encode urls properly
@@ -74,8 +66,6 @@ Other aspects:
  - I want a timer to count down to event start
 
 Basic game structure:
-  - Add horizontal history view in bottom bar
-  - Before game starts, show timer
   - As game starts: Log Date object to cookies? 
   - Game end is found when the iframe location is equal to the target URL
   - At game end, (StartTime - CurrentTime) is submitted to the database as the time taken, along with a user entered name.
@@ -86,12 +76,7 @@ To do:
  - Disable opening links in new tab?
  - Nicely comment everything.
  - get a good server hosting solution.
- - Look into port forwarding with NGINX 
  - Create homepage
- - Create game client
-	 - Be able to detect what webpage the user is on.
-		 - How to get info from url?
-	 - Time till completion should work by storing a date object at game start, and getting the delta at game over.
  - Create backend (hopefully something better than just a JSON file, but we'll see.)
 
 Online games we can clone:
@@ -118,3 +103,11 @@ This is intended to be run on a linux system.
 - set github language [with this](https://hackernoon.com/how-to-change-repo-language-in-github-c3e07819c5bb) [or this](https://stackoverflow.com/questions/34713765/github-changes-repository-to-wrong-language)
 - create test suite
 - due to xss, I cannot tell what url an iframe is on without hosting it.
+- add more padding to the bottom of the navbar
+- Add horizontal history view in bottom bar
+- Before game starts, show timer
+- Be able to detect what webpage the user is on.
+	- How to get info from url?
+- Time till completion should work by storing a date object at game start, and getting the delta at game over.
+- Create game client
+- Look into port forwarding with NGINX
