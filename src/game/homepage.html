@@ -15,19 +15,14 @@
 			name="description"
 			content="A website to host challenges where people try to get from one wikipedia page to another, as quick as possible."
 		/>
-		<!-- <link rel="stylesheet" type="text/css" href="../client.css" /> -->
+		<link rel="stylesheet" type="text/css" href="../homepage.css" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</head>
 
 	<body>
-		<div id="container">
-			<form method="POST" action="/submit">
-				<input type="text" name="username" />
-				<input type="submit" />
-			</form>
+		<div id="page">
+			<div id="levels-table"></div>
 		</div>
-		THis is a test
-		<button onclick="submit()">test</button>
 		<!--[if lt IE 7]>
 			<p class="browsehappy">
 				You are using an <strong>outdated</strong> browser. Please
@@ -35,8 +30,5 @@
 			</p>
 		<![endif]-->
 		<script src="../homepage.js" async defer></script>
-		<script>
-			console.log("Hello world");
-		</script>
 	</body>
 </html>

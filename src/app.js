@@ -67,7 +67,7 @@ app.get("/wiki-races/game/*", (req, res) => {
 });
 
 // main page
-app.get("/wiki-races/", (req, res) => {
+app.get("/wiki-races", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/homepage.html"));
 });
 

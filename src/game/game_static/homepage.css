@@ -1,0 +1,28 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background: #e6dfdf;
+}
+
+#levels-table table {
+    width: 100%;
+}
+
+tr th, tr td {
+    width: fit-content;
+    padding: 1em;
+}
+
+.align-left {
+    text-align: left;
+}
+
+#page {
+    background: white;
+    margin: auto;
+    width: 50%;
+    border: 1px solid rgb(138, 176, 245);
+    padding: 10px;
+}

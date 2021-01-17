@@ -17,12 +17,18 @@ TODO - redo project anatomy
 
 ## Random notes, mainly for me
 
+Things to ask Ajai:
+- Process vs function
+- Running database on same thread?
+- Running database on same server?
+- What libraries did you use?
+
 <!--- TODO -->
 ### Order of development:
 ------
-- add loading icon behind Iframe
-------
 - add level view to homepage
+------
+- Get accurate times
 ------
 - Forward `/` to `/wiki-races` with NGINX
 ------
@@ -44,6 +50,8 @@ TODO - redo project anatomy
 - Add message for Edge
 ------
 - encode urls properly
+------
+- add loading icon behind Iframe
 ------
 
 ### Code maintenance / small changes
