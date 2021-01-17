@@ -55,7 +55,7 @@ function createTableLine(number, content) {
 
 	url = nameToURL(content);
 	link.href = url;
-	link.textContent = url;
+	link.textContent = `Level ${number}`;
 	link.className = "align-left";
 
 	let time = document.createElement("td");
