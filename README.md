@@ -17,12 +17,6 @@ TODO - redo project anatomy
 
 ## Random notes, mainly for me
 
-### Code maintenance / small changes
-- test to see if not using JSDOM improves performance
-	- I need to stop using JSDOM
-- fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
-- set up nojs and IE support
-
 <!--- TODO -->
 ### Order of development:
 ------
@@ -39,6 +33,23 @@ TODO - redo project anatomy
 	- log that data to database
 - create leaderboard that loads level data and views it.
 ------
+- add loading icon behind Iframe
+------
+- make script to start in `n` minutes
+------
+- replace JSDOM with custom formatter
+------
+- Add message for Edge
+------
+- encode urls properly
+------
+
+### Code maintenance / small changes
+- test to see if not using JSDOM improves performance
+	- I need to stop using JSDOM
+- fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
+- set up nojs and IE support
+
 
 ### Design:
 - encode urls properly
