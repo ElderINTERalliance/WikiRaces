@@ -71,6 +71,12 @@ app.get("/wiki-races", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/homepage.html"));
 });
 
+// main page
+app.get("/date", (req, res) => {
+	const time = new Date();
+	res.send(time.toISOString());
+});
+
 // take user submissions:
 app.use(
 	express.urlencoded({
