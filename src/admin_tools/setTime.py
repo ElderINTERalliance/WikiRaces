@@ -25,9 +25,9 @@ print("")
 # CONVERT MINUTES FROM NOW INTO DATE STRING
 def minutes_to_date(mins: int) -> str:
     if mins <= 0:
-        return datetime.datetime.now()
+        return datetime.datetime.now(tz=datetime.timezone.utc)
 
-    start = datetime.datetime.now()
+    start = datetime.datetime.now(tz=datetime.timezone.utc)
     delta = datetime.timedelta(minutes=mins)
     return (start + delta).replace(microsecond=0).isoformat()
 
