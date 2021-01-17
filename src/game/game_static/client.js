@@ -230,4 +230,3 @@ document.getElementById("history-frame").addEventListener("click", (ele) => {
 });
 
 setHistory();
-

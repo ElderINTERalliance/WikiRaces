@@ -19,13 +19,13 @@ test("expect page to be cached now", async () => {
 
 describe("getWiki", () => {
 	it("should load a page", async () => {
-	  const wiki = await dynamic.getWiki("Green");
-	  expect(wiki).toBeDefined();
-	  expect(wiki.length).toBeGreaterThan(500);
+		const wiki = await dynamic.getWiki("Green");
+		expect(wiki).toBeDefined();
+		expect(wiki.length).toBeGreaterThan(500);
 	});
 
 	it("should not load pages that don't exist", async () => {
-	  const wiki = await dynamic.getWiki("aslkdjaslkd");
-	  expect(wiki).toBeUndefined();
+		const wiki = await dynamic.getWiki("aslkdjaslkd");
+		expect(wiki).toBeUndefined();
 	});
 });
