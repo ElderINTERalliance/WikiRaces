@@ -1,6 +1,4 @@
-async function getJsonData() {
-	const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
-
+function getTextFrom(url) {
 	var resp;
 	var xmlHttp;
 
@@ -9,10 +7,16 @@ async function getJsonData() {
 	xmlHttp = new XMLHttpRequest();
 
 	if (xmlHttp != null) {
-		xmlHttp.open("GET", levelsURL, false);
+		xmlHttp.open("GET", url, false);
 		xmlHttp.send(null);
 		resp = xmlHttp.responseText;
 	}
+	return resp;
+}
+
+async function getJsonData() {
+	const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
+	const resp = getTextFrom(levelsURL);
 	return JSON.parse(resp);
 }
 
@@ -69,8 +73,27 @@ function createTableLine(number, content) {
 	return element;
 }
 
+/* NOTE: This function runs on document load */
+var offset = 0;
+function setServerOffset() {
+	const dateURL = `http://${window.location.host}/wiki-races/date`;
+	const serverDateString = getTextFrom(dateURL);
+
+	let serverTime = Date.parse(
+		new Date(Date.parse(serverDateString)).toUTCString()
+	);
+	let localTime = Date.parse(new Date().toUTCString());
+
+	offset = serverTime - localTime;
+}
+setServerOffset();
+
 function getTime() {
-	return new Date();
+	var date = new Date();
+
+	date.setTime(date.getTime() + offset);
+
+	return date;
 }
 
 function getTimeStringAndClass(levelStart, levelEnd) {
