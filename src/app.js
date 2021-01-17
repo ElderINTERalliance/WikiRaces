@@ -72,7 +72,7 @@ app.get("/wiki-races", (req, res) => {
 });
 
 // main page
-app.get("/date", (req, res) => {
+app.get("/wiki-races/date", (req, res) => {
 	const time = new Date();
 	res.send(time.toISOString());
 });
