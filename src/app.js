@@ -92,7 +92,7 @@ app.post("/submit", (req, res) => {
 // between client and server time
 app.get("/time", (_req, res) => {
 	res.send(Date.now().toString());
-})
+});
 
 // Other routes here
 app.get("*", (req, res) => {
