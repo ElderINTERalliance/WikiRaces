@@ -25,8 +25,14 @@ function createTableHeading() {
 	links.textContent = "Links:";
 	links.className = "align-left";
 
+	let time = document.createElement("th");
+	time.textContent = "Time:";
+	time.className = "align-left";
+	time.className += " time";
+
 	element.appendChild(numbers);
 	element.appendChild(links);
+	element.appendChild(time);
 	return element;
 }
 
@@ -48,11 +54,36 @@ function createTableLine(number, content) {
 	link.textContent = url;
 	link.className = "align-left";
 
+	let time = document.createElement("td");
+	time.className = "align-left";
+	time.className += " time";
+
 	links.appendChild(link);
 	element.appendChild(numbers);
 	element.appendChild(links);
+	element.appendChild(time);
 	return element;
 }
+
+function getTime() {
+	return new Date();
+}
+
+function getSoonestLevel(levels) {
+	const levelNames = Object.keys(levels);
+	let soonestTime = levels[levelNames[0]].startTime;
+	let soonestLevel = undefined;
+	for (level of levelNames) {
+		let time = levels[level].startTime;
+		if (time < soonestTime && time > getTime()) {
+			soonestTime = time;
+			soonestLevel = level;
+		}
+	}
+	return soonestLevel;
+}
+
+// Run at script load:
 
 (async () => {
 	const levels = await getJsonData();
@@ -65,4 +96,11 @@ function createTableLine(number, content) {
 		table.append(createTableLine(i, names[i]));
 	}
 	levelsDiv.append(table);
+})();
+
+(async () => {
+	const data = await getJsonData();
+	setInterval(() => {
+		console.log(getSoonestLevel(data));
+	}, 300);
 })();

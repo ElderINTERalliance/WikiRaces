@@ -10,6 +10,37 @@ body {
     width: 100%;
 }
 
+/* Heading Start */
+
+#header {
+    width: auto;
+    border: green;
+    background: white;
+    border: 1px solid rgb(138, 176, 245);
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+#header h1 {
+    font-size: xx-large;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#header h2 {
+    font-size: large;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: grey;
+}
+
+/* Heading End */
+
+/* Table Start */
+
 tr th, tr td {
     width: fit-content;
     padding: 1em;
@@ -19,10 +50,16 @@ tr th, tr td {
     text-align: left;
 }
 
-#page {
+table {
+    width: 100%;
     background: white;
+    border: 1px solid rgb(138, 176, 245);
+}
+
+/* Table End */
+
+#page {
     margin: auto;
     width: 50%;
-    border: 1px solid rgb(138, 176, 245);
     padding: 10px;
 }
