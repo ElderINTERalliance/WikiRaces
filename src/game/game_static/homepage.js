@@ -26,9 +26,8 @@ function createTableHeading() {
 	links.className = "align-left";
 
 	let time = document.createElement("th");
-	time.textContent = "Time:";
-	time.className = "align-left";
-	time.className += " time";
+	time.textContent = "Starts in:";
+	time.className = "align-right";
 
 	element.appendChild(numbers);
 	element.appendChild(links);
@@ -40,9 +39,14 @@ function nameToURL(name) {
 	return `http://${window.location.host}/wiki-races/game/${name}`;
 }
 
+function getIdFromName(name) {
+	return `time-${name}`;
+}
+
 function createTableLine(number, content) {
 	let element = document.createElement("tr");
 	let numbers = document.createElement("td");
+	number++;
 	numbers.textContent = number.toString();
 	numbers.className = "align-left";
 
@@ -55,8 +59,8 @@ function createTableLine(number, content) {
 	link.className = "align-left";
 
 	let time = document.createElement("td");
-	time.className = "align-left";
-	time.className += " time";
+	time.className = "align-right";
+	time.id = getIdFromName(content);
 
 	links.appendChild(link);
 	element.appendChild(numbers);
@@ -69,18 +73,47 @@ function getTime() {
 	return new Date();
 }
 
-function getSoonestLevel(levels) {
-	const levelNames = Object.keys(levels);
-	let soonestTime = levels[levelNames[0]].startTime;
-	let soonestLevel = undefined;
-	for (level of levelNames) {
-		let time = levels[level].startTime;
-		if (time < soonestTime && time > getTime()) {
-			soonestTime = time;
-			soonestLevel = level;
+function getTimeStringAndClass(levelStart, levelEnd) {
+	const normal = "align-right";
+	const urgent = "align-right status-urgent";
+	const over = "align-right status-over";
+
+	if (levelStart === undefined || levelEnd === undefined) return "";
+	if (getTime() - levelStart >= 0) {
+		if (getTime() - levelEnd >= 0) {
+			return ["Complete", over]; // level is completely over
+		} else {
+			return ["In progress!", urgent];
 		}
 	}
-	return soonestLevel;
+	const date = getTime();
+	let seconds = (levelStart - date) / 1000;
+	let minutes = Math.floor(seconds / 60);
+	seconds = seconds - minutes * 60;
+
+	// Update time on screen
+	if (minutes > 5) {
+		return [`${minutes} minutes`, normal];
+	} else if (minutes > 0) {
+		return [`${minutes} minutes ${Math.round(seconds)} sec`, normal];
+	} else {
+		return [`${Math.round(seconds)} sec`, urgent];
+	}
+}
+
+function updateTimes(levels) {
+	const names = Object.keys(levels);
+
+	for (level of names) {
+		const div = document.getElementById(getIdFromName(level));
+		const levelStart = Date.parse(levels[level].startTime);
+		const levelEnd = Date.parse(levels[level].endTime);
+		const info = getTimeStringAndClass(levelStart, levelEnd);
+		const text = info[0];
+		const className = info[1];
+		div.textContent = text;
+		div.className = className;
+	}
 }
 
 // Run at script load:
@@ -100,7 +133,8 @@ function getSoonestLevel(levels) {
 
 (async () => {
 	const data = await getJsonData();
+	updateTimes(data);
 	setInterval(() => {
-		console.log(getSoonestLevel(data));
-	}, 300);
+		updateTimes(data);
+	}, 1000);
 })();

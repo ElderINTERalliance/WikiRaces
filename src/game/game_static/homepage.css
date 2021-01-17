@@ -50,10 +50,22 @@ tr th, tr td {
     text-align: left;
 }
 
+.align-right {
+    text-align: right;
+}
+
 table {
     width: 100%;
     background: white;
     border: 1px solid rgb(138, 176, 245);
+}
+
+.status-urgent {
+    background: rgb(241, 139, 144);
+}
+
+.status-over {
+    color: grey;
 }
 
 /* Table End */
