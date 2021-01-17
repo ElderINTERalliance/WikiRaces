@@ -91,7 +91,7 @@ app.post("/submit", (req, res) => {
 // get current time so that client can adjust for differences
 // between client and server time
 app.get("/time", (_req, res) => {
-	res.send(Date.now().toString())
+	res.send(Date.now().toString());
 })
 
 // Other routes here

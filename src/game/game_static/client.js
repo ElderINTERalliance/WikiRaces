@@ -36,11 +36,11 @@ if (timeXmlHttp != null) {
 }
 
 const serverTime = parseFloat(timeResp);
-const clientTime = Date.now()
-const timeOffset = serverTime - clientTime
+const clientTime = Date.now();
+const timeOffset = serverTime - clientTime;
 
 function getAdjustedDateNumber() {
-	return Date.now() + timeOffset
+	return Date.now() + timeOffset;
 }
 /* end bad idea */
 
