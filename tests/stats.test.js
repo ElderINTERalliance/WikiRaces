@@ -3,6 +3,13 @@ const stats = require("../src/game/stats");
 test("expect average of one value to be that one value", async () => {
 	const avg = new stats.Average();
 	const LIMIT = avg.limit;
+	avg.add(3);
+	expect(avg).toEqual({ records: [3], position: 1, limit: LIMIT });
+});
+
+test("expect average to be created empty", async () => {
+	const avg = new stats.Average();
+	const LIMIT = avg.limit;
 	expect(avg).toEqual({ records: [], position: 0, limit: LIMIT });
 });
 
