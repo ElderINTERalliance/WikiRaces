@@ -42,3 +42,13 @@ test("expect average of 0 through 15 to be 5", async () => {
 	}
 	expect(await avg.average()).toBe(7.5);
 });
+
+test("get records properly", async () => {
+	const avg = new stats.Average();
+	let arr = [];
+	for (let i = 0; i <= 15; i++) {
+		avg.add(i);
+		arr.push(i);
+	}
+	expect(avg.get()).toEqual(arr);
+});

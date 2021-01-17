@@ -6,7 +6,7 @@
  */
 
 // Get domain, including port number
-const levelsURL = `http://${window.location.host}/levels.json`;
+const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
 
 var resp;
 var xmlHttp;
@@ -230,3 +230,4 @@ document.getElementById("history-frame").addEventListener("click", (ele) => {
 });
 
 setHistory();
+
