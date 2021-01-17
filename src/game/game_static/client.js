@@ -7,6 +7,7 @@
 
 // Get domain, including port number
 const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
+const timeURL = `http://${window.location.host}/time`;
 
 var resp;
 var xmlHttp;
@@ -22,6 +23,25 @@ if (xmlHttp != null) {
 }
 
 const levels = JSON.parse(resp);
+
+// get server time to account for client time being wrong
+let timeResp = "";
+
+let timeXmlHttp = new XMLHttpRequest();
+
+if (timeXmlHttp != null) {
+	timeXmlHttp.open("GET", timeURL, false);
+	timeXmlHttp.send(null);
+	timeResp = timeXmlHttp.responseText;
+}
+
+const serverTime = parseFloat(timeResp);
+const clientTime = Date.now()
+const timeOffset = serverTime - clientTime
+
+function getAdjustedDateNumber() {
+	return Date.now() + timeOffset
+}
 /* end bad idea */
 
 /* globally accessed variables: */
@@ -76,7 +96,7 @@ function setUpCountDown() {
 	const endDate = Date.parse(level.endTime);
 	if (endDate === undefined) return undefined;
 	let timeLeft = setInterval(function () {
-		const date = new Date();
+		const date = new Date(getAdjustedDateNumber());
 		let seconds = (endDate - date) / 1000;
 		let minutes = Math.floor(seconds / 60);
 		seconds = seconds - minutes * 60;
@@ -91,7 +111,7 @@ function setUpCountDown() {
 		}
 
 		// clear interval when time passes
-		if (Date.now() - endDate >= 0) {
+		if (getAdjustedDateNumber() - endDate >= 0) {
 			timer.textContent = `Time ran out. :(`;
 			clearInterval(timeLeft);
 			alert("This level is over.");
@@ -123,7 +143,7 @@ function loadClient() {
 	const startDate = Date.parse(level.startTime);
 	const error = document.getElementById("error-text");
 	let countdown = setInterval(function () {
-		const date = new Date();
+		const date = new Date(getAdjustedDateNumber());
 		let seconds = (startDate - date) / 1000;
 		let minutes = Math.floor(seconds / 60);
 		seconds = seconds - minutes * 60;
@@ -143,7 +163,7 @@ function loadClient() {
 		}
 
 		// start game at correct time.
-		if (Date.now() - startDate >= 0) {
+		if (getAdjustedDateNumber() - startDate >= 0) {
 			startGame(level);
 			clearInterval(countdown);
 		}

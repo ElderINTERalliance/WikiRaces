@@ -88,6 +88,12 @@ app.post("/submit", (req, res) => {
 	res.end();
 });
 
+// get current time so that client can adjust for differences
+// between client and server time
+app.get("/time", (_req, res) => {
+	res.send(Date.now().toString())
+})
+
 // Other routes here
 app.get("*", (req, res) => {
 	res.send(`Sorry, this is an invalid URL. `);
