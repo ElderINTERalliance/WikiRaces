@@ -48,7 +48,6 @@ Run `npm run-script run` to host the site.
 - set up nojs and IE support
 - remove if statement in `const refs = document.getElementsByClassName("reflist");`
 - add more padding to the bottom of the navbar
-- set github language [with this](https://hackernoon.com/how-to-change-repo-language-in-github-c3e07819c5bb) [or this](https://stackoverflow.com/questions/34713765/github-changes-repository-to-wrong-language)
 
 ### Design:
 - encode urls properly
@@ -119,3 +118,4 @@ This is intended to be run on a linux system.
 - If I can host the page and the game, I shouldn't have issues with XSS
 - Autogenerate [url](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L8)
 - improve `if (err) return log.error(err);`
+- set github language [with this](https://hackernoon.com/how-to-change-repo-language-in-github-c3e07819c5bb) [or this](https://stackoverflow.com/questions/34713765/github-changes-repository-to-wrong-language)
