@@ -20,6 +20,8 @@ TODO - redo project anatomy
 <!--- TODO -->
 ### Order of development:
 ------
+- add loading icon behind Iframe
+------
 - add level view to homepage
 ------
 - Forward `/` to `/wiki-races` with NGINX
@@ -33,11 +35,11 @@ TODO - redo project anatomy
 	- log that data to database
 - create leaderboard that loads level data and views it.
 ------
-- add loading icon behind Iframe
-------
 - make script to start in `n` minutes
 ------
 - replace JSDOM with custom formatter
+	- remember to clear cache while developing
+	- write test scripts for Wiki pages
 ------
 - Add message for Edge
 ------
