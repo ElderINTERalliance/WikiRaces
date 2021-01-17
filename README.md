@@ -46,7 +46,6 @@ Run `npm run-script run` to host the site.
 	- I need to stop using JSDOM
 - fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
 - set up nojs and IE support
-- remove if statement in `const refs = document.getElementsByClassName("reflist");`
 - add more padding to the bottom of the navbar
 
 ### Design:
@@ -63,8 +62,6 @@ Run `npm run-script run` to host the site.
 
 
 Limitations:
- - due to xss, I cannot tell what url an iframe is on without hosting it.
-
  - Design I know will work: Shortest time wins
  - Design I want: get shortest time, and shortest number of links.
  - If I'm hosting this on my home network, I am not going to be able to host all of the Wikipedia pages due to network limitations.
@@ -119,3 +116,5 @@ This is intended to be run on a linux system.
 - Autogenerate [url](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L8)
 - improve `if (err) return log.error(err);`
 - set github language [with this](https://hackernoon.com/how-to-change-repo-language-in-github-c3e07819c5bb) [or this](https://stackoverflow.com/questions/34713765/github-changes-repository-to-wrong-language)
+- create test suite
+- due to xss, I cannot tell what url an iframe is on without hosting it.
