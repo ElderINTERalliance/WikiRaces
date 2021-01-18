@@ -101,6 +101,12 @@ app.post("/submit", (req, res) => {
 	res.end();
 });
 
+app.post("/submit-username", (req, res) => {
+	log.info(`Received username: ${req.body.name}`);
+	log.info(`Received username body: ${JSON.stringify(req.body)}`);
+	res.end();
+});
+
 // Other routes here
 app.get("*", (req, res) => {
 	res.send(`Sorry, this is an invalid URL. `);

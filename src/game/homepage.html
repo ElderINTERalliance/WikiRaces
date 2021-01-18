@@ -31,9 +31,22 @@
 			</div>
 			<div id="username-entry">
 				<h3>Name:</h3>
-				<input type="text" id="submission-box" />
-				<button id="submission-button">Submit</button>
-				<div id="input-error"></div>
+				<div id="username-exists" class="has-username">
+					Your name is
+					<div id="username-value" class="has-username"></div>
+				</div>
+
+				<div id="username-does-not-exist" class="no-username">
+					<input
+						type="text"
+						id="submission-box"
+						class="no-username"
+					/>
+					<button id="submission-button" class="no-username">
+						Submit
+					</button>
+					<div id="input-error" class="no-username"></div>
+				</div>
 			</div>
 			<div id="levels-table">
 				<h3>Levels:</h3>

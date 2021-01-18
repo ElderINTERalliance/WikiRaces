@@ -49,6 +49,18 @@ body {
     text-align: left;
 }
 
+.has-username {
+    display: inline;
+}
+
+.no-username {
+    display: none;
+}
+
+#username-entry h3 {
+    margin-top: 0.2em;
+}
+
 #input-error {
     margin: 0.1em;
 }
@@ -59,6 +71,10 @@ body {
 
 .input-status-good {
     color: green;
+}
+
+#username-value {
+    font-weight: bold;
 }
 
 /* Username End */

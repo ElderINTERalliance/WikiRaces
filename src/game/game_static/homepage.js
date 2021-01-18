@@ -143,6 +143,27 @@ function updateTimes(levels) {
 	}
 }
 
+async function sendData(data) {
+	const url = generateURL("/submit-username");
+	const method = "POST";
+
+	const request = new XMLHttpRequest();
+
+	request.onload = () => {
+		console.log(`Debug: Sent Data: ${request.status}`); // HTTP response status, e.g., 200 for "200 OK"
+		console.log(JSON.stringify(data));
+	};
+
+	request.open(method, url, true);
+
+	request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+	// Actually sends the request to the server.
+	request.send(JSON.stringify(data));
+}
+
+async function endLevel() {}
+
 function isValidUsername(content) {
 	let error = document.getElementById("input-error");
 	if (content.toLowerCase() === "[object object]") {
@@ -174,11 +195,55 @@ function isValidUsername(content) {
 	}
 }
 
-function attemptSubmitUsername() {
+function dec2hex(dec) {
+	return dec.toString(16).padStart(2, "0");
+}
+
+function getUserID(len = 40) {
+	const arr = new Uint8Array(len / 2);
+	window.crypto.getRandomValues(arr);
+	return Array.from(arr, dec2hex).join("");
+}
+
+function setCookie(name, userId) {
+	let d = new Date();
+	const days = 2; // Days to expire
+	d.setTime(d.getTime() + days * 24 * 60 * 60 * 1000);
+	document.cookie = `username=${name}; expires=${d.toUTCString()}; path=/;`;
+	document.cookie = `userId=${userId}; expires=${d.toUTCString()}; path=/;`;
+	console.log(document.cookie);
+}
+
+function getCookie(cookieName) {
+	let name = cookieName + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let cookies = decodedCookie.split(";");
+	for (let i = 0; i < cookies.length; i++) {
+		let c = cookies[i];
+		while (c.charAt(0) == " ") {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+async function attemptToSubmitUsername() {
 	let content = document.getElementById("submission-box").value;
 	if (!isValidUsername(content)) return undefined;
 
-	console.log(content.length);
+	userId = getUserID();
+
+	sendData({
+		name: content,
+		userId: userId,
+		time: getTime(),
+	});
+	console.log("Set cookie");
+	setCookie(content, userId);
+	displayName();
 }
 
 // Run at script load:
@@ -206,4 +271,37 @@ function attemptSubmitUsername() {
 
 document
 	.getElementById("submission-button")
-	.addEventListener("click", attemptSubmitUsername);
+	.addEventListener("click", attemptToSubmitUsername);
+
+function hideAll(className, hidden) {
+	let elements = document.querySelectorAll(`.${className}`);
+
+	for (let i = 0; i < elements.length; i++) {
+		elements[i].style.display = hidden ? "none" : "inline";
+	}
+}
+
+function showName() {
+	hideAll("no-username", true);
+	hideAll("has-username", false);
+}
+
+function showEntry() {
+	hideAll("no-username", false);
+	hideAll("has-username", true);
+}
+
+function displayName() {
+	let username = getCookie("username");
+	let userId = getCookie("userId");
+	if (username && userId) {
+		let nameBox = document.getElementById("username-value");
+		nameBox.textContent = username;
+
+		showName();
+	} else {
+		showEntry();
+	}
+}
+
+displayName();
