@@ -319,4 +319,9 @@ function logOut() {
 	document.getElementById("input-error").textContent = "";
 	displayName();
 }
+
 document.getElementById("delete-username").addEventListener("click", logOut);
+
+document.body.onload = () => {
+	document.getElementById("submission-box").focus();
+};
