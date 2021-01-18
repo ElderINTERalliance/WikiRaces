@@ -14,7 +14,6 @@ body {
 
 #header {
     width: auto;
-    border: green;
     background: white;
     border: 1px solid rgb(138, 176, 245);
     margin-bottom: 1em;
@@ -39,6 +38,31 @@ body {
 
 /* Heading End */
 
+/* Username Start */
+
+#username-entry {
+    width: auto;
+    background: white;
+    border: 1px solid rgb(138, 176, 245);
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: left;
+}
+
+#input-error {
+    margin: 0.1em;
+}
+
+.input-status-error {
+    color: red;
+}
+
+.input-status-good {
+    color: green;
+}
+
+/* Username End */
+
 /* Table Start */
 
 tr th, tr td {
@@ -54,10 +78,17 @@ tr th, tr td {
     text-align: right;
 }
 
-table {
+#levels-table {
     width: 100%;
     background: white;
     border: 1px solid rgb(138, 176, 245);
+}
+
+#levels-table h3 {
+    margin-left: 1em;
+    margin-bottom: 0;
+    margin-top: 0.5em;
+    text-align: center;
 }
 
 .status-urgent {

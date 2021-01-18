@@ -143,6 +143,44 @@ function updateTimes(levels) {
 	}
 }
 
+function isValidUsername(content) {
+	let error = document.getElementById("input-error");
+	if (content.toLowerCase() === "[object object]") {
+		error.textContent = "That's just mean.";
+		error.className = "input-status-error";
+		return false;
+	} else if (
+		// Name is invalid if:
+
+		// name is just whitespace:
+		content.match(/^\s+$/) ||
+		// name is not of the range letters, diacritics, and space:
+		!content.match(/^[a-zA-ZÀ-ž\u0370-\u03FF\u0400-\u04FF ]*$/g) ||
+		// name is not filled out:
+		content.length < 1 ||
+		// name is too long:
+		content.length > 20 ||
+		// name is falsy:
+		!content
+	) {
+		error.textContent =
+			"Not a valid name. Please use only letters and spaces.";
+		error.className = "input-status-error";
+		return false;
+	} else {
+		error.textContent = "Submitted.";
+		error.className = "input-status-good";
+		return true;
+	}
+}
+
+function attemptSubmitUsername() {
+	let content = document.getElementById("submission-box").value;
+	if (!isValidUsername(content)) return undefined;
+
+	console.log(content.length);
+}
+
 // Run at script load:
 
 (async () => {
@@ -165,3 +203,7 @@ function updateTimes(levels) {
 		updateTimes(data);
 	}, 1000);
 })();
+
+document
+	.getElementById("submission-button")
+	.addEventListener("click", attemptSubmitUsername);
