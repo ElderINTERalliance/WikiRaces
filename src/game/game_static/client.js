@@ -20,9 +20,13 @@ function getTextFrom(url) {
 	return resp;
 }
 
+function generateURL(path) {
+	return `${window.location.protocol}//${window.location.host}${path}`;
+}
+
 /* NOTE: This function runs on document load */
 function getJsonData() {
-	const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
+	const levelsURL = generateURL("/wiki-races/levels.json");
 	const resp = getTextFrom(levelsURL);
 	return JSON.parse(resp);
 }
@@ -30,7 +34,7 @@ function getJsonData() {
 /* NOTE: This function runs on document load */
 var offset = 0;
 function setServerOffset() {
-	const dateURL = `http://${window.location.host}/wiki-races/date`;
+	const dateURL = generateURL("/wiki-races/date");
 	const serverDateString = getTextFrom(dateURL);
 
 	let serverTime = Date.parse(

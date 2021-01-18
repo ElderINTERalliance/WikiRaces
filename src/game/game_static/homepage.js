@@ -14,8 +14,12 @@ function getTextFrom(url) {
 	return resp;
 }
 
+function generateURL(path) {
+	return `${window.location.protocol}//${window.location.host}${path}`;
+}
+
 async function getJsonData() {
-	const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
+	const levelsURL = generateURL("/wiki-races/levels.json");
 	const resp = getTextFrom(levelsURL);
 	return JSON.parse(resp);
 }
@@ -40,7 +44,7 @@ function createTableHeading() {
 }
 
 function nameToURL(name) {
-	return `http://${window.location.host}/wiki-races/game/${name}`;
+	return generateURL(`/wiki-races/game/${name}`);
 }
 
 function getIdFromName(name) {
@@ -76,7 +80,7 @@ function createTableLine(number, content) {
 /* NOTE: This function runs on document load */
 var offset = 0;
 function setServerOffset() {
-	const dateURL = `http://${window.location.host}/wiki-races/date`;
+	const dateURL = generateURL("/wiki-races/date");
 	const serverDateString = getTextFrom(dateURL);
 
 	let serverTime = Date.parse(
