@@ -164,9 +164,9 @@ function loadClient() {
 		} else {
 			error.innerHTML = `Starts in ${
 				Math.round(seconds * 10) / 10
-			} seconds. <br>	Goal: Go from <pre>${serialize(
+			} seconds. <br>	Goal: Go from <b>${serialize(
 				level.startPage
-			)}</pre> to <pre>${serialize(level.endPage)}</pre><br><br>
+			)}</b> to <b>${serialize(level.endPage)}</b><br><br>
 			Remember that the goal is displayed in the bottom right.`;
 		}
 
