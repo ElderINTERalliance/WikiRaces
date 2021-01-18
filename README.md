@@ -21,9 +21,8 @@ TODO - redo project anatomy
 ### Order of development:
 ------
 - Get backend capable of accepting submissions
+	- semi complete
 - create homepage that allows users to register username
-  - Takes username in box
-  - generates userid
   - Submits userid with username to database
 - make levels submit data on level clear
 	- log that data to database
@@ -123,3 +122,5 @@ This is intended to be run on a linux system.
 - make script to start in `n` minutes
 - Forward `/` to `/wiki-races` with NGINX
 - set up https with nginx and certbot
+- Takes username in box
+- generates userid
