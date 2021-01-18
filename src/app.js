@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const path = require("path");
 
+// BodyParser, for parsing post requests
+const bodyParser = require("body-parser");
+
 // Bunyan, for logging
 const bunyan = require("bunyan");
 const bunyanOpts = {
@@ -83,19 +86,18 @@ app.get("/wiki-races/date", (req, res) => {
 });
 
 // take user submissions:
-app.use(
-	express.urlencoded({
-		extended: true,
-	})
-);
+// app.use(
+// 	express.urlencoded({
+// 		extended: true,
+// 	})
+// );
 
-// TODO - Add submission form
-// app.get("/submit-form/", (req, res) => {
-// 	// res.sendFile(path.join(__dirname + "/game/"));
-// });
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.post("/submit", (req, res) => {
 	log.info(`Received post request: ${req.body.username}`);
+	log.info(`Received post request body: ${JSON.stringify(req.body.user)}`);
 	res.end();
 });
 
