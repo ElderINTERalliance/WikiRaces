@@ -269,10 +269,20 @@ async function attemptToSubmitUsername() {
 	}, 1000);
 })();
 
+// Submit when button is pressed:
 document
 	.getElementById("submission-button")
 	.addEventListener("click", attemptToSubmitUsername);
 
+// Submit when enter is pressed:
+document.getElementById("submission-box").addEventListener("keyup", (event) => {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		attemptToSubmitUsername();
+	}
+});
+
+// Hide all elements with given classname
 function hideAll(className, hidden) {
 	let elements = document.querySelectorAll(`.${className}`);
 
