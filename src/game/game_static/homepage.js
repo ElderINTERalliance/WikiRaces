@@ -305,3 +305,18 @@ function displayName() {
 }
 
 displayName();
+
+function logOut() {
+	const understand = prompt(
+		'If you log out, you will not be able to submit any more levels under this name. Type "I agree" to confirm ending this session.'
+	);
+	if (understand !== "I agree") {
+		alert("Not logged out.");
+		return undefined;
+	}
+	setCookie("", "");
+	document.getElementById("submission-box").value = "";
+	document.getElementById("input-error").textContent = "";
+	displayName();
+}
+document.getElementById("delete-username").addEventListener("click", logOut);
