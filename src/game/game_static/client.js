@@ -5,24 +5,52 @@
  * It might also submit but idk I haven't go that far.
  */
 
-// Get domain, including port number
-const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
+function getTextFrom(url) {
+	var resp;
+	var xmlHttp;
 
-var resp;
-var xmlHttp;
+	resp = "";
+	xmlHttp = new XMLHttpRequest();
 
-/* XML Request on main thread is a bad idea. */
-resp = "";
-xmlHttp = new XMLHttpRequest();
-
-if (xmlHttp != null) {
-	xmlHttp.open("GET", levelsURL, false);
-	xmlHttp.send(null);
-	resp = xmlHttp.responseText;
+	if (xmlHttp != null) {
+		xmlHttp.open("GET", url, false);
+		xmlHttp.send(null);
+		resp = xmlHttp.responseText;
+	}
+	return resp;
 }
 
-const levels = JSON.parse(resp);
-/* end bad idea */
+/* NOTE: This function runs on document load */
+function getJsonData() {
+	const levelsURL = `http://${window.location.host}/wiki-races/levels.json`;
+	const resp = getTextFrom(levelsURL);
+	return JSON.parse(resp);
+}
+
+/* NOTE: This function runs on document load */
+var offset = 0;
+function setServerOffset() {
+	const dateURL = `http://${window.location.host}/wiki-races/date`;
+	const serverDateString = getTextFrom(dateURL);
+
+	let serverTime = Date.parse(
+		new Date(Date.parse(serverDateString)).toUTCString()
+	);
+	let localTime = Date.parse(new Date().toUTCString());
+
+	offset = serverTime - localTime;
+}
+setServerOffset();
+
+function getTime() {
+	var date = new Date();
+
+	date.setTime(date.getTime() + offset);
+
+	return date;
+}
+
+const levels = getJsonData();
 
 /* globally accessed variables: */
 const settings = getLevelSettings();
@@ -76,7 +104,7 @@ function setUpCountDown() {
 	const endDate = Date.parse(level.endTime);
 	if (endDate === undefined) return undefined;
 	let timeLeft = setInterval(function () {
-		const date = new Date();
+		const date = getTime();
 		let seconds = (endDate - date) / 1000;
 		let minutes = Math.floor(seconds / 60);
 		seconds = seconds - minutes * 60;
@@ -123,7 +151,7 @@ function loadClient() {
 	const startDate = Date.parse(level.startTime);
 	const error = document.getElementById("error-text");
 	let countdown = setInterval(function () {
-		const date = new Date();
+		const date = getTime();
 		let seconds = (startDate - date) / 1000;
 		let minutes = Math.floor(seconds / 60);
 		seconds = seconds - minutes * 60;

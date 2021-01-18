@@ -26,9 +26,7 @@ Things to ask Ajai:
 <!--- TODO -->
 ### Order of development:
 ------
-- add level view to homepage
-------
-- Get accurate times
+- correct time in client.js
 ------
 - Forward `/` to `/wiki-races` with NGINX
 ------
@@ -41,17 +39,15 @@ Things to ask Ajai:
 	- log that data to database
 - create leaderboard that loads level data and views it.
 ------
-- make script to start in `n` minutes
-------
 - replace JSDOM with custom formatter
 	- remember to clear cache while developing
 	- write test scripts for Wiki pages
 ------
+- add informational text on homepage
+------
 - Add message for Edge
 ------
 - encode urls properly
-------
-- add loading icon behind Iframe
 ------
 
 ### Code maintenance / small changes
@@ -132,3 +128,6 @@ This is intended to be run on a linux system.
 - Time till completion should work by storing a date object at game start, and getting the delta at game over.
 - Create game client
 - Look into port forwarding with NGINX
+- Get accurate times
+- add level view to homepage
+- make script to start in `n` minutes
