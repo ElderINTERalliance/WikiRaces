@@ -20,15 +20,68 @@ function getTextFrom(url) {
 	return resp;
 }
 
-function generateURL(path) {
-	return `${window.location.protocol}//${window.location.host}${path}`;
-}
-
 /* NOTE: This function runs on document load */
 function getJsonData() {
 	const levelsURL = generateURL("/wiki-races/levels.json");
 	const resp = getTextFrom(levelsURL);
 	return JSON.parse(resp);
+}
+
+const levels = getJsonData();
+
+// Takes a string, returns after last `/` to end
+function parseLevelFromString(str) {
+	const lastSlash = str.lastIndexOf("/") + 1;
+	return str.slice(lastSlash);
+}
+
+// returns the settings for the level if the URL is valid
+// otherwise returns undefined
+function getLevelSettings() {
+	const levelName = parseLevelFromString(window.location.href);
+
+	if (validLevel(levels[levelName])) {
+		return levels[levelName];
+	} else {
+		return undefined;
+	}
+}
+
+/* globally accessed variables: */
+const settings = getLevelSettings();
+const frame = document.getElementById("wikipedia-frame");
+var viewedPages = [];
+var totalLinks = 0;
+
+function generateURL(path) {
+	return `${window.location.protocol}//${window.location.host}${path}`;
+}
+
+async function sendData(data) {
+	const url = generateURL("/submit");
+	const method = "POST";
+
+	const request = new XMLHttpRequest();
+
+	request.onload = () => {
+		console.log(`Debug: Sent Data: ${request.status}`); // HTTP response status, e.g., 200 for "200 OK"
+		console.log(JSON.stringify(data));
+	};
+
+	request.open(method, url, true);
+
+	request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+	// Actually sends the request to the server.
+	request.send(JSON.stringify(data));
+}
+
+async function endLevel() {
+	sendData({
+		time: getTime(),
+		viewedPages: viewedPages,
+		totalLinks: totalLinks,
+	});
 }
 
 /* NOTE: This function runs on document load */
@@ -54,14 +107,6 @@ function getTime() {
 	return date;
 }
 
-const levels = getJsonData();
-
-/* globally accessed variables: */
-const settings = getLevelSettings();
-const frame = document.getElementById("wikipedia-frame");
-var viewedPages = [];
-var totalLinks = 0;
-
 // Check if an object has all of the correct
 // properties to be a level
 function validLevel(level) {
@@ -78,24 +123,6 @@ function validLevel(level) {
 		return true;
 	}
 	return false;
-}
-
-// Takes a string, returns after last `/` to end
-function parseLevelFromString(str) {
-	const lastSlash = str.lastIndexOf("/") + 1;
-	return str.slice(lastSlash);
-}
-
-// returns the settings for the level if the URL is valid
-// otherwise returns undefined
-function getLevelSettings() {
-	const levelName = parseLevelFromString(window.location.href);
-
-	if (validLevel(levels[levelName])) {
-		return levels[levelName];
-	} else {
-		return undefined;
-	}
 }
 
 function goTo(page) {
@@ -183,7 +210,8 @@ function loadClient() {
 }
 
 function submit() {
-	alert("Everything would have been submitted here.");
+	// alert("Everything would have been submitted here.");
+	endLevel();
 }
 
 function serialize(name) {
@@ -249,7 +277,7 @@ frame.addEventListener("load", async () => {
 		viewedPages.push(page);
 	}
 	setHistory();
-	document.getElementById("total").textContent = `Total Links: ${totalLinks}`;
+	// document.getElementById("total").textContent = `Total Links: ${totalLinks}`;
 });
 
 // navigate to page when history is clicked

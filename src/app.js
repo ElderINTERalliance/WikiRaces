@@ -97,7 +97,7 @@ app.use(bodyParser.json());
 
 app.post("/submit", (req, res) => {
 	log.info(`Received post request: ${req.body.username}`);
-	log.info(`Received post request body: ${JSON.stringify(req.body.user)}`);
+	log.info(`Received post request body: ${JSON.stringify(req.body)}`);
 	res.end();
 });
 
