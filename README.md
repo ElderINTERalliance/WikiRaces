@@ -17,16 +17,8 @@ TODO - redo project anatomy
 
 ## Random notes, mainly for me
 
-Things to ask Ajai:
-- Process vs function
-- Running database on same thread?
-- Running database on same server?
-- What libraries did you use?
-
 <!--- TODO -->
 ### Order of development:
-------
-- correct time in client.js
 ------
 - Forward `/` to `/wiki-races` with NGINX
 ------
