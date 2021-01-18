@@ -318,9 +318,9 @@ displayName();
 
 function logOut() {
 	const understand = prompt(
-		'If you log out, you will not be able to submit any more levels under this name. Type "I agree" to confirm ending this session.'
+		'If you log out, you will not be able to submit any more levels under this name. Type "I understand" to confirm ending this session.'
 	);
-	if (understand !== "I agree") {
+	if (understand !== "I understand") {
 		alert("Not logged out.");
 		return undefined;
 	}
