@@ -20,8 +20,6 @@ TODO - redo project anatomy
 <!--- TODO -->
 ### Order of development:
 ------
-- Forward `/` to `/wiki-races` with NGINX
-------
 - Get backend capable of accepting submissions
 - create homepage that allows users to register username
   - Takes username in box
@@ -123,3 +121,5 @@ This is intended to be run on a linux system.
 - Get accurate times
 - add level view to homepage
 - make script to start in `n` minutes
+- Forward `/` to `/wiki-races` with NGINX
+- set up https with nginx and certbot
