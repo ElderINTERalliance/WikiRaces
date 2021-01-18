@@ -171,7 +171,7 @@ function loadClient() {
 		}
 
 		// start game at correct time.
-		if (Date.now() - startDate >= 0) {
+		if (getTime() - startDate >= 0) {
 			startGame(level);
 			clearInterval(countdown);
 		}
