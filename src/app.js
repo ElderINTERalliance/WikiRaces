@@ -58,6 +58,11 @@ app.get("/wiki/:id", async (req, res) => {
 app.use("/", express.static(__dirname + "/game/game_static"));
 app.use("/wiki-races/", express.static(__dirname + "/game/game_static"));
 
+// redirect user to /wiki-races
+app.get("/", (req, res) => {
+	res.redirect("/wiki-races");
+});
+
 let clientCount = 1;
 app.get("/wiki-races/game/*", (req, res) => {
 	log.warn(`Game client #${clientCount} loaded.`);
