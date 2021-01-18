@@ -1,11 +1,25 @@
 import dateparser
 import datetime
-epoch = datetime.datetime.utcfromtimestamp(0)
+import os
+import json
+from shutil import copyfile
 
+epoch = datetime.datetime.utcfromtimestamp(0)
 
 levels = {}
 
 cursor = "> "
+
+
+def backup():
+    source = os.path.join(os.pardir, "game/game_static/levels.json")
+    destination = os.path.join(os.pardir, "game/game_static/BU_levels.json")
+    copyfile(source, destination)
+
+
+def set_json(raw_string: str):
+    with open(os.path.join(os.pardir, "game/game_static/levels.json"), 'w') as file:
+        return file.write(raw_string)
 
 
 def get_time() -> str:
@@ -44,8 +58,8 @@ def end_page():
 def generate_level():
     return {
         "name": get_name(),
-        "startTime": start_time(),
-        "endTime": end_time(),
+        "startTime": "",
+        "endTime": "",
         "startPage": start_page(),
         "endPage": end_page()
     }
@@ -56,21 +70,25 @@ def add_level():
     levels[level["name"]] = level
 
 
-def add_more():
-    print("Would you like to add another level? (y/n)")
+def accept(prompt, repeat=True):
+    print(prompt)
     choice = input("> ")
     if choice == "y":
         return True
     elif choice == "n":
         return False
     else:
-        return add_more()
+        return accept()
 
 
-while add_more():
+while accept("Would you like to add another level? (y/n)"):
     add_level()
 
-print("")
-print("Copy and paste the following into the `levels` variable in ../game/game_static/client.js")
-print("")
-print(levels)
+if accept("Would you like to save these levels? (y/n)"):
+    print("Written and backed up")
+    backup()
+    set_json(json.dumps(levels, indent=4))
+    print("Level start and end points were created.")
+    print("You need to run setTime.py now.")
+else:
+    print("Cancelled - Nothing written")

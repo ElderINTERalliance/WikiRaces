@@ -1,5 +1,6 @@
 # Game cache
 src/game/cache
+__pycache__/
 
 # Logs
 logs
