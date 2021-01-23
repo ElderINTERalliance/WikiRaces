@@ -31,10 +31,12 @@ const log = bunyan.createLogger(bunyanOpts);
 class Database {
 	// not sure if this is a bad way to do this.
 	async saveUser(name, userId, timeCreated) {
+		log.info(`function ran. (${name})`); // TODO - Remove this
 		MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
 			if (err) throw err;
 			var dbo = db.db("wikiRaces");
 
+			log.info(`closure ran. (${name})`); // TODO - Remove this
 			dbo.collection("users").insertOne(
 				{ name: name, userId: userId, time: timeCreated },
 				(err, res) => {

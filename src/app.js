@@ -106,6 +106,7 @@ app.post("/submit", (req, res) => {
 app.post("/submit-username", (req, res) => {
 	log.info(`Received name: ${req.body.name}`);
 	log.info(`Received username body: ${JSON.stringify(req.body)}`);
+	log.info(`Passed: ${user.name}, ${user.userId}, ${user.time}`);
 	const user = req.body;
 	db.saveUser(user.name, user.userId, user.time);
 	res.end();
