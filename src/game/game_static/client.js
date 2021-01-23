@@ -94,7 +94,6 @@ async function sendData(data) {
 }
 
 async function endLevel() {
-	frame.src = "/wiki-races/levelComplete.html";
 	sendData({
 		levelName: settings.name,
 		userId: getCookie("userId"),
@@ -104,6 +103,7 @@ async function endLevel() {
 		fullHistory: fullHistory,
 		totalLinks: totalLinks,
 	});
+	window.location.href = generateURL("/wiki-races/levelComplete.html");
 }
 
 /* NOTE: This function runs on document load */
@@ -175,7 +175,7 @@ function setUpCountDown() {
 		if (Date.now() - endDate >= 0) {
 			timer.textContent = `Time ran out. :(`;
 			clearInterval(timeLeft);
-			alert("This level is over.");
+			window.location.href = generateURL("/wiki-races/levelOver.html");
 		}
 	}, 400);
 }
