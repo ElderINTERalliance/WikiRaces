@@ -137,14 +137,18 @@ tr th, tr td {
 
 /* Button */
 
-#go-home {
+#go-home, #give-up {
     background: rgb(238, 160, 160);
-    margin-top: 1em;
+    /* margin-top: 1em; */
     font-weight: bold;
     border-radius: 5em;
-    padding: 0.3em;
+    padding: 0.5em;
 }
 
-#go-home:hover {
+#go-home:hover, #give-up:hover {
     background: rgb(233, 151, 151);
+}
+
+p {
+    line-height: 200%;
 }
