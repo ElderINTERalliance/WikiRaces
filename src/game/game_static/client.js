@@ -51,6 +51,7 @@ function getLevelSettings() {
 const settings = getLevelSettings();
 const frame = document.getElementById("wikipedia-frame");
 var viewedPages = [];
+var fullHistory = [];
 var totalLinks = 0;
 
 function generateURL(path) {
@@ -97,6 +98,7 @@ async function endLevel() {
 		userId: getCookie("userId"),
 		time: getTime(),
 		viewedPages: viewedPages,
+		fullHistory: fullHistory,
 		totalLinks: totalLinks,
 	});
 }
@@ -292,6 +294,7 @@ frame.addEventListener("load", async () => {
 	totalLinks++;
 	if (page != viewedPages[viewedPages.length - 1]) {
 		viewedPages.push(page);
+		fullHistory.push(page);
 	}
 	setHistory();
 	// document.getElementById("total").textContent = `Total Links: ${totalLinks}`;
