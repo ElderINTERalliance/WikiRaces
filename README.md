@@ -20,6 +20,8 @@ TODO - redo project anatomy
 <!--- TODO -->
 ### Order of development:
 ------
+- add https://wiki-races.interalliance.org with certbot
+------
 - Get backend capable of accepting submissions
 	- semi complete
 - create homepage that allows users to register username
@@ -31,6 +33,8 @@ TODO - redo project anatomy
 - replace JSDOM with custom formatter
 	- remember to clear cache while developing
 	- write test scripts for Wiki pages
+------
+- add wikipedia attribution at the bottom of each page
 ------
 - add informational text on homepage
 ------
