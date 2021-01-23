@@ -98,8 +98,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.post("/submit", (req, res) => {
-	log.info(`Received post request: ${req.body.username}`);
-	log.info(`Received post request body: ${JSON.stringify(req.body)}`);
+	log.info(`Received post request: ${req.body.levelName}`);
 	db.saveSubmission(req.body);
 	res.end();
 });

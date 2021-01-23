@@ -1,0 +1,135 @@
+* {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background: #e6dfdf;
+}
+
+#levels-table table {
+    width: 100%;
+}
+
+/* Heading Start */
+
+#header {
+    width: auto;
+    background: white;
+    border: 1px solid rgb(138, 176, 245);
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: center;
+}
+
+#header h1 {
+    font-size: xx-large;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#header h2 {
+    font-size: large;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: grey;
+}
+
+/* Heading End */
+
+/* Username Start */
+
+#username-entry {
+    width: auto;
+    background: white;
+    border: 1px solid rgb(138, 176, 245);
+    margin-bottom: 1em;
+    padding: 1em;
+    text-align: left;
+}
+
+#delete-username {
+    display: block;
+    margin-top: 0.4em;
+}
+
+#submission-box {
+    margin-top: 1em;
+    display: inline;
+}
+
+.has-username {
+    display: inline;
+}
+
+.no-username {
+    display: none;
+}
+
+#username-entry h3 {
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+}
+
+#input-error {
+    margin: 0.1em;
+}
+
+.input-status-error {
+    color: red;
+}
+
+.input-status-good {
+    color: green;
+}
+
+#username-value {
+    font-weight: bold;
+}
+
+/* Username End */
+
+/* Table Start */
+
+tr th, tr td {
+    width: fit-content;
+    padding: 1em;
+}
+
+.align-left {
+    text-align: left;
+}
+
+.align-right {
+    text-align: right;
+}
+
+#levels-table {
+    width: 100%;
+    background: white;
+    border: 1px solid rgb(138, 176, 245);
+}
+
+#levels-table h3 {
+    margin-left: 1em;
+    margin-bottom: 0;
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+.status-urgent {
+    background: rgb(241, 139, 144);
+}
+
+.status-over {
+    color: grey;
+}
+
+/* Table End */
+
+#page {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}

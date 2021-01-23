@@ -94,6 +94,7 @@ async function sendData(data) {
 }
 
 async function endLevel() {
+	frame.src = "/wiki-races/levelComplete.html";
 	sendData({
 		levelName: settings.name,
 		userId: getCookie("userId"),
