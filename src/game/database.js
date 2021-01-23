@@ -1,31 +1,51 @@
 /* This file contains the class that I use to act as an in memory database.
    Originally, I wanted to use mongodb, because my friends had given it good reviews.
    However, I don't really need a database to persist data after reboots, so I
-   started looking at REDIS as an in-memory database. After that I realized that this
+
    app is small enough that it isn't really worth setting up a full database,
    as all I need is a place to store memory for a little while, and then I can get rid of it.
    (or just export it to a JSON file, if I want to keep it.)
  */
 
+// mongoclient, to connect to mongodb
+var MongoClient = require("mongodb").MongoClient;
+var url = "mongodb://localhost:27017/";
+
+// bunyan, for logging
+const bunyan = require("bunyan");
+const bunyanOpts = {
+	name: "WikiRaces",
+	streams: [
+		{
+			level: "debug",
+			stream: process.stdout,
+		},
+		{
+			level: "info",
+			path: "/var/tmp/WikiRaces.json",
+		},
+	],
+};
+const log = bunyan.createLogger(bunyanOpts);
+
 class Database {
-	constructor() {
-		this.entries = Array();
-	}
+	// not sure if this is a bad way to do this.
+	async saveUser(name, userId, timeCreated) {
+		MongoClient.connect(url, (err, db) => {
+			if (err) throw err;
+			var dbo = db.db("wikiRaces");
 
-	async add(object) {
-		if (this.validSubmission(object)) {
-			this.entries.push(object);
-			return true;
-		}
-		return false;
-	}
-
-	async get() {
-		return this.entries;
-	}
-
-	async validSubmission(level) {
-		return level !== undefined;
+			dbo.collection("users").insertOne(
+				{ name: name, userId: userId, time: timeCreated },
+				(err, res) => {
+					if (err) throw err;
+					log.info(
+						"Number of documents inserted: " + res.insertedCount
+					);
+					db.close();
+				}
+			);
+		});
 	}
 }
 

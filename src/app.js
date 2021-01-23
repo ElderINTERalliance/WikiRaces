@@ -32,7 +32,8 @@ const dynamic = require("./game/dynamic");
 
 log.info("Server Started");
 
-// My very small custom "database":
+// My code to interact with the database.
+// `db` is not the same as mongodb's `db`
 const db = require("./game/database");
 
 // Start Server Code: ---------------
@@ -102,8 +103,10 @@ app.post("/submit", (req, res) => {
 });
 
 app.post("/submit-username", (req, res) => {
-	log.info(`Received username: ${req.body.name}`);
+	log.info(`Received name: ${req.body.name}`);
 	log.info(`Received username body: ${JSON.stringify(req.body)}`);
+	const user = req.body;
+	db.saveUser(user.name, user.userId, user.time);
 	res.end();
 });
 
