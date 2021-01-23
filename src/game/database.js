@@ -70,21 +70,17 @@ class Database {
 				url,
 				{ useUnifiedTopology: true },
 				(err, db) => {
-					if (err) {
-						reject(err);
-					} else {
-						var dbo = db.db("wikiRaces");
-						var query = {
-							name: "level1",
-						};
-						dbo.collection("submissions")
-							.find(query)
-							.toArray((err, result) => {
-								if (err) reject(err);
-								else resolve(result);
-								db.close();
-							});
-					}
+					if (err) reject(err);
+					var dbo = db.db("wikiRaces");
+
+					var query = {};
+					dbo.collection("submissions")
+						.find(query)
+						.toArray((err, result) => {
+							if (err) reject(err);
+							else resolve(result);
+							db.close();
+						});
 				}
 			);
 		});
