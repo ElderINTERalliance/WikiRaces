@@ -83,15 +83,16 @@ app.get("/wiki-races", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/homepage.html"));
 });
 
-// main page
+// date for server time synchronization
 app.get("/wiki-races/date", (req, res) => {
 	const time = new Date();
 	res.send(time.toISOString());
 });
 
-// main page
-app.get("/api/leaderboards", (req, res) => {
-	res.send(await getLeaderboards());
+// leaderboards api
+app.get("/wiki-races/api/leaderboards", async (req, res) => {
+	let leaderboards = await getLeaderboards();
+	res.send(leaderboards);
 });
 
 // take user submissions:

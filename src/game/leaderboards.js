@@ -1,5 +1,9 @@
+const { Database } = require("./game/database");
+const db = new Database();
+
 async function getLeaderboards() {
-	return "hello world";
+	const submissions = await db.getSubmissions();
+	return JSON.stringify(submissions);
 }
 
 module.exports = { getLeaderboards };
