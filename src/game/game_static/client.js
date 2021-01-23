@@ -151,6 +151,11 @@ function goTo(page) {
 	frame.src = `/wiki/${page}`;
 }
 
+// Returns an s if the number is not 1
+function s(number) {
+	return number === 1 ? "" : "s";
+}
+
 function setUpCountDown() {
 	const level = getLevelSettings();
 	const timer = document.getElementById("time-left");
@@ -164,11 +169,13 @@ function setUpCountDown() {
 
 		// Update time on screen
 		if (minutes > 0) {
-			timer.textContent = `Time Left: ${minutes} minutes ${Math.round(
-				seconds
-			)} seconds.`;
+			timer.textContent = `Time Left: ${minutes} minute${s(
+				minutes
+			)} ${Math.round(seconds)} second${s(seconds)}.`;
 		} else if (seconds >= 0) {
-			timer.textContent = `Time Left: ${Math.round(seconds)} seconds.`;
+			timer.textContent = `Time Left: ${Math.round(seconds)} second${s(
+				Math.round(seconds)
+			)}.`;
 		}
 
 		// clear interval when time passes
@@ -211,13 +218,14 @@ function loadClient() {
 
 		// Update time on screen
 		if (minutes > 0) {
-			error.textContent = `Starts in ${minutes} minutes ${Math.round(
-				seconds
-			)} seconds.`;
+			error.textContent = `Starts in ${minutes} minute${s(
+				minutes
+			)} ${Math.round(seconds)} second${s(Math.round(seconds))}.`;
 		} else {
-			error.innerHTML = `Starts in ${
-				Math.round(seconds * 10) / 10
-			} seconds. <br>	Goal: Go from <b>${serialize(
+			const timeLeft = Math.round(seconds * 10) / 10;
+			error.innerHTML = `Starts in ${timeLeft} second${s(
+				timeLeft
+			)}. <br>	Goal: Go from <b>${serialize(
 				level.startPage
 			)}</b> to <b>${serialize(level.endPage)}</b><br><br>
 			Remember that the goal is displayed in the bottom right.`;
