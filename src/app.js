@@ -32,10 +32,12 @@ const dynamic = require("./game/dynamic");
 
 log.info("Server Started");
 
-// My code to interact with the database.
+// My code to interact with mongodb.
 // `db` is not the same as mongodb's `db`
 const { Database } = require("./game/database");
 const db = new Database();
+
+const getLeaderboards = require("./game/leaderboards").getLeaderboards;
 
 // Start Server Code: ---------------
 
@@ -85,6 +87,11 @@ app.get("/wiki-races", (req, res) => {
 app.get("/wiki-races/date", (req, res) => {
 	const time = new Date();
 	res.send(time.toISOString());
+});
+
+// main page
+app.get("/api/leaderboards", (req, res) => {
+	res.send(await getLeaderboards());
 });
 
 // take user submissions:
