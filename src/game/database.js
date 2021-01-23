@@ -64,16 +64,16 @@ class Database {
 			);
 		});
 	}
-	// gets submissions from a level
+	// gets submissions with a query
 	// gets all submissions if no level is provided
-	async getSubmissions(levelNames) {
-		let query;
-		if (levelNames) {
-			query = { levelName: { $in: [levelNames] } };
-		} else {
+	async getSubmissions(query) {
+		if (query === undefined) {
 			query = {};
 		}
 		return this.getCollection(query, "submissions");
+	}
+	async getUsers() {
+		return this.getCollection({}, "users");
 	}
 	async getCollection(query, collectionName) {
 		return new Promise((resolve, reject) => {
