@@ -66,7 +66,7 @@ class Database {
 	}
 	async getSubmissions(levelNames) {
 		return new Promise((resolve, reject) => {
-			mongoClient.connect(
+			MongoClient.connect(
 				url,
 				{ useUnifiedTopology: true },
 				(err, db) => {
@@ -82,6 +82,7 @@ class Database {
 							.toArray((err, result) => {
 								if (err) reject(err);
 								else resolve(result);
+								db.close();
 							});
 					}
 				}
