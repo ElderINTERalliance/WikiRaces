@@ -35,6 +35,13 @@
 					connections in the future.
 				</p>
 			</div>
+			<div id="text-section" class="align-left">
+				<p>
+					If you want to leave this level now, click the button below:
+					<br />
+					<button id="go-home">Go home!</button>
+				</p>
+			</div>
 		</div>
 		<!--[if lt IE 7]>
 			<p class="browsehappy">
@@ -42,5 +49,11 @@
 				<a href="#">upgrade your browser</a> to improve your experience.
 			</p>
 		<![endif]-->
+		<script>
+			// I normally don't like using script tags, but I don't want another .js file to keep track of.
+			document.getElementById("go-home").addEventListener("click", () => {
+				window.location.href = `${window.location.protocol}//${window.location.host}`;
+			});
+		</script>
 	</body>
 </html>

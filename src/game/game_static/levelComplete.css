@@ -18,7 +18,7 @@ body {
     border: 1px solid rgb(138, 176, 245);
     margin-bottom: 1em;
     padding: 1em;
-    text-align: center;
+    display: block;
 }
 
 #header h1 {
@@ -26,6 +26,7 @@ body {
     padding: 0;
     margin-top: 0;
     margin-bottom: 0;
+    text-align: center;
 }
 
 #header h2 {
@@ -40,12 +41,12 @@ body {
 
 /* Username Start */
 
-#username-entry {
+#text-section {
     width: auto;
     background: white;
     border: 1px solid rgb(138, 176, 245);
     margin-bottom: 1em;
-    padding: 1em;
+    padding: 0.8em;
     text-align: left;
 }
 
@@ -132,4 +133,18 @@ tr th, tr td {
     margin: auto;
     width: 50%;
     padding: 10px;
+}
+
+/* Button */
+
+#go-home {
+    background: rgb(238, 160, 160);
+    margin-top: 1em;
+    font-weight: bold;
+    border-radius: 5em;
+    padding: 0.3em;
+}
+
+#go-home:hover {
+    background: rgb(233, 151, 151);
 }
