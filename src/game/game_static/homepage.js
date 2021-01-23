@@ -100,6 +100,11 @@ function getTime() {
 	return date;
 }
 
+// Returns an s if the number is not 1
+function s(number) {
+	return number === 1 ? "" : "s";
+}
+
 function getTimeStringAndClass(levelStart, levelEnd) {
 	const normal = "align-right";
 	const urgent = "align-right status-urgent";
@@ -122,7 +127,8 @@ function getTimeStringAndClass(levelStart, levelEnd) {
 	if (minutes > 5) {
 		return [`${minutes} minutes`, normal];
 	} else if (minutes > 0) {
-		return [`${minutes} minutes ${Math.round(seconds)} sec`, normal];
+		const secs = Math.round(seconds);
+		return [`${minutes} minute${s(minutes)} ${secs} sec${s(secs)}`, normal];
 	} else {
 		return [`${Math.round(seconds)} sec`, urgent];
 	}
