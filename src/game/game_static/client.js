@@ -232,7 +232,6 @@ function loadClient() {
 }
 
 function submit() {
-	// alert("Everything would have been submitted here.");
 	endLevel();
 }
 
@@ -253,14 +252,12 @@ function visualizeHistory(array) {
 		// Create the list items:
 		var item = document.createElement("li");
 		item.className = "history-element";
-		// let span = document.createElement("span");
 		let border = document.createElement("span");
 		border.className = "history-text";
 		let text = document.createTextNode(serialize(array[i]));
 
 		// append them
 		border.appendChild(text);
-		// span.appendChild(border);
 		item.appendChild(border);
 		list.appendChild(item);
 	}
@@ -300,7 +297,6 @@ frame.addEventListener("load", async () => {
 		fullHistory.push(page);
 	}
 	setHistory();
-	// document.getElementById("total").textContent = `Total Links: ${totalLinks}`;
 });
 
 // navigate to page when history is clicked
