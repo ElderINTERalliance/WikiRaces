@@ -65,6 +65,9 @@ class Database {
 		});
 	}
 	async getSubmissions(levelNames) {
+		return this.getCollection({}, "submissions");
+	}
+	async getCollection(query, collectionName) {
 		return new Promise((resolve, reject) => {
 			MongoClient.connect(
 				url,
@@ -73,8 +76,7 @@ class Database {
 					if (err) reject(err);
 					var dbo = db.db("wikiRaces");
 
-					var query = {};
-					dbo.collection("submissions")
+					dbo.collection(collectionName)
 						.find(query)
 						.toArray((err, result) => {
 							if (err) reject(err);
