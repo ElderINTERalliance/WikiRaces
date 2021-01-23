@@ -20,7 +20,9 @@ async function getLevelNames() {
 // level times
 async function getUserTimes(userId) {}
 
-async function getLeaderboards() {}
+async function getLeaderboards() {
+	return db.getUserById("1d8f2b5bfa19f0ef3626fe360a81a208f0dda67a");
+}
 
 async function getLevelsLeaderboards() {
 	const levelNames = await getLevelNames();

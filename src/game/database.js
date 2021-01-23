@@ -75,6 +75,10 @@ class Database {
 	async getUsers() {
 		return this.getCollection({}, "users");
 	}
+	async getUserById(id) {
+		if (!id) return undefined;
+		return this.getCollection({ userId: id }, "users");
+	}
 	async getCollection(query, collectionName) {
 		return new Promise((resolve, reject) => {
 			MongoClient.connect(
