@@ -179,7 +179,7 @@ function setUpCountDown() {
 		}
 
 		// clear interval when time passes
-		if (Date.now() - endDate >= 0) {
+		if (getTime() - endDate >= 0) {
 			timer.textContent = `Time ran out. :(`;
 			clearInterval(timeLeft);
 			window.location.href = generateURL("/wiki-races/levelOver.html");
