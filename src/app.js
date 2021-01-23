@@ -34,7 +34,8 @@ log.info("Server Started");
 
 // My code to interact with the database.
 // `db` is not the same as mongodb's `db`
-const db = require("./game/database");
+const { Database } = require("./game/database");
+const db = new Database();
 
 // Start Server Code: ---------------
 

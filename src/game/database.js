@@ -14,7 +14,7 @@ var url = "mongodb://localhost:27017/";
 // bunyan, for logging
 const bunyan = require("bunyan");
 const bunyanOpts = {
-	name: "WikiRaces",
+	name: "database",
 	streams: [
 		{
 			level: "debug",
@@ -31,7 +31,7 @@ const log = bunyan.createLogger(bunyanOpts);
 class Database {
 	// not sure if this is a bad way to do this.
 	async saveUser(name, userId, timeCreated) {
-		MongoClient.connect(url, (err, db) => {
+		MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
 			if (err) throw err;
 			var dbo = db.db("wikiRaces");
 
@@ -39,9 +39,7 @@ class Database {
 				{ name: name, userId: userId, time: timeCreated },
 				(err, res) => {
 					if (err) throw err;
-					log.info(
-						"Number of documents inserted: " + res.insertedCount
-					);
+					log.info(`${name} saved.`);
 					db.close();
 				}
 			);
