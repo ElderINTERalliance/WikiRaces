@@ -77,7 +77,9 @@ class Database {
 	}
 	async getUserById(id) {
 		if (!id) return undefined;
-		return this.getCollection({ userId: id }, "users");
+		let user = this.getCollection({ userId: id }, "users")[0];
+		delete user._id;
+		return user;
 	}
 	async getCollection(query, collectionName) {
 		return new Promise((resolve, reject) => {
