@@ -77,7 +77,7 @@ class Database {
 	}
 	async getUserById(id) {
 		if (!id) return undefined;
-		let user = this.getCollection({ userId: id }, "users")[0];
+		let user = await this.getCollection({ userId: id }, "users")[0];
 		delete user._id;
 		return user;
 	}
