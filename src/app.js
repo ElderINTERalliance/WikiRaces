@@ -100,13 +100,14 @@ app.use(bodyParser.json());
 app.post("/submit", (req, res) => {
 	log.info(`Received post request: ${req.body.username}`);
 	log.info(`Received post request body: ${JSON.stringify(req.body)}`);
+	db.saveSubmission(req.body);
 	res.end();
 });
 
 app.post("/submit-username", (req, res) => {
 	const user = req.body;
-	log.info(`Passed: ${user.name}, ${user.userId}, ${user.time}`);
 	db.saveUser(user.name, user.userId, user.time);
+	log.info(`Welcome "${user.name}"!`);
 	res.end();
 });
 

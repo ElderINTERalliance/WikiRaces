@@ -44,7 +44,21 @@ class Database {
 				},
 				(err, res) => {
 					if (err) throw err;
-					log.info(`Welcome "${name}"!`);
+					db.close();
+				}
+			);
+		});
+	}
+	async saveSubmission(submissionData) {
+		MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
+			if (err) throw err;
+			var dbo = db.db("wikiRaces");
+
+			dbo.collection("submissions").insertOne(
+				submissionData,
+				(err, res) => {
+					if (err) throw err;
+					log.info(`Received a submission`);
 					db.close();
 				}
 			);
