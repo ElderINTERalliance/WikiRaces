@@ -64,8 +64,16 @@ class Database {
 			);
 		});
 	}
+	// gets submissions from a level
+	// gets all submissions if no level is provided
 	async getSubmissions(levelNames) {
-		return this.getCollection({}, "submissions");
+		let query;
+		if (levelNames) {
+			query = { levelName: { $in: [levelNames] } };
+		} else {
+			query = {};
+		}
+		return this.getCollection(query, "submissions");
 	}
 	async getCollection(query, collectionName) {
 		return new Promise((resolve, reject) => {
