@@ -37,6 +37,7 @@
 			</div>
 			<div id="text-section" class="align-left">
 				<button id="give-up">Go home!</button>
+				<button id="go-leaderboards">Go to leaderboards!</button>
 			</div>
 		</div>
 		<!--[if lt IE 7]>
@@ -47,9 +48,14 @@
 		<![endif]-->
 		<script>
 			// I normally don't like using script tags, but I don't want another .js file to keep track of.
-			document.getElementById("give-up").addEventListener("click", () => {
+			document.getElementById("go-home").addEventListener("click", () => {
 				window.location.href = `${window.location.protocol}//${window.location.host}`;
 			});
+			document
+				.getElementById("go-leaderboards")
+				.addEventListener("click", () => {
+					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboards`;
+				});
 		</script>
 	</body>
 </html>

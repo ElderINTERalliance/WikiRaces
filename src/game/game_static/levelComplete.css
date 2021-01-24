@@ -149,6 +149,18 @@ tr th, tr td {
     background: rgb(233, 151, 151);
 }
 
+#go-leaderboards {
+    background: rgb(15, 218, 25);
+    /* margin-top: 1em; */
+    font-weight: bold;
+    border-radius: 5em;
+    padding: 0.5em;
+}
+
+#go-leaderboards {
+    background: rgb(10, 187, 18);
+}
+
 p {
     line-height: 200%;
 }

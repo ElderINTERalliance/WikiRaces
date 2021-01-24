@@ -38,6 +38,7 @@
 			</div>
 			<div id="text-section" class="align-left">
 				<button id="go-home">Go home!</button>
+				<button id="go-leaderboards">Go to leaderboards!</button>
 			</div>
 		</div>
 		<!--[if lt IE 7]>
@@ -51,6 +52,11 @@
 			document.getElementById("go-home").addEventListener("click", () => {
 				window.location.href = `${window.location.protocol}//${window.location.host}`;
 			});
+			document
+				.getElementById("go-leaderboards")
+				.addEventListener("click", () => {
+					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboards`;
+				});
 		</script>
 	</body>
 </html>
