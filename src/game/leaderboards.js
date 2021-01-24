@@ -3,6 +3,23 @@
 const { Database } = require("./database");
 const db = new Database();
 
+// bunyan, for logging
+const bunyan = require("bunyan");
+const bunyanOpts = {
+	name: "Leaderboard",
+	streams: [
+		{
+			level: "debug",
+			stream: process.stdout,
+		},
+		{
+			level: "info",
+			path: "/var/tmp/WikiRaces.json",
+		},
+	],
+};
+const log = bunyan.createLogger(bunyanOpts);
+
 // fs and path, to read levels.json
 const fs = require("fs").promises;
 const path = require("path");
@@ -24,22 +41,39 @@ async function getDateDeltas(open, close) {
 	return date.getTime();
 }
 
-async function getLevelDuration(levelName) {
-	const data = await getLevelData();
-	console.log("level:", getLevelDuration);
-	console.log(data);
-}
-
 // return level time in milliseconds
 async function parseTime(obj) {
 	submission = await obj;
-	console.log(submission);
 	if (submission.levelOpen && submission.submitTime) {
 		return await getDateDeltas(submission.levelOpen, submission.submitTime);
 	}
 	return getLevelDuration(submission.levelName);
 }
 
+async function fillInMissing(total, times) {
+	const levels = await getLevelData();
+	const levelNames = Object.keys(await levels);
+
+	for (levelName of levelNames) {
+		if (!times[levelName]) {
+			const level = levels[levelName];
+			const time = await getDateDeltas(level.startTime, level.endTime);
+			times[levelName] = time;
+			total += Number(time);
+		}
+	}
+	return [total, times];
+}
+
+/*
+ * I break getting user times into two steps:
+ *   - get all the times of the submitted levels
+ *   - add all the times of the non-submitted levels
+ *
+ * This saves having to loop over the submissions to find
+ * a particular object, and means we can get the times by
+ * looping over both the submissions and the levelnames once.
+ */
 async function getUserTimes(userId) {
 	const submissions = await db.getCollection(
 		{ userId: userId },
@@ -47,6 +81,7 @@ async function getUserTimes(userId) {
 	);
 	times = {};
 	totalTime = 0;
+
 	for (submission of submissions) {
 		time = await parseTime(submission);
 		// If there are multiple submissions for one level, choose the shortest one
@@ -55,13 +90,15 @@ async function getUserTimes(userId) {
 				totalTime -= Number(times[submission.levelName]);
 				times[submission.levelName] = time;
 				totalTime += Number(time);
-				console.log("duplicate deleted");
 			}
 		} else {
 			times[submission.levelName] = time;
 			totalTime += Number(time);
 		}
 	}
+
+	[totalTime, times] = await fillInMissing(totalTime, times);
+
 	return [totalTime, times];
 }
 
@@ -75,6 +112,7 @@ async function getUserIds() {
 }
 
 async function getLeaderboards() {
+	log.info("generated leaderboards");
 	const userIds = await getUserIds();
 
 	let leaderboard = [];
