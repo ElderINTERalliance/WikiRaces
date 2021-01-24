@@ -168,8 +168,6 @@ async function sendData(data) {
 	request.send(JSON.stringify(data));
 }
 
-async function endLevel() {}
-
 function isValidUsername(content) {
 	let error = document.getElementById("input-error");
 	if (content.toLowerCase() === "[object object]") {
