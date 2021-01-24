@@ -31,9 +31,7 @@ async function getLevelNames() {
 
 /* NOTE: This function runs on document load */
 async function getLeaderboardsData() {
-	// const levelsURL = generateURL("/wiki-races/api/leaderboards"); // TODO - replace once on server
-	const levelsURL =
-		"http://wiki-races.zsarge.live/wiki-races/api/leaderboards"; // TODO - replace once on server
+	const levelsURL = generateURL("/wiki-races/api/leaderboards");
 	const resp = await getTextFrom(levelsURL);
 	return JSON.parse(resp);
 }
