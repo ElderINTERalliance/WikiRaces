@@ -74,23 +74,26 @@ function getCookie(cookieName) {
 	return "";
 }
 
-async function sendData(data) {
-	const url = generateURL("/submit");
-	const method = "POST";
+function sendData(data) {
+	return new Promise((resolve) => {
+		const url = generateURL("/submit");
+		const method = "POST";
 
-	const request = new XMLHttpRequest();
+		const request = new XMLHttpRequest();
 
-	request.onload = () => {
-		console.log(`Debug: Sent Data: ${request.status}`); // HTTP response status, e.g., 200 for "200 OK"
-		console.log(JSON.stringify(data));
-	};
+		request.onload = () => {
+			console.log(`Debug: Sent Data: ${request.status}`); // HTTP response status, e.g., 200 for "200 OK"
+			console.log(JSON.stringify(data));
+			resolve();
+		};
 
-	request.open(method, url, true);
+		request.open(method, url, true);
 
-	request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
-	// Actually sends the request to the server.
-	request.send(JSON.stringify(data));
+		// Actually sends the request to the server.
+		request.send(JSON.stringify(data));
+	})
 }
 
 async function endLevel() {
