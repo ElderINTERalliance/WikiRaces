@@ -34,6 +34,8 @@
 					Your name is
 					<div id="username-value" class="has-username"></div>
 					<button id="delete-username">Log Out</button>
+					<br />
+					<button id="go-leaderboards">Go to leaderboards</button>
 				</div>
 
 				<div id="username-does-not-exist" class="no-username">
@@ -61,5 +63,14 @@
 			</p>
 		<![endif]-->
 		<script src="../wiki-races/homepage.js" async defer></script>
+		<script>
+			// I normally don't like using script tags, but I don't want another .js file to keep track of.
+			// TODO - REPLACE THIS
+			document
+				.getElementById("go-leaderboards")
+				.addEventListener("click", () => {
+					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboards`;
+				});
+		</script>
 	</body>
 </html>
