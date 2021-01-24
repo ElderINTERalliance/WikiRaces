@@ -94,7 +94,8 @@ async function sendData(data) {
 }
 
 async function endLevel() {
-	await sendData({
+	let submitObject = {
+		//TODO -
 		levelName: settings.name,
 		userId: getCookie("userId"),
 		levelOpen: settings.startTime,
@@ -102,8 +103,17 @@ async function endLevel() {
 		viewedPages: viewedPages,
 		fullHistory: fullHistory,
 		totalLinks: totalLinks,
-	});
-	window.location.href = generateURL("/wiki-races/levelComplete.html");
+	};
+
+	sendData(submitObject)
+		.then(() => {
+			console.log(submitObject);
+		})
+		.then(() => {
+			window.location.href = generateURL(
+				"/wiki-races/levelComplete.html"
+			);
+		});
 }
 
 /* NOTE: This function runs on document load */
