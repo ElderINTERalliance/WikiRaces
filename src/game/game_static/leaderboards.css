@@ -107,12 +107,23 @@ tr th, tr td {
 }
 
 #levels-table {
+    position: relative;
     width: 100%;
     background: white;
     border: 1px solid rgb(138, 176, 245);
+    overflow-x: scroll;
+}
+
+#levels-table table {
+    position: relative;
+    width: 100%;
+    overflow-x: scroll;
 }
 
 #levels-table h3 {
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0em);
     margin-left: 1em;
     margin-bottom: 0;
     margin-top: 0.5em;
