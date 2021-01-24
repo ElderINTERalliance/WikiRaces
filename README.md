@@ -30,6 +30,28 @@ TODO - redo project anatomy
 	- log that data to database
 - create leaderboard that loads level data and views it.
 ------
+- Reorder directory structure so pages are not jumbled together.
+------
+- Get backend capable of accepting submissions
+	- semi complete
+- create homepage that allows users to register username
+  - Submits userid with username to database
+- make levels submit data on level clear
+	- log that data to database
+- create leaderboard that loads level data and views it.
+------
+- replace JSDOM with custom formatter
+	- remember to clear cache while developing
+	- write test scripts for Wiki pages
+------
+- add wikipedia attribution at the bottom of each page
+------
+- add informational text on homepage
+------
+- Add message for Edge
+------
+- encode urls properly
+------
 - replace JSDOM with custom formatter
 	- remember to clear cache while developing
 	- write test scripts for Wiki pages
