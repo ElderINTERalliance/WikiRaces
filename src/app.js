@@ -37,7 +37,7 @@ log.info("Server Started");
 const { Database } = require("./game/database");
 const db = new Database();
 
-const getLeaderboards = require("./game/leaderboards").getLeaderboards;
+const getLeaderboards = require("./game/leaderboardsAPI").getLeaderboards;
 
 // Start Server Code: ---------------
 
