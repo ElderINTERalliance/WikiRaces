@@ -1,4 +1,4 @@
-/*                                                                                                                                                           * This file renders the information from the leaderboards api.
+/*
  * This file renders the information from the leaderboards api.
  */
 
@@ -23,6 +23,12 @@ async function getTextFrom(url) {
 	return resp;
 }
 
+async function getLevelNames() {
+	const levelsURL = generateURL("/wiki-races/levels.json");
+	const resp = await getTextFrom(levelsURL);
+	return Object.keys(JSON.parse(resp));
+}
+
 /* NOTE: This function runs on document load */
 async function getLeaderboardsData() {
 	const levelsURL = generateURL("/wiki-races/api/leaderboards");
@@ -37,9 +43,48 @@ async function sortSubmissions(submissions) {
 	});
 }
 
+function createTableHeading(levelNames) {
+	let element = document.createElement("tr");
+	let numbers = document.createElement("th");
+	numbers.textContent = "#";
+	numbers.className = "align-left";
+	let links = document.createElement("th");
+	links.textContent = "User:";
+	links.className = "align-left";
+
+	let time = document.createElement("th");
+	time.textContent = "Total:";
+	time.className = "align-right";
+
+	element.appendChild(numbers);
+	element.appendChild(links);
+	element.appendChild(time);
+
+	for (levelName of levelNames) {
+		let level = document.createElement("th");
+		level.textContent = levelName.toString();
+		level.className = "align-right";
+		element.appendChild(level);
+	}
+
+	return element;
+}
+
+async function setTable(data) {
+	let table = document.getElementById("levels-table");
+	document.createElement("");
+	table.textContent += "testing";
+}
+
 /* This is run at script load: */
 (async () => {
+	const levelNames = await getLevelNames();
 	const data = await getLeaderboardsData();
 	const sorted = await sortSubmissions([...data]);
-	console.log(sorted);
+	let levelsDiv = document.getElementById("levels-table");
+	let table = document.createElement("table");
+	table.append(createTableHeading(levelNames));
+	console.log(levelNames);
+	// setTable(sorted);
+	levelsDiv.append(table);
 })();
