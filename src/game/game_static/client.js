@@ -94,7 +94,7 @@ async function sendData(data) {
 }
 
 async function endLevel() {
-	sendData({
+	await sendData({
 		levelName: settings.name,
 		userId: getCookie("userId"),
 		levelOpen: settings.startTime,
