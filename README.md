@@ -48,6 +48,8 @@ TODO - redo project anatomy
 ------
 - add informational text on homepage
 ------
+- Make iframe load on mobile. is it not https?
+------
 - Add message for Edge
 ------
 - encode urls properly

@@ -62,7 +62,7 @@ function createTableHeading(levelNames) {
 
 	for (levelName of levelNames) {
 		let level = document.createElement("th");
-		level.textContent = levelName.toString();
+		level.textContent = `${levelName}:`;
 		level.className = "align-right";
 		element.appendChild(level);
 	}
@@ -70,10 +70,36 @@ function createTableHeading(levelNames) {
 	return element;
 }
 
-async function setTable(data) {
-	let table = document.getElementById("levels-table");
-	document.createElement("");
-	table.textContent += "testing";
+function createCell(content) {
+	let cell = document.createElement("td");
+	cell.textContent = content.toString();
+	// cell.className = "align-left";
+	return cell;
+}
+
+// format millisecond time
+function formatMS(milliseconds) {
+	const date = new Date(Number(milliseconds));
+	const m = date.getMinutes();
+	const s = date.getSeconds();
+	const ms = date.getMilliseconds();
+	return `${m}:${s}.${ms}`;
+}
+
+let number = 0;
+
+function createTableLine(submission) {
+	let element = document.createElement("tr");
+	number++;
+	element.appendChild(createCell(number));
+	element.appendChild(createCell(submission.name));
+	element.appendChild(createCell(formatMS(submission.totalTime)));
+
+	for (levelTime of Object.values(submission.times)) {
+		element.appendChild(createCell(formatMS(levelTime)));
+	}
+
+	return element;
 }
 
 /* This is run at script load: */
@@ -81,10 +107,14 @@ async function setTable(data) {
 	const levelNames = await getLevelNames();
 	const data = await getLeaderboardsData();
 	const sorted = await sortSubmissions([...data]);
+	console.log(sorted);
 	let levelsDiv = document.getElementById("levels-table");
 	let table = document.createElement("table");
 	table.append(createTableHeading(levelNames));
-	console.log(levelNames);
-	// setTable(sorted);
+
+	for (submission of sorted) {
+		table.append(createTableLine(submission));
+	}
+
 	levelsDiv.append(table);
 })();
