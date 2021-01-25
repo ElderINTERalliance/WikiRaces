@@ -19,26 +19,14 @@ TODO - redo project anatomy
 
 <!--- TODO -->
 ### Order of development:
+
 ------
 - add https://wiki-races.interalliance.org with certbot
 ------
-- Get backend capable of accepting submissions
-	- semi complete
-- create homepage that allows users to register username
-  - Submits userid with username to database
-- make levels submit data on level clear
-	- log that data to database
-- create leaderboard that loads level data and views it.
-------
-- Reorder directory structure so pages are not jumbled together.
-------
-- Get backend capable of accepting submissions
-	- semi complete
-- create homepage that allows users to register username
-  - Submits userid with username to database
-- make levels submit data on level clear
-	- log that data to database
-- create leaderboard that loads level data and views it.
+- replace JSDOM with custom formatter
+	- remember to clear cache while developing
+	- write test scripts for Wiki pages
+- multithread page generation with worker process
 ------
 - replace JSDOM with custom formatter
 	- remember to clear cache while developing
@@ -49,22 +37,17 @@ TODO - redo project anatomy
 - add informational text on homepage
 ------
 - Make iframe load on mobile. is it not https?
+	- might be solved by removing php assets
 ------
 - Add message for Edge
-------
-- encode urls properly
-------
-- replace JSDOM with custom formatter
-	- remember to clear cache while developing
-	- write test scripts for Wiki pages
 ------
 - add wikipedia attribution at the bottom of each page
 ------
-- add informational text on homepage
-------
 - Add message for Edge
 ------
 - encode urls properly
+------
+- Reorder directory structure so pages are not jumbled together.
 ------
 
 ### Code maintenance / small changes
@@ -152,3 +135,16 @@ This is intended to be run on a linux system.
 - set up https with nginx and certbot
 - Takes username in box
 - generates userid
+- Get backend capable of accepting submissions
+- create homepage that allows users to register username
+	- Submits userid with username to database
+- create leaderboard that loads level data and views it.
+- Get backend capable of accepting submissions
+	- semi complete
+- create homepage that allows users to register username
+  - Submits userid with username to database
+- make levels submit data on level clear
+	- log that data to database
+- make levels submit data on level clear
+	- log that data to database
+- create leaderboard that loads level data and views it.
