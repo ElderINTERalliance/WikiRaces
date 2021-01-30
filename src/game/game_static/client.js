@@ -260,11 +260,11 @@ function submit() {
 }
 
 function serialize(name) {
-	return name.replaceAll("_", " ").replaceAll("%27", "'");
+	return name.replace(/_/g, " ").replace(/%27/g, "'");
 }
 
 function unSerialize(name) {
-	return name.replaceAll(" ", "_").replaceAll("'", "%27");
+	return name.replace(/ /g, "_").replace(/'/g, "%27");
 }
 
 // creates unordered list from array
