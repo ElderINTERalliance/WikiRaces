@@ -26,20 +26,19 @@ TODO - redo project anatomy
 - replace JSDOM with custom formatter
 	- remember to clear cache while developing
 	- write test scripts for Wiki pages
-- multithread page generation with worker process
 ------
-- replace JSDOM with custom formatter
-	- remember to clear cache while developing
-	- write test scripts for Wiki pages
-------
-- add wikipedia attribution at the bottom of each page
+- add "You are in #th place" on leaderboards
 ------
 - add informational text on homepage
 ------
+- click to view more submission info on leaderboards
+------
+- multithread page generation with worker process
+------
+- add wikipedia attribution at the bottom of each page
+------
 - Make iframe load on mobile. is it not https?
 	- might be solved by removing php assets
-------
-- Add message for Edge
 ------
 - add wikipedia attribution at the bottom of each page
 ------
