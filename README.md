@@ -23,30 +23,28 @@ TODO - redo project anatomy
 ------
 - add https://wiki-races.interalliance.org with certbot
 ------
-- replace JSDOM with custom formatter
-	- remember to clear cache while developing
-	- write test scripts for Wiki pages
+- cache leaderboards
+------
+- add css for `go to leaderboards` button on homepage
 ------
 - add "You are in #th place" on leaderboards
 ------
 - add informational text on homepage
 ------
+- display username on page login
+------
 - click to view more submission info on leaderboards
-------
-- multithread page generation with worker process
-------
-- add wikipedia attribution at the bottom of each page
 ------
 - Make iframe load on mobile. is it not https?
 	- might be solved by removing php assets
-------
-- add wikipedia attribution at the bottom of each page
 ------
 - Add message for Edge
 ------
 - encode urls properly
 ------
 - Reorder directory structure so pages are not jumbled together.
+------
+- multithread page generation with worker process (optional)
 ------
 
 ### Code maintenance / small changes
@@ -147,3 +145,5 @@ This is intended to be run on a linux system.
 - make levels submit data on level clear
 	- log that data to database
 - create leaderboard that loads level data and views it.
+- replace JSDOM with custom formatter
+- add wikipedia attribution at the bottom of each page
