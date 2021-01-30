@@ -51,16 +51,21 @@ async function getWiki(id) {
 }
 
 function tryRemoveClass(page, name) {
-	const regex = new RegExp(`<div.*class="${name}.*>`, "gm");
+	const regex = new RegExp(`<div.*class="${name}.*>([\s\S]*?)<\/div>`, "gm");
 	return page.replaceAll(regex, "");
 }
 
 function tryRemoveId(page, name) {
-	const regex = new RegExp(`<div.*id="${name}.*>`, "gm");
+	const regex = new RegExp(`<div.*id="${name}.*>([\s\S]*?)<\/div>`, "gm");
 	return page.replaceAll(regex, "");
 }
 
 async function formatPage(page) {
+	// To remove: Authority control, external text
+	// remove html boilerplate:
+	page = page.replace("<!DOCTYPE html>", "");
+	page = page.replace("<body>", "");
+	page = page.replace("</body>", "");
 	// removes all script tags
 	page = page.replaceAll(
 		/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
@@ -70,24 +75,30 @@ async function formatPage(page) {
 	page = page.replaceAll(/<footer[\s\S]*<\/footer>/gm, "");
 	// remove citations
 	page = page.replaceAll(/<h2.*id="References.*h2>/gm, "");
-	page = page.replaceAll(/<li id="cite_note.*$/gm, "");
+	page = page.replaceAll(/<li id="cite_note([\s\S]*?)<\/li>/gm, "");
 	// remove navigation
 	page = page.replaceAll("<h2>Navigation menu</h2>", "");
 	page = page.replaceAll(
 		/<div id="mw-navigation([\s\S]*?)<\/form>\n<\/div>/gm,
 		""
 	);
+	// remove external links section
 	page = page.replaceAll(/<nav id="p-([\s\S]*?)<\/nav>/gm, "");
 	page = page.replaceAll(/<h2.*External links.*<\/h2>/gm, "");
 	page = page.replaceAll(/<table.*sistersitebox([\s\S]*?)<\/table>/gm, "");
 	page = page.replaceAll(/<div role.*sistersitebox.*$/gm, "");
-	page = page.replaceAll(/.*external text.*/g, "");
+	page = page.replaceAll(/<a rel.*external text.*<\/a>/g, "[external link]");
 	// remove Jump To ___ links
 	page = page.replaceAll(/<a class.*Jump.*/g, "");
 	// remove php scripts
 	page = page.replaceAll(/<link rel.*php\?.*/g, "");
 	// remove all [edit] boxes without removing the end tags
 	page = page.replaceAll(/<span class="mw-editsection">.*(?=(<\/h.*>))/g, "");
+	page = page.replaceAll(/<div.*class="refbegin.*>([\s\S]*?)<\/div>/gm, "");
+	page = page.replaceAll(
+		/<div role="navigation".*navbox auth.*>([\s\S]*?)<\/div>/gm,
+		""
+	);
 	// remove divs by class
 	page = tryRemoveClass(page, "reflist");
 	page = tryRemoveClass(page, "printfooter");
@@ -107,6 +118,7 @@ async function generatePage(id) {
 		return "This page does not exist.";
 	}
 	page = await formatPage(page);
+	page = await fillTemplate(page);
 	return page;
 
 	// // add logo and text to top left of page
