@@ -61,11 +61,12 @@ function tryRemoveId(page, name) {
 }
 
 async function formatPage(page) {
-	// To remove: Authority control, external text
 	// remove html boilerplate:
 	page = page.replace("<!DOCTYPE html>", "");
 	page = page.replace("<body>", "");
 	page = page.replace("</body>", "");
+	page = page.replace(/<html.*>/, "");
+	page = page.replace("</html>", "");
 	// removes all script tags
 	page = page.replaceAll(
 		/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
@@ -87,6 +88,7 @@ async function formatPage(page) {
 	page = page.replaceAll(/<h2.*External links.*<\/h2>/gm, "");
 	page = page.replaceAll(/<table.*sistersitebox([\s\S]*?)<\/table>/gm, "");
 	page = page.replaceAll(/<div role.*sistersitebox.*$/gm, "");
+	// replace external links with text
 	page = page.replaceAll(/<a rel.*external text.*<\/a>/g, "[external link]");
 	// remove Jump To ___ links
 	page = page.replaceAll(/<a class.*Jump.*/g, "");
@@ -106,6 +108,7 @@ async function formatPage(page) {
 	page = tryRemoveClass(page, "mw-indicator");
 	// remove divs by id
 	page = tryRemoveId(page, "catlinks");
+
 	return page;
 }
 
@@ -118,17 +121,19 @@ async function generatePage(id) {
 		return "This page does not exist.";
 	}
 	page = await formatPage(page);
-	page = await fillTemplate(page);
+	page = await fillTemplate(page, id);
 	return page;
 
 	// // add logo and text to top left of page
 	// const image = document.createElement("img");
 	// image.src = "../wiki-races/logo.png";
 	// image.style.height = "95px";
+
 	// const text = document.createElement("h1");
 	// text.textContent = "Wiki Races 2021";
 	// text.style.borderBottom = "0";
 	// text.style.padding = "35px";
+
 	// const heading = document.getElementById("mw-head-base");
 	// heading.style.height = "100px";
 	// heading.style.display = "flex";
