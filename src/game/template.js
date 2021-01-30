@@ -1,4 +1,18 @@
-const htmlTemplate = `
+const heading = `
+<div id="mw-head-base" class="noprint" style="height: 100px; display: flex; flex-direction: row;">
+    <img src="../wiki-races/logo.png" height="95px">
+    <h1 style="border-bottom: 0; padding: 35px;">Wiki Races 2021</h1>
+</div>
+`;
+
+async function addHeadingToContent(content) {
+	content = content.replace(/<div id="mw-head-base".*<\/div>/, heading);
+	return content;
+}
+
+async function fillTemplate(content, id) {
+	content = await addHeadingToContent(content);
+	return `
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -17,10 +31,22 @@ const htmlTemplate = `
 </head>
 
 <body>
-    <div id="content">If you're seeing this, something went terribly wrong.</div>
-</body>
-`;
 
+    ${content}
+
+    <center style="padding: 1em">
+        This page uses material from
+        the Wikipedia article <u>https://en.wikipedia.org/wiki/${id}</u>
+        which is released under the Creative Commons
+        Attribution-Share-Alike License 3.0. <br />
+        A copy of this license can be found at <u>https://creativecommons.org/licenses/by-sa/3.0/</u>. </br>
+        This article was procedurally modified to remove content that would hurt the game experience.
+    </center>
+</body>
+
+</html>
+`;
+}
 module.exports = {
-	htmlTemplate,
+	fillTemplate,
 };
