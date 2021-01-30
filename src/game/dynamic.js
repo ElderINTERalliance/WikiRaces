@@ -52,12 +52,12 @@ async function getWiki(id) {
 
 function tryRemoveClass(page, name) {
 	const regex = new RegExp(`<div.*class="${name}.*>([\s\S]*?)<\/div>`, "gm");
-	return page.replaceAll(regex, "");
+	return page.replace(regex, "");
 }
 
 function tryRemoveId(page, name) {
 	const regex = new RegExp(`<div.*id="${name}.*>([\s\S]*?)<\/div>`, "gm");
-	return page.replaceAll(regex, "");
+	return page.replace(regex, "");
 }
 
 async function formatPage(page) {
@@ -68,36 +68,37 @@ async function formatPage(page) {
 	page = page.replace(/<html.*>/, "");
 	page = page.replace("</html>", "");
 	// removes all script tags
-	page = page.replaceAll(
+	log.debug(`length of page = ${page.length}`);
+	page = page.replace(
 		/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
 		""
 	);
 	// remove footer
-	page = page.replaceAll(/<footer[\s\S]*<\/footer>/gm, "");
+	page = page.replace(/<footer[\s\S]*<\/footer>/gm, "");
 	// remove citations
-	page = page.replaceAll(/<h2.*id="References.*h2>/gm, "");
-	page = page.replaceAll(/<li id="cite_note([\s\S]*?)<\/li>/gm, "");
+	page = page.replace(/<h2.*id="References.*h2>/gm, "");
+	page = page.replace(/<li id="cite_note([\s\S]*?)<\/li>/gm, "");
 	// remove navigation
-	page = page.replaceAll("<h2>Navigation menu</h2>", "");
-	page = page.replaceAll(
+	page = page.replace("<h2>Navigation menu</h2>", "");
+	page = page.replace(
 		/<div id="mw-navigation([\s\S]*?)<\/form>\n<\/div>/gm,
 		""
 	);
 	// remove external links section
-	page = page.replaceAll(/<nav id="p-([\s\S]*?)<\/nav>/gm, "");
-	page = page.replaceAll(/<h2.*External links.*<\/h2>/gm, "");
-	page = page.replaceAll(/<table.*sistersitebox([\s\S]*?)<\/table>/gm, "");
-	page = page.replaceAll(/<div role.*sistersitebox.*$/gm, "");
+	page = page.replace(/<nav id="p-([\s\S]*?)<\/nav>/gm, "");
+	page = page.replace(/<h2.*External links.*<\/h2>/gm, "");
+	page = page.replace(/<table.*sistersitebox([\s\S]*?)<\/table>/gm, "");
+	page = page.replace(/<div role.*sistersitebox.*$/gm, "");
 	// replace external links with text
-	page = page.replaceAll(/<a rel.*external text.*<\/a>/g, "[external link]");
+	page = page.replace(/<a rel.*external text.*<\/a>/g, "[external link]");
 	// remove Jump To ___ links
-	page = page.replaceAll(/<a class.*Jump.*/g, "");
+	page = page.replace(/<a class.*Jump.*/g, "");
 	// remove php scripts
-	page = page.replaceAll(/<link rel.*php\?.*/g, "");
+	page = page.replace(/<link rel.*php\?.*/g, "");
 	// remove all [edit] boxes without removing the end tags
-	page = page.replaceAll(/<span class="mw-editsection">.*(?=(<\/h.*>))/g, "");
-	page = page.replaceAll(/<div.*class="refbegin.*>([\s\S]*?)<\/div>/gm, "");
-	page = page.replaceAll(
+	page = page.replace(/<span class="mw-editsection">.*(?=(<\/h.*>))/g, "");
+	page = page.replace(/<div.*class="refbegin.*>([\s\S]*?)<\/div>/gm, "");
+	page = page.replace(
 		/<div role="navigation".*navbox auth.*>([\s\S]*?)<\/div>/gm,
 		""
 	);
