@@ -120,6 +120,7 @@ async function generatePage(id) {
 	if (!page) {
 		return "This page does not exist.";
 	}
+	log.debug(`typeof page ${id} = ${typeof page}`);
 	page = await formatPage(page);
 	page = await fillTemplate(page, id);
 	return page;
