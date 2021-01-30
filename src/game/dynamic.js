@@ -32,7 +32,7 @@ const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
 // basic html and css
-const htmlTemplate = require("./template").htmlTemplate;
+const { fillTemplate } = require("./template");
 
 // This gets the raw html from wikipedia.
 // I do not use an API because I want to preserve
@@ -50,69 +50,81 @@ async function getWiki(id) {
 	}
 }
 
-function tryRemoveClass(name, dom) {
-	const ele = dom.window.document.getElementsByClassName(name)[0];
-	if (ele) {
-		ele.remove();
-	}
+function tryRemoveClass(page, name) {
+	const regex = new RegExp(`<div.*class="${name}.*>`, "gm");
+	return page.replaceAll(regex, "");
 }
 
-function tryRemoveId(id, dom) {
-	const ele = dom.window.document.getElementById(id);
-	if (ele) {
-		ele.remove();
-	}
+function tryRemoveId(page, name) {
+	const regex = new RegExp(`<div.*id="${name}.*>`, "gm");
+	return page.replaceAll(regex, "");
+}
+
+async function formatPage(page) {
+	// removes all script tags
+	page = page.replaceAll(
+		/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
+		""
+	);
+	// remove footer
+	page = page.replaceAll(/<footer[\s\S]*<\/footer>/gm, "");
+	// remove citations
+	page = page.replaceAll(/<h2.*id="References.*h2>/gm, "");
+	page = page.replaceAll(/<li id="cite_note.*$/gm, "");
+	// remove navigation
+	page = page.replaceAll("<h2>Navigation menu</h2>", "");
+	page = page.replaceAll(
+		/<div id="mw-navigation([\s\S]*?)<\/form>\n<\/div>/gm,
+		""
+	);
+	page = page.replaceAll(/<nav id="p-([\s\S]*?)<\/nav>/gm, "");
+	page = page.replaceAll(/<h2.*External links.*<\/h2>/gm, "");
+	page = page.replaceAll(/<table.*sistersitebox([\s\S]*?)<\/table>/gm, "");
+	page = page.replaceAll(/<div role.*sistersitebox.*$/gm, "");
+	page = page.replaceAll(/.*external text.*/g, "");
+	// remove Jump To ___ links
+	page = page.replaceAll(/<a class.*Jump.*/g, "");
+	// remove php scripts
+	page = page.replaceAll(/<link rel.*php\?.*/g, "");
+	// remove all [edit] boxes without removing the end tags
+	page = page.replaceAll(/<span class="mw-editsection">.*(?=(<\/h.*>))/g, "");
+	// remove divs by class
+	page = tryRemoveClass(page, "reflist");
+	page = tryRemoveClass(page, "printfooter");
+	page = tryRemoveClass(page, "navbox authority-control");
+	page = tryRemoveClass(page, "mw-indicator");
+	// remove divs by id
+	page = tryRemoveId(page, "catlinks");
+	return page;
 }
 
 async function generatePage(id) {
-	const dom = new JSDOM(htmlTemplate);
-	const document = dom.window.document;
+	// const dom = new JSDOM(htmlTemplate);
+	// const document = dom.window.document;
 	// get raw html from wikipedia.
-	const page = await getWiki(id);
+	let page = await getWiki(id);
 	if (!page) {
 		return "This page does not exist.";
 	}
-	let content = dom.window.document.getElementById("content");
-	// set page
-	content.innerHTML = page;
+	page = await formatPage(page);
+	return page;
 
-	tryRemoveId("mw-navigation", dom);
-	tryRemoveId("mw-hidden-catlinks", dom);
-	tryRemoveId("footer", dom);
-	tryRemoveId("catlinks", dom);
-	tryRemoveId("mw-indicator-pp-default", dom);
-	tryRemoveId("mw-indicator-pp-autoreview", dom);
-	tryRemoveId("References", dom);
-	tryRemoveId("references", dom);
+	// // add logo and text to top left of page
+	// const image = document.createElement("img");
+	// image.src = "../wiki-races/logo.png";
+	// image.style.height = "95px";
+	// const text = document.createElement("h1");
+	// text.textContent = "Wiki Races 2021";
+	// text.style.borderBottom = "0";
+	// text.style.padding = "35px";
+	// const heading = document.getElementById("mw-head-base");
+	// heading.style.height = "100px";
+	// heading.style.display = "flex";
+	// heading.style.flexDirection = "row";
+	// heading.append(image);
+	// heading.append(text);
 
-	tryRemoveClass("authority-control", dom);
-	tryRemoveClass("printfooter", dom);
-	tryRemoveClass("sistersitebox", dom);
-
-	// Remove references
-	const refs = document.getElementsByClassName("reflist");
-	if (refs) {
-		for (let i = 0; i < refs.length; i++) {
-			refs[i].remove();
-		}
-	}
-
-	// add logo and text to top left of page
-	const image = document.createElement("img");
-	image.src = "../wiki-races/logo.png";
-	image.style.height = "95px";
-	const text = document.createElement("h1");
-	text.textContent = "Wiki Races 2021";
-	text.style.borderBottom = "0";
-	text.style.padding = "35px";
-	const heading = document.getElementById("mw-head-base");
-	heading.style.height = "100px";
-	heading.style.display = "flex";
-	heading.style.flexDirection = "row";
-	heading.append(image);
-	heading.append(text);
-
-	return dom.serialize();
+	// return dom.serialize();
 }
 
 // make folder if none exists
