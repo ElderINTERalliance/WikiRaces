@@ -34,7 +34,7 @@ async function fillTemplate(content, id) {
 
     ${content}
 
-    <center style="padding: 1em">
+    <center style="padding: 1em; padding-bottom: 4.5em;">
         This page uses material from
         the Wikipedia article <u>https://en.wikipedia.org/wiki/${id}</u>
         which is released under the Creative Commons

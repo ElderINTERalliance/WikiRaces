@@ -68,7 +68,6 @@ async function formatPage(page) {
 	page = page.replace(/<html.*>/, "");
 	page = page.replace("</html>", "");
 	// removes all script tags
-	log.debug(`length of page = ${page.length}`);
 	page = page.replace(
 		/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
 		""
@@ -119,7 +118,6 @@ async function generatePage(id) {
 	if (!page) {
 		return "This page does not exist.";
 	}
-	log.debug(`typeof page ${id} = ${typeof page}`);
 	page = await formatPage(page);
 	page = await fillTemplate(page, id);
 	return page;
