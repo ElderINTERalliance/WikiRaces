@@ -89,11 +89,14 @@ function sendData(data) {
 
 		request.open(method, url, true);
 
-		request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+		request.setRequestHeader(
+			"Content-Type",
+			"application/json;charset=UTF-8"
+		);
 
 		// Actually sends the request to the server.
 		request.send(JSON.stringify(data));
-	})
+	});
 }
 
 async function endLevel() {
