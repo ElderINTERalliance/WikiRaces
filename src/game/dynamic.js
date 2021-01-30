@@ -114,8 +114,6 @@ async function formatPage(page) {
 }
 
 async function generatePage(id) {
-	// const dom = new JSDOM(htmlTemplate);
-	// const document = dom.window.document;
 	// get raw html from wikipedia.
 	let page = await getWiki(id);
 	if (!page) {

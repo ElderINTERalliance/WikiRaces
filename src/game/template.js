@@ -47,6 +47,7 @@ async function fillTemplate(content, id) {
 </html>
 `;
 }
+
 module.exports = {
 	fillTemplate,
 };
