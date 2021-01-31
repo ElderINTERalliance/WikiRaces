@@ -151,7 +151,7 @@ async function getLeaderboards() {
 		lastGenerated = new Date();
 
 		const leaderboards = generateLeaderboards();
-		saveFile(cacheName, leaderboards, ".json");
+		saveFile(cacheName, JSON.stringify(leaderboards), ".json");
 
 		return leaderboards;
 	} else {
