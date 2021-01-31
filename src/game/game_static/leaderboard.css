@@ -123,6 +123,7 @@ tr th, tr td {
     margin-left: 1em;
     margin-bottom: 0;
     margin-top: 0.5em;
+    text-align: center;
 }
 
 .status-urgent {
