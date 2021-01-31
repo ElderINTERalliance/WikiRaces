@@ -147,7 +147,6 @@ const cacheName = "leaderboards";
 async function getLeaderboards() {
 	// Only generate leaderboards every `seconds` seconds.
 	if (new Date().getTime() > lastGenerated.getTime() + seconds * 1000) {
-		log.debug("Leaderboards generated");
 		lastGenerated = new Date();
 
 		const leaderboards = await generateLeaderboards();
@@ -155,7 +154,6 @@ async function getLeaderboards() {
 
 		return leaderboards;
 	} else {
-		log.debug("Leaderboards not generated");
 		return getCached(cacheName, ".json");
 	}
 }
