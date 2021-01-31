@@ -1,5 +1,5 @@
 /*
- * This file renders the information from the leaderboards api.
+ * This file renders the information from the leaderboard api.
  */
 
 document.getElementById("go-home").addEventListener("click", () => {
@@ -30,8 +30,8 @@ async function getLevelNames() {
 }
 
 /* NOTE: This function runs on document load */
-async function getLeaderboardsData() {
-	const levelsURL = generateURL("/wiki-races/api/leaderboards");
+async function getleaderboardData() {
+	const levelsURL = generateURL("/wiki-races/api/leaderboard");
 	const resp = await getTextFrom(levelsURL);
 	return JSON.parse(resp);
 }
@@ -105,7 +105,7 @@ function createTableLine(submission) {
 /* This is run at script load: */
 (async () => {
 	const levelNames = await getLevelNames();
-	const data = await getLeaderboardsData();
+	const data = await getleaderboardData();
 	const sorted = await sortSubmissions([...data]);
 	console.log(sorted);
 	let levelsDiv = document.getElementById("levels-table");

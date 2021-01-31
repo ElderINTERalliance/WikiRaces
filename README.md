@@ -21,15 +21,13 @@ TODO - redo project anatomy
 ### Order of development:
 
 ------
-- add https://wiki-races.interalliance.org with certbot
-------
 - center leaderboard titles
 ------
 - make script to redact names
 ------
-- add css for `go to leaderboards` button on homepage
+- add css for `go to leaderboard` button on homepage
 ------
-- add "You are in #th place" on leaderboards
+- add "You are in #th place" on leaderboard
 ------
 - add informational text on homepage
 	- note a re-direct does not count
@@ -37,7 +35,7 @@ TODO - redo project anatomy
 - display username on page login
 - kick user to main page if no username is detected
 ------
-- click to view more submission info on leaderboards
+- click to view more submission info on leaderboard
 ------
 - Make iframe load on mobile. is it not https?
 	- might be solved by removing php assets
@@ -69,40 +67,6 @@ TODO - redo project anatomy
 - set up mongodb
 - Make homepage to view submissions
 	- simplified view -> click for more details
-
-
-Limitations:
- - Design I know will work: Shortest time wins
- - Design I want: get shortest time, and shortest number of links.
- - If I'm hosting this on my home network, I am not going to be able to host all of the Wikipedia pages due to network limitations.
-	 - Can I scrape the wiki pages and modify them so they set window variables?
-         - This would mean I can host all of the pages with github's free hosting, and just host the database on my personal server.
-
-Other aspects:
- - I want a leaderboard -> need to host a website
- - I want to tell who won immediately -> I need to host a website
- - I want a timer to count down to event start
-
-Basic game structure:
-  - As game starts: Log Date object to cookies? 
-  - Game end is found when the iframe location is equal to the target URL
-  - At game end, (StartTime - CurrentTime) is submitted to the database as the time taken, along with a user entered name.
-	  - (we should ask they use their real names.)
-
-To do: 
- - Add link to go back to main page when we run out of time.
- - Disable opening links in new tab?
- - Nicely comment everything.
- - get a good server hosting solution.
- - Create homepage
- - Create backend (hopefully something better than just a JSON file, but we'll see.)
-
-Online games we can clone:
-  - Wikispedia
-	  - They seemd to have used the same strategy of hosting webpages in an iframe.
-		  - I think they take an article name and automatically generate the html they want from it.
-	  - [see this link](https://dlab.epfl.ch/wikispeedia/play/wiki.php?article=Spanish_conquest_of_the_Inca_Empire) 
-  - [thewikigame](https://www.thewikigame.com) seems to use a parser that returns raw html, which is inserted with JS.
 
 This is intended to be run on a linux system.
 
@@ -151,3 +115,11 @@ This is intended to be run on a linux system.
 - create leaderboard that loads level data and views it.
 - replace JSDOM with custom formatter
 - add wikipedia attribution at the bottom of each page
+- add https://wiki-races.interalliance.org with certbot
+- fix css for small browsers
+- Add link to go back to main page when we run out of time.
+- Disable opening links in new tab?
+- Nicely comment everything.
+- get a good server hosting solution.
+- Create homepage
+- Create backend (hopefully something better than just a JSON file, but we'll see.)

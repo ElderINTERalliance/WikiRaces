@@ -156,7 +156,7 @@ tr th, tr td {
     background: rgb(233, 151, 151);
 }
 
-#go-leaderboards {
+#go-leaderboard {
     background: rgb(15, 218, 25);
     /* margin-top: 1em; */
     font-weight: bold;
@@ -164,7 +164,7 @@ tr th, tr td {
     padding: 0.5em;
 }
 
-#go-leaderboards {
+#go-leaderboard {
     background: rgb(10, 187, 18);
 }
 

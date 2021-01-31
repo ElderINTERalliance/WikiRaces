@@ -35,7 +35,7 @@
 					<div id="username-value" class="has-username"></div>
 					<button id="delete-username">Log Out</button>
 					<br />
-					<button id="go-leaderboards">Go to leaderboards</button>
+					<button id="go-leaderboard">Go to leaderboard</button>
 				</div>
 
 				<div id="username-does-not-exist" class="no-username">
@@ -82,9 +82,9 @@
 			// I normally don't like using script tags, but I don't want another .js file to keep track of.
 			// TODO - REPLACE THIS
 			document
-				.getElementById("go-leaderboards")
+				.getElementById("go-leaderboard")
 				.addEventListener("click", () => {
-					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboards`;
+					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
 				});
 		</script>
 	</body>

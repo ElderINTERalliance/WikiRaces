@@ -37,7 +37,7 @@
 			</div>
 			<div id="text-section" class="align-left">
 				<button id="go-home">Go home!</button>
-				<button id="go-leaderboards">Go to leaderboards!</button>
+				<button id="go-leaderboard">Go to leaderboard!</button>
 			</div>
 		</div>
 		<!--[if lt IE 7]>
@@ -52,9 +52,9 @@
 				window.location.href = `${window.location.protocol}//${window.location.host}`;
 			});
 			document
-				.getElementById("go-leaderboards")
+				.getElementById("go-leaderboard")
 				.addEventListener("click", () => {
-					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboards`;
+					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
 				});
 		</script>
 	</body>
