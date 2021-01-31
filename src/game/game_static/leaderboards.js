@@ -54,7 +54,7 @@ function createTableHeading(levelNames) {
 
 	let time = document.createElement("th");
 	time.textContent = "Total:";
-	time.className = "align-right";
+	time.className = "align-left";
 
 	element.appendChild(numbers);
 	element.appendChild(links);
@@ -63,7 +63,7 @@ function createTableHeading(levelNames) {
 	for (levelName of levelNames) {
 		let level = document.createElement("th");
 		level.textContent = `${levelName}:`;
-		level.className = "align-right";
+		level.className = "align-left";
 		element.appendChild(level);
 	}
 

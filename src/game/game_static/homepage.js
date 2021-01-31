@@ -35,7 +35,7 @@ function createTableHeading() {
 
 	let time = document.createElement("th");
 	time.textContent = "Starts in:";
-	time.className = "align-left";
+	time.className = "align-right";
 
 	element.appendChild(numbers);
 	element.appendChild(links);
