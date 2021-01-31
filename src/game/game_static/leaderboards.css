@@ -146,6 +146,13 @@ tr th, tr td {
     padding: 10px;
 }
 
+@media (max-width: 700px) {
+    #page {
+        width: 98%;
+        padding: 2px;
+    }
+}
+
 /* Button */
 
 #go-home, #give-up {
