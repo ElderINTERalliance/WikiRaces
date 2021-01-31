@@ -133,8 +133,8 @@ if (!fs.existsSync(cacheFolder)) {
 async function saveFile(id, content) {
 	fs.writeFile(`${cacheFolder}/${id}.html`, content, (err) => {
 		if (err) {
-			return undefined;
 			log.error(err);
+			return undefined;
 		}
 		log.info(`saved ${id} to cache.`);
 	});
