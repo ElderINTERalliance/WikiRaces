@@ -1,6 +1,7 @@
 # Game cache
 src/game/cache
 __pycache__/
+.vscode
 
 # Logs
 logs
