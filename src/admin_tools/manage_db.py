@@ -2,6 +2,9 @@ from pymongo import MongoClient
 client = MongoClient("mongodb://127.0.0.1:27017")
 db = client.wikiRaces
 
+print("This script is for managing WikiRace users and usernames.")
+print()
+
 
 def take_and_confirm_input(prompt):
     print(prompt)
@@ -22,6 +25,13 @@ def list_users():
     print("Listing users. \n")
     for item in db.users.find():
         print(f'name = "{item["name"]}"')
+
+
+def get_usernames():
+    users = []
+    for item in db.users.find():
+        users.append(str(item["name"]))
+    return list(users)
 
 
 def list_full_user_data():
@@ -83,8 +93,11 @@ def take_input(commands, word="command"):
 
     print(f"Pick a choice from the following {word}s:")
 
-    for i, function in enumerate(commands, 1):
-        print(f"\t{i} - {function.__name__}")
+    for i, item in enumerate(commands, 1):
+        if word == "command":
+            print(f"\t{i} - {item.__name__}")
+        else:
+            print(f"\t{i} - {item}")
 
     print(f"\nPress ENTER for last {word}, or type an individual number. \n")
 
@@ -106,12 +119,22 @@ def take_input(commands, word="command"):
             return take_input(commands, word)
 
 
+def change_username_from_selection():
+    print("Choosing from selection:")
+    print()
+    username = take_input(get_usernames(), "username")
+    ids = get_ids_of_username(username)
+    ids = "".join(ids)
+    change_username_by_user_id(ids)
+
+
 list_of_commands = [
+    change_username_from_selection,
     change_username_by_username,
+    change_username_by_user_id,
     list_users,
     list_users_with_ids,
     get_ids_of_username,
-    change_username_by_user_id,
     list_full_user_data,
     cancel,
 ]
