@@ -121,7 +121,7 @@ async function getUserIds() {
 	return userIds;
 }
 
-async function generateleaderboard() {
+async function generateLeaderboard() {
 	log.info("generated leaderboard");
 	const userIds = await getUserIds();
 
@@ -144,12 +144,12 @@ async function generateleaderboard() {
 var lastGenerated = new Date();
 const seconds = 3;
 const cacheName = "leaderboard";
-async function getleaderboard() {
+async function getLeaderboard() {
 	// Only generate leaderboard every `seconds` seconds.
 	if (new Date().getTime() > lastGenerated.getTime() + seconds * 1000) {
 		lastGenerated = new Date();
 
-		const leaderboard = await generateleaderboard();
+		const leaderboard = await generateLeaderboard();
 		saveFile(cacheName, JSON.stringify(leaderboard), ".json");
 
 		return leaderboard;
@@ -158,7 +158,7 @@ async function getleaderboard() {
 	}
 }
 
-async function getLevelsleaderboard() {
+async function getLevelsLeaderboard() {
 	const levelNames = await getLevelNames();
 	let submissions = new Set();
 	for (levelName of levelNames) {
@@ -171,4 +171,4 @@ async function getLevelsleaderboard() {
 	return JSON.stringify(submissions);
 }
 
-module.exports = { getleaderboard };
+module.exports = { getLeaderboard };

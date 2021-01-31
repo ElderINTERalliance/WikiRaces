@@ -37,7 +37,7 @@ log.info("Server Started");
 const { Database } = require("./game/database");
 const db = new Database();
 
-const getleaderboard = require("./game/leaderboardAPI").getleaderboard;
+const getLeaderboard = require("./game/leaderboardAPI").getLeaderboard;
 
 // Start Server Code: ---------------
 
@@ -91,7 +91,7 @@ app.get("/wiki-races/date", (req, res) => {
 
 // leaderboard api
 app.get("/wiki-races/api/leaderboard", async (req, res) => {
-	let leaderboard = await getleaderboard();
+	let leaderboard = await getLeaderboard();
 	res.send(leaderboard);
 });
 

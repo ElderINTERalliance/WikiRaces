@@ -30,7 +30,7 @@ async function getLevelNames() {
 }
 
 /* NOTE: This function runs on document load */
-async function getleaderboardData() {
+async function getLeaderboardData() {
 	const levelsURL = generateURL("/wiki-races/api/leaderboard");
 	const resp = await getTextFrom(levelsURL);
 	return JSON.parse(resp);
@@ -105,7 +105,7 @@ function createTableLine(submission) {
 /* This is run at script load: */
 (async () => {
 	const levelNames = await getLevelNames();
-	const data = await getleaderboardData();
+	const data = await getLeaderboardData();
 	const sorted = await sortSubmissions([...data]);
 	console.log(sorted);
 	let levelsDiv = document.getElementById("levels-table");
