@@ -21,15 +21,20 @@ TODO - redo project anatomy
 ### Order of development:
 
 ------
-- add https://wiki-races.interalliance.org with certbot
+- fix leaderboard ordering to account for not finishing levels
 ------
 - cache leaderboards
+------
+- add https://wiki-races.interalliance.org with certbot
+------
+- make script to redact names
 ------
 - add css for `go to leaderboards` button on homepage
 ------
 - add "You are in #th place" on leaderboards
 ------
 - add informational text on homepage
+	- note a re-direct does not count
 ------
 - display username on page login
 ------
