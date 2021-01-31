@@ -151,9 +151,14 @@ tr th, tr td {
 /* Go to leaderboard button */
 
 #go-leaderboard {
-    background: rgb(15, 218, 25);
+    /* background: rgb(166, 243, 170); */
     /* margin-top: 1em; */
     font-weight: bold;
     border-radius: 5em;
     padding: 0.5em;
+    cursor: pointer;
+}
+
+#go-leaderboard:hover {
+    background: rgb(214, 214, 214);
 }

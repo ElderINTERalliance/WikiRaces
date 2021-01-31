@@ -150,6 +150,7 @@ tr th, tr td {
     font-weight: bold;
     border-radius: 5em;
     padding: 0.5em;
+    cursor: pointer;
 }
 
 #go-home:hover, #give-up:hover {
@@ -162,9 +163,10 @@ tr th, tr td {
     font-weight: bold;
     border-radius: 5em;
     padding: 0.5em;
+    cursor: pointer;
 }
 
-#go-leaderboard {
+#go-leaderboard:hover {
     background: rgb(10, 187, 18);
 }
 
