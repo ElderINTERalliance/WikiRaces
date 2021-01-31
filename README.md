@@ -21,10 +21,6 @@ TODO - redo project anatomy
 ### Order of development:
 
 ------
-- center leaderboard titles
-------
-- make script to redact names
-------
 - add css for `go to leaderboard` button on homepage
 ------
 - add "You are in #th place" on leaderboard
@@ -35,7 +31,7 @@ TODO - redo project anatomy
 - display username on page login
 - kick user to main page if no username is detected
 ------
-- click to view more submission info on leaderboard
+- click to view user's submission info on leaderboard
 ------
 - Make iframe load on mobile. is it not https?
 	- might be solved by removing php assets
@@ -45,8 +41,6 @@ TODO - redo project anatomy
 - encode urls properly
 ------
 - Reorder directory structure so pages are not jumbled together.
-------
-- multithread page generation with worker process (optional)
 ------
 
 ### Code maintenance / small changes
@@ -123,3 +117,5 @@ This is intended to be run on a linux system.
 - get a good server hosting solution.
 - Create homepage
 - Create backend (hopefully something better than just a JSON file, but we'll see.)
+- center leaderboard titles
+- make script to redact names
