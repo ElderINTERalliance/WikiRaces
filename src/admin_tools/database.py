@@ -36,7 +36,7 @@ def list_users_with_ids():
         print(f'userId = "{item["userId"]}" \t name = "{item["name"]}"')
 
 
-def get_id_of_username(username=None):
+def get_ids_of_username(username=None):
     if not username:
         print("What is the username you want to get the id of?")
         username = str(input("> "))
@@ -44,7 +44,7 @@ def get_id_of_username(username=None):
     for item in db.users.find({"name": username}):
         print("Found the following users:")
         print(f'userId = "{item["userId"]}"\t name = "{item["name"]}"')
-        user_ids.push(item["userId"])
+        user_ids += "".join(item["userId"])
     return user_ids
 
 
@@ -61,6 +61,13 @@ def change_username_by_user_id(user_id=None):
     user = users_with_id[0]
     user["name"] = new_name
     db.users.find_one_and_replace({"userId": user_id}, user)
+
+
+def change_username_by_username():
+    username = take_and_confirm_input("What username do you want to modify?")
+    ids = get_ids_of_username(username)
+    ids = "".join(ids)
+    change_username_by_user_id(ids)
 
 
 def cancel():
@@ -100,9 +107,10 @@ def take_input(commands, word="command"):
 
 
 list_of_commands = [
+    change_username_by_username,
     list_users,
     list_users_with_ids,
-    get_id_of_username,
+    get_ids_of_username,
     change_username_by_user_id,
     list_full_user_data,
     cancel,
