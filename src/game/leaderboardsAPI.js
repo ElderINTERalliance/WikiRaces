@@ -24,10 +24,10 @@ const log = bunyan.createLogger(bunyanOpts);
 const fs = require("fs").promises;
 const path = require("path");
 
-const staticFolder = path.join(__dirname, "/game_static/levels.json");
+const levelsFile = path.join(__dirname, "/game_static/levels.json");
 
 async function getLevelData() {
-	const file = await fs.readFile(`${staticFolder}`, "utf-8");
+	const file = await fs.readFile(`${levelsFile}`, "utf-8");
 	return JSON.parse(file);
 }
 
@@ -99,7 +99,14 @@ async function getUserTimes(userId) {
 
 	[totalTime, times] = await fillInMissing(totalTime, times);
 
-	return [totalTime, times];
+	// Quick patch to make sure levels are ordered correctly:
+	let sortedTimes = {};
+	const names = await getLevelNames();
+	for (levelName of names) {
+		sortedTimes[levelName] = times[levelName];
+	}
+
+	return [totalTime, sortedTimes];
 }
 
 async function getUserIds() {
