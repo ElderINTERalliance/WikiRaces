@@ -150,7 +150,7 @@ async function getLeaderboards() {
 		log.debug("Leaderboards generated");
 		lastGenerated = new Date();
 
-		const leaderboards = generateLeaderboards();
+		const leaderboards = await generateLeaderboards();
 		saveFile(cacheName, JSON.stringify(leaderboards), ".json");
 
 		return leaderboards;
