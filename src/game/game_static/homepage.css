@@ -133,3 +133,10 @@ tr th, tr td {
     width: 50%;
     padding: 10px;
 }
+
+/* Credits, at footer of page */
+
+#credits {
+    padding-bottom: 3em;
+    font-size: small;
+}
