@@ -21,11 +21,9 @@ TODO - redo project anatomy
 ### Order of development:
 
 ------
-- fix leaderboard ordering to account for not finishing levels
-------
-- cache leaderboards
-------
 - add https://wiki-races.interalliance.org with certbot
+------
+- center leaderboard titles
 ------
 - make script to redact names
 ------
@@ -37,6 +35,7 @@ TODO - redo project anatomy
 	- note a re-direct does not count
 ------
 - display username on page login
+- kick user to main page if no username is detected
 ------
 - click to view more submission info on leaderboards
 ------
