@@ -3,6 +3,9 @@
 const { Database } = require("./database");
 const db = new Database();
 
+// saveFile, to save files
+const { saveFile, getCached } = require("./dynamic");
+
 // bunyan, for logging
 const bunyan = require("bunyan");
 const bunyanOpts = {
@@ -118,7 +121,7 @@ async function getUserIds() {
 	return userIds;
 }
 
-async function getLeaderboards() {
+async function generateLeaderboards() {
 	log.info("generated leaderboards");
 	const userIds = await getUserIds();
 
@@ -136,6 +139,25 @@ async function getLeaderboards() {
 	}
 
 	return leaderboard;
+}
+
+var lastGenerated = new Date();
+const seconds = 3;
+const cacheName = "leaderboards";
+async function getLeaderboards() {
+	// Only generate leaderboards every `seconds` seconds.
+	if (new Date().getTime() > lastGenerated.getTime() + seconds * 1000) {
+		log.debug("Leaderboards generated");
+		lastGenerated = new Date();
+
+		const leaderboards = generateLeaderboards();
+		saveFile(cacheName, leaderboards, ".json");
+
+		return leaderboards;
+	} else {
+		log.debug("Leaderboards not generated");
+		return getCached(cacheName, ".json");
+	}
 }
 
 async function getLevelsLeaderboards() {

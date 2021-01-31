@@ -61,6 +61,9 @@ function tryRemoveId(page, name) {
 }
 
 async function formatPage(page) {
+	// I previously used a DOM emulator (jsdom) to remove elements,
+	// and, in terms of performance, this wall of regex is significantly better.
+
 	// remove html boilerplate:
 	page = page.replace("<!DOCTYPE html>", "");
 	page = page.replace("<body>", "");
@@ -130,8 +133,8 @@ if (!fs.existsSync(cacheFolder)) {
 }
 
 // save file to cache
-async function saveFile(id, content) {
-	fs.writeFile(`${cacheFolder}/${id}.html`, content, (err) => {
+async function saveFile(id, content, suffix = ".html") {
+	fs.writeFile(`${cacheFolder}/${id}${suffix}`, content, (err) => {
 		if (err) {
 			log.error(err);
 			return undefined;
@@ -145,10 +148,10 @@ function isCached(id) {
 }
 
 // get file from cache, or return undefined
-async function getCached(id) {
+async function getCached(id, suffix = ".html") {
 	try {
 		log.info(`read ${id} from cache.`);
-		return asyncfs.readFile(`${cacheFolder}/${id}.html`, "utf-8");
+		return asyncfs.readFile(`${cacheFolder}/${id}${suffix}`, "utf-8");
 	} catch (err) {
 		log.error("Error opening cached file: ", err);
 		return undefined;
@@ -180,4 +183,6 @@ module.exports = {
 	getPage,
 	getCached,
 	getWiki,
+	saveFile,
+	getCached,
 };
