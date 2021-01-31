@@ -147,3 +147,13 @@ tr th, tr td {
     padding-bottom: 3em;
     font-size: small;
 }
+
+/* Go to leaderboard button */
+
+#go-leaderboard {
+    background: rgb(15, 218, 25);
+    /* margin-top: 1em; */
+    font-weight: bold;
+    border-radius: 5em;
+    padding: 0.5em;
+}
