@@ -6,10 +6,6 @@ body {
     background: #e6dfdf;
 }
 
-#levels-table table {
-    width: 100%;
-}
-
 /* Heading Start */
 
 #header {
@@ -127,7 +123,7 @@ tr th, tr td {
     margin-left: 1em;
     margin-bottom: 0;
     margin-top: 0.5em;
-    text-align: center;
+    text-align: left;
 }
 
 .status-urgent {
