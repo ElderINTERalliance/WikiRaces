@@ -21,20 +21,15 @@ TODO - redo project anatomy
 ### Order of development:
 
 ------
-- add css for `go to leaderboard` button on homepage
+- display username on page login
+- kick user to main page if no username is detected
 ------
 - add "You are in #th place" on leaderboard
 ------
 - add informational text on homepage
 	- note a re-direct does not count
 ------
-- display username on page login
-- kick user to main page if no username is detected
-------
 - click to view user's submission info on leaderboard
-------
-- Make iframe load on mobile. is it not https?
-	- might be solved by removing php assets
 ------
 - Add message for Edge
 ------
@@ -44,23 +39,7 @@ TODO - redo project anatomy
 ------
 
 ### Code maintenance / small changes
-- test to see if not using JSDOM improves performance
-	- I need to stop using JSDOM
-- fix [xml request](https://github.com/ElderINTERalliance/WikiRaces2021/blob/3d731bdac930a36299f17b73827c23e2dd1e2c54/src/game/game_static/client.js#L13)
 - set up nojs and IE support
-
-
-### Design:
-- encode urls properly
-- add loading icon behind Iframe
-- see if I can do anything to make http requests less intensive
-	-  http/2
-- send POST requests on level finish
-- create homepage where you can set your name in a cookie
-	- add this to the post request
-- set up mongodb
-- Make homepage to view submissions
-	- simplified view -> click for more details
 
 This is intended to be run on a linux system.
 
@@ -119,3 +98,4 @@ This is intended to be run on a linux system.
 - Create backend (hopefully something better than just a JSON file, but we'll see.)
 - center leaderboard titles
 - make script to redact names
+- add css for `go to leaderboard` button on homepage
