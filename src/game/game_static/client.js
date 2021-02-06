@@ -303,7 +303,14 @@ function setHistory() {
 	frame.scrollLeft = 10000;
 }
 
+function kickIfNotLoggedIn() {
+	if (getCookie("userId") === "") {
+		window.location.href = generateURL("/wiki-races/notLoggedIn.html");
+	}
+}
+
 /* Functions that run at script load: */
+kickIfNotLoggedIn();
 setUpCountDown();
 loadClient();
 
