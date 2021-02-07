@@ -12,33 +12,6 @@ describe("game page", () => {
 	});
 });
 
-describe("/wiki-races/game/level1", () => {
-	const LEVEL = "level1";
-	beforeAll(async () => {
-		// load client
-		await page.goto(`${URL}/wiki-races/game/${LEVEL}`);
-	});
-
-	it("should have a restart button", async () => {
-		let button = await page.evaluate(() =>
-			document.getElementById("restart")
-		);
-		expect(button).toBeDefined();
-
-		let buttonText = await page.evaluate(
-			() => document.getElementById("restart").textContent
-		);
-		expect(buttonText).toBe("Restart");
-	});
-
-	it("should have a history element", async () => {
-		let history = await page.evaluate(() =>
-			document.getElementById("history-frame")
-		);
-		expect(history).toBeDefined();
-	});
-});
-
 describe("levels.json", () => {
 	var data, levels;
 	beforeAll(async () => {
