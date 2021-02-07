@@ -96,10 +96,13 @@ app.get("/wiki-races/api/leaderboard", async (req, res) => {
 });
 
 // get the submissions from a user
-app.get("/wiki-races/api/leaderboard/:userId", async (req, res) => {
-	let leaderboard = await getLevelsByUser(req.params.userId);
-	res.send(JSON.stringify(leaderboard));
-});
+app.get(
+	"/wiki-races/api/leaderboard/:userId([a-z0-9]{40})",
+	async (req, res) => {
+		let leaderboard = await getLevelsByUser(req.params.userId);
+		res.send(JSON.stringify(leaderboard));
+	}
+);
 
 app.get("/wiki-races/leaderboard", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/leaderboard.html"));
