@@ -113,10 +113,19 @@ tr th, tr td {
 #levels-table {
     position: relative;
     width: 100%;
-    background: white;
-    border: 1px solid rgb(138, 176, 245);
     overflow-x: scroll;
     box-shadow: inset -1em 0 1em -1.2em grey;
+    background: white;
+}
+
+#levels-container {
+    background: white;
+    border: 1px solid rgb(138, 176, 245);
+    width: 100%;
+}
+
+#static-section h3 {
+    text-align: center;
 }
 
 #levels-table table {
