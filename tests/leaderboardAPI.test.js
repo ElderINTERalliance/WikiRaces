@@ -66,7 +66,7 @@ describe("getUserTimes()", () => {
 		let userIds = await leaderboardAPI.getUserIds();
 		let totalTime = 0,
 			sortedTimes = {};
-		[(totalTime, sortedTimes)] = await leaderboardAPI.getUserTimes(
+		[totalTime, sortedTimes] = await leaderboardAPI.getUserTimes(
 			userIds[0]
 		);
 		expect(totalTime).not.toBe(0);
