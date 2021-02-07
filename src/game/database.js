@@ -28,40 +28,51 @@ const bunyanOpts = {
 };
 const log = bunyan.createLogger(bunyanOpts);
 
+// Note that each database object has a separate connection.
+// Try not to have too many database objects.
 class Database {
-	// not sure if this is a bad way to do this.
+	constructor() {
+		try {
+			this.db = new Promise((resolve, reject) => {
+				MongoClient.connect(
+					url,
+					{ useUnifiedTopology: true },
+					(err, db) => {
+						if (err) reject(err);
+						const dbo = db.db("wikiRaces");
+						resolve(dbo);
+					}
+				);
+			});
+		} catch (err) {
+			log.error(err);
+			throw err;
+		}
+	}
 	async saveUser(name, userId, timeCreated) {
-		MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
-			if (err) throw err;
-			var dbo = db.db("wikiRaces");
+		var dbo = await this.db;
 
-			dbo.collection("users").insertOne(
-				{
-					name: name,
-					userId: userId,
-					time: timeCreated,
-					originalName: name,
-				},
-				(err, res) => {
-					if (err) throw err;
-					db.close();
+		dbo.collection("users").insertOne(
+			{
+				name: name,
+				userId: userId,
+				time: timeCreated,
+				originalName: name,
+			},
+			(err) => {
+				if (err) {
+					log.error(err);
+					throw err;
 				}
-			);
-		});
+			}
+		);
 	}
 	async saveSubmission(submissionData) {
-		MongoClient.connect(url, { useUnifiedTopology: true }, (err, db) => {
-			if (err) throw err;
-			var dbo = db.db("wikiRaces");
+		var dbo = await this.db;
 
-			dbo.collection("submissions").insertOne(
-				submissionData,
-				(err, res) => {
-					if (err) throw err;
-					log.info(`Received a submission`);
-					db.close();
-				}
-			);
+		dbo.collection("submissions").insertOne(submissionData, (err) => {
+			if (err) throw err;
+			log.info(`Received a submission`);
 		});
 	}
 	// gets submissions with a query
@@ -82,23 +93,14 @@ class Database {
 		return user[0];
 	}
 	async getCollection(query, collectionName) {
+		var dbo = await this.db;
 		return new Promise((resolve, reject) => {
-			MongoClient.connect(
-				url,
-				{ useUnifiedTopology: true },
-				(err, db) => {
+			dbo.collection(collectionName)
+				.find(query)
+				.toArray((err, result) => {
 					if (err) reject(err);
-					var dbo = db.db("wikiRaces");
-
-					dbo.collection(collectionName)
-						.find(query)
-						.toArray((err, result) => {
-							if (err) reject(err);
-							else resolve(result);
-							db.close();
-						});
-				}
-			);
+					else resolve(result);
+				});
 		});
 	}
 }
