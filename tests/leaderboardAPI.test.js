@@ -1,6 +1,6 @@
 const leaderboardAPI = require("../src/game/leaderboardAPI");
 
-describe("leaderboardAPI", () => {
+describe("leaderboardAPI helper functions", () => {
 	it("should have 'level1' in level data.", async () => {
 		const levels = await leaderboardAPI.getLevelData();
 
@@ -17,6 +17,29 @@ describe("leaderboardAPI", () => {
 		const largeNumber = 1000000000000;
 		const start = new Date(0);
 		const end = new Date(largeNumber);
-		expect(leaderboardAPI.getDateDeltas(start, end)).toBe(largeNumber);
+		expect(await leaderboardAPI.getDateDeltas(start, end)).toBe(
+			largeNumber
+		);
+	});
+
+	it("should get time change from objects with times", async () => {
+		const largeNumber = 1000000000000;
+		const start = new Date(0);
+		const end = new Date(largeNumber);
+
+		const levelObject = {
+			levelOpen: start,
+			submitTime: end,
+		};
+
+		expect(await leaderboardAPI.parseTime(levelObject)).toBe(largeNumber);
+	});
+
+	it("should get time change from objects without times", async () => {
+		const levelObject = {
+			levelName: "level1",
+		};
+
+		expect(await leaderboardAPI.parseTime(levelObject)).not.toBeNaN();
 	});
 });

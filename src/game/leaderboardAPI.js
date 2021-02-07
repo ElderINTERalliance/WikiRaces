@@ -178,4 +178,10 @@ async function getLevelsLeaderboard() {
 
 // Only getLeaderboard() is actually used.
 // The rest are exported for testing.
-module.exports = { getLeaderboard, getLevelData, getLevelNames, getDateDeltas };
+module.exports = {
+	getLeaderboard,
+	getLevelData,
+	getLevelNames,
+	getDateDeltas,
+	parseTime,
+};
