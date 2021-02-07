@@ -42,4 +42,12 @@ describe("leaderboardAPI helper functions", () => {
 
 		expect(await leaderboardAPI.parseTime(levelObject)).not.toBeDefined();
 	});
+
+	it("should fill in missing data", async () => {
+		let totalTime = 0,
+			times = {};
+		[totalTime, times] = await fillInMissing(totalTime, times);
+		expect(totalTime).not.toBe(0);
+		expect(times).not.toBe({});
+	});
 });

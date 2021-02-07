@@ -184,4 +184,5 @@ module.exports = {
 	getLevelNames,
 	getDateDeltas,
 	parseTime,
+	fillInMissing,
 };
