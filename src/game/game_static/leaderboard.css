@@ -87,6 +87,15 @@ body {
 
 /* Username End */
 
+/* Leaderboard Position Start */
+
+#leaderboard-position {
+    margin-left: 1em;
+    float: left;
+}
+
+/* Leaderboard Position End */
+
 /* Table Start */
 
 tr th, tr td {
