@@ -21,11 +21,6 @@ TODO - redo project anatomy
 ### Order of development:
 
 ------
-- display username on page login
-- kick user to main page if no username is detected
-------
-- add "You are in #th place" on leaderboard
-------
 - add informational text on homepage
 	- note a re-direct does not count
 ------
@@ -99,3 +94,4 @@ This is intended to be run on a linux system.
 - center leaderboard titles
 - make script to redact names
 - add css for `go to leaderboard` button on homepage
+- make database connection a property of a database object.
