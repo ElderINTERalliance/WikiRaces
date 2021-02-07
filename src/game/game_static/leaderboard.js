@@ -118,7 +118,7 @@ function getCookie(cookieName) {
 	return "";
 }
 
-function getLeaderboardPosition(userId, submissions) {
+async function getLeaderboardPosition(userId, submissions) {
 	const submissionNames = Object.keys(submissions);
 
 	for (var i = 0; i < submissionNames.length; i++) {
@@ -129,6 +129,40 @@ function getLeaderboardPosition(userId, submissions) {
 		}
 	}
 	return -1; // Nothing was found
+}
+
+const endings = {
+	1: "st",
+	2: "nd",
+	3: "rd",
+};
+function getEnding(number) {
+	const irregulars = Object.keys(endings);
+	const numString = number.toString();
+	const lastDigit = String(numString[numString.length - 1]);
+	if (number > 15) {
+		if (irregulars.includes(lastDigit)) {
+			return endings[lastDigit];
+		} else {
+			return "th";
+		}
+	} else if (number > 3) {
+		return "th";
+	} else {
+		return endings[number];
+	}
+}
+
+async function getPlaceString(place, allUsers) {
+	const numberOfUsers = Object.keys(allUsers).length;
+	if (place === -1) {
+		return `You are not logged in.`;
+	} else {
+		place++;
+		return `You are in ${place}${getEnding(
+			place
+		)} place! (out of ${numberOfUsers})`;
+	}
 }
 
 /* This is run at script load: */
@@ -151,5 +185,6 @@ function getLeaderboardPosition(userId, submissions) {
 	// Display user position:
 	const posText = document.getElementById("leaderboard-position");
 	const userId = getCookie("userId");
-	posText.textContent = getLeaderboardPosition(userId, sorted);
+	const position = await getLeaderboardPosition(userId, sorted);
+	posText.textContent = await getPlaceString(position, sorted);
 })();
