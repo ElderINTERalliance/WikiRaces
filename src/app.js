@@ -99,13 +99,6 @@ app.get("/wiki-races/leaderboard", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/leaderboard.html"));
 });
 
-// take user submissions:
-// app.use(
-// 	express.urlencoded({
-// 		extended: true,
-// 	})
-// );
-
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
