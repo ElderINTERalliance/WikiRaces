@@ -6,5 +6,3 @@ document.getElementById("go-home").addEventListener("click", () => {
 document.getElementById("go-leaderboard").addEventListener("click", () => {
 	window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
 });
-
-alert("script loaded!");
