@@ -32,22 +32,22 @@ const log = bunyan.createLogger(bunyanOpts);
 // Try not to have too many database objects.
 class Database {
 	constructor() {
-		try {
-			this.db = new Promise((resolve, reject) => {
-				MongoClient.connect(
-					url,
-					{ useUnifiedTopology: true },
-					(err, db) => {
-						if (err) reject(err);
-						const dbo = db.db("wikiRaces");
-						resolve(dbo);
-					}
-				);
-			});
-		} catch (err) {
+		this.db = new Promise((resolve, reject) => {
+			MongoClient.connect(
+				url,
+				{ useUnifiedTopology: true },
+				(err, db) => {
+					if (err) reject(err);
+					const dbo = db.db("wikiRaces");
+					resolve(dbo);
+				}
+			);
+		});
+
+		this.db.catch((err) => {
 			log.error(err);
 			throw err;
-		}
+		});
 	}
 	async saveUser(name, userId, timeCreated) {
 		var dbo = await this.db;
