@@ -187,4 +187,5 @@ module.exports = {
 	fillInMissing,
 	getUserTimes,
 	getUserIds,
+	generateLeaderboard,
 };

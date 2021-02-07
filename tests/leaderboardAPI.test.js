@@ -73,3 +73,18 @@ describe("getUserTimes()", () => {
 		expect(sortedTimes).not.toBe({});
 	});
 });
+
+describe("generateLeaderboard", () => {
+	it("should return an array", async () => {
+		let leaderboard = await leaderboardAPI.generateLeaderboard();
+		expect(leaderboard).toBeDefined();
+		expect(leaderboard.length).toBeGreaterThan(0);
+	});
+
+	it("should have as many entries as there are users", async () => {
+		const userIds = await leaderboardAPI.getUserIds();
+		const leaderboard = await leaderboardAPI.generateLeaderboard();
+
+		expect(leaderboard.length).toBe(userIds.length);
+	});
+});
