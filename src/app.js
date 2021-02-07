@@ -95,7 +95,7 @@ app.get("/wiki-races/api/leaderboard", async (req, res) => {
 	res.send(leaderboard);
 });
 
-// get the submissions from a user
+// user submission api
 app.get(
 	"/wiki-races/api/leaderboard/:userId([a-z0-9]{40})",
 	async (req, res) => {
@@ -104,8 +104,14 @@ app.get(
 	}
 );
 
+// Display global leaderboard
 app.get("/wiki-races/leaderboard", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/leaderboard.html"));
+});
+
+// Display user submissions
+app.get("/wiki-races/leaderboard/:userId([a-z0-9]{40})", (req, res) => {
+	res.sendFile(path.join(__dirname + "/game/userSubmissions.html"));
 });
 
 app.use(bodyParser.urlencoded({ extended: true }));
