@@ -163,6 +163,14 @@ async function getLeaderboard() {
 	}
 }
 
+async function getLevelsByUser(userId) {
+	let submissions = await db.getSubmissions({ userId: userId });
+	for (submission of submissions) {
+		delete submission._id;
+	}
+	return submissions;
+}
+
 async function getLevelsLeaderboard() {
 	const levelNames = await getLevelNames();
 	let submissions = new Set();
@@ -180,6 +188,7 @@ async function getLevelsLeaderboard() {
 // The rest are exported for testing.
 module.exports = {
 	getLeaderboard,
+	getLevelsByUser,
 	getLevelData,
 	getLevelNames,
 	getDateDeltas,

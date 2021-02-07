@@ -37,7 +37,7 @@ log.info("Server Started");
 const { Database } = require("./game/database");
 const db = new Database();
 
-const getLeaderboard = require("./game/leaderboardAPI").getLeaderboard;
+const { getLeaderboard, getLevelsByUser } = require("./game/leaderboardAPI");
 
 // Start Server Code: ---------------
 
@@ -93,6 +93,12 @@ app.get("/wiki-races/date", (req, res) => {
 app.get("/wiki-races/api/leaderboard", async (req, res) => {
 	let leaderboard = await getLeaderboard();
 	res.send(leaderboard);
+});
+
+// get the submissions from a user
+app.get("/wiki-races/api/leaderboard/:userId", async (req, res) => {
+	let leaderboard = await getLevelsByUser(req.params.userId);
+	res.send(JSON.stringify(leaderboard));
 });
 
 app.get("/wiki-races/leaderboard", (req, res) => {
