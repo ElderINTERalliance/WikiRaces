@@ -176,4 +176,4 @@ async function getLevelsLeaderboard() {
 	return JSON.stringify(submissions);
 }
 
-module.exports = { getLeaderboard };
+module.exports = { getLeaderboard, getLevelData };
