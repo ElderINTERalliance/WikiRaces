@@ -108,6 +108,7 @@ tr th, tr td {
     background: white;
     border: 1px solid rgb(138, 176, 245);
     overflow-x: scroll;
+    box-shadow: inset -1em 0 1em -1.2em grey;
 }
 
 #levels-table table {
