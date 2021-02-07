@@ -120,10 +120,15 @@ function getCookie(cookieName) {
 
 function getLeaderboardPosition(userId, submissions) {
 	const submissionNames = Object.keys(submissions);
+
 	for (var i = 0; i < submissionNames.length; i++) {
-		console.log(submissions[submissionNames[i]]["userId"]);
+		const leaderboardId = submissions[submissionNames[i]]["userId"];
+
+		if (userId === leaderboardId) {
+			return i;
+		}
 	}
-	return "for loop completed";
+	return -1; // Nothing was found
 }
 
 /* This is run at script load: */
