@@ -3,7 +3,8 @@
 const { Database } = require("./database");
 const db = new Database();
 
-// saveFile, to save files
+// saveFile and getCached, to cache generated leaderboards
+// because I expect leaderboards to be refreshed often.
 const { saveFile, getCached } = require("./dynamic");
 
 // bunyan, for logging
@@ -87,6 +88,10 @@ async function getUserTimes(userId) {
 
 	for (submission of submissions) {
 		time = await parseTime(submission);
+
+		// Do nothing with submissions that have no links
+		if (submission.totalLinks === 0) continue;
+
 		// If there are multiple submissions for one level, choose the shortest one
 		if (times[submission.levelName] !== undefined) {
 			if (times[submission.levelName] > time) {
@@ -94,7 +99,7 @@ async function getUserTimes(userId) {
 				times[submission.levelName] = time;
 				totalTime += Number(time);
 			}
-		} else {
+		} else if (submission.totalLinks !== 0) {
 			times[submission.levelName] = time;
 			totalTime += Number(time);
 		}
