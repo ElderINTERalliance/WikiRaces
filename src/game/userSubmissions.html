@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<!-- This is the homepage. -->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js">        <![endif]-->
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<link rel="icon" href="../wiki-races/favicon.png" />
+		<title>Interalliance Wiki Races</title>
+		<meta
+			name="description"
+			content="A website to host challenges where people try to get from one wikipedia page to another, as quick as possible."
+		/>
+		<link
+			rel="stylesheet"
+			type="text/css"
+			href="../wiki-races/userSubmissions.css"
+		/>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+
+	<body>
+		<div id="page">
+			<div id="header" class="align-left">
+				<h1>Leaderboard</h1>
+				<p>
+					Note: All incomplete levels count as the time they were
+					open.
+					<br />
+					Therefore, you will start with the maximum time, and your
+					time will go down as you complete levels.
+					<br />
+					Your goal is to have the lowest total time.
+				</p>
+			</div>
+			<div id="text-section" class="align-left">
+				<button id="go-home">Go home!</button>
+			</div>
+			<div id="levels-container">
+				<div id="static-section">
+					<p id="leaderboard-position">You are not logged in.</p>
+					<h3>Times (mins:secs)</h3>
+				</div>
+				<div id="levels-table"></div>
+			</div>
+		</div>
+		<!--[if lt IE 7]>
+			<p class="browsehappy">
+				You are using an <strong>outdated</strong> browser. Please
+				<a href="#">upgrade your browser</a> to improve your experience.
+			</p>
+		<![endif]-->
+		<script src="../wiki-races/userSubmissions.js" async defer></script>
+	</body>
+</html>
