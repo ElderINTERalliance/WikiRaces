@@ -185,4 +185,6 @@ module.exports = {
 	getDateDeltas,
 	parseTime,
 	fillInMissing,
+	getUserTimes,
+	getUserIds,
 };

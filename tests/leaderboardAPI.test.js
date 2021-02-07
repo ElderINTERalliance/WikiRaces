@@ -46,8 +46,30 @@ describe("leaderboardAPI helper functions", () => {
 	it("should fill in missing data", async () => {
 		let totalTime = 0,
 			times = {};
-		[totalTime, times] = await fillInMissing(totalTime, times);
+		[totalTime, times] = await leaderboardAPI.fillInMissing(
+			totalTime,
+			times
+		);
 		expect(totalTime).not.toBe(0);
 		expect(times).not.toBe({});
+	});
+});
+
+describe("getUserTimes()", () => {
+	it("should be able to get User Ids", async () => {
+		let userIds = await leaderboardAPI.getUserIds();
+		expect(userIds).toBeDefined();
+		expect(userIds.length).toBeGreaterThan(0);
+	});
+
+	it("should return times and total time", async () => {
+		let userIds = await leaderboardAPI.getUserIds();
+		let totalTime = 0,
+			sortedTimes = {};
+		[(totalTime, sortedTimes)] = await leaderboardAPI.getUserTimes(
+			userIds[0]
+		);
+		expect(totalTime).not.toBe(0);
+		expect(sortedTimes).not.toBe({});
 	});
 });
