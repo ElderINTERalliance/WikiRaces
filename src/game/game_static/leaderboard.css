@@ -1,3 +1,7 @@
+:root {
+    --leaderboard-width: 65vw;
+}
+
 * {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
@@ -121,7 +125,8 @@ tr th, tr td {
 #levels-container {
     background: white;
     border: 1px solid rgb(138, 176, 245);
-    width: 100%;
+    width: var(--leaderboard-width);
+    margin-left: calc(-1 * calc(var(--leaderboard-width) - calc(4.5 * var(--leaderboard-width) / 5)));
 }
 
 #static-section h3 {
@@ -165,13 +170,18 @@ tr th, tr td {
         width: 98%;
         padding: 2px;
     }
+    #levels-container {
+        width: 100%;
+        padding: 0;
+        margin-right: 0;
+        margin-left: 0;
+    }
 }
 
 /* Button */
 
 #go-home, #give-up {
     background: rgb(238, 160, 160);
-    /* margin-top: 1em; */
     font-weight: bold;
     border-radius: 5em;
     padding: 0.5em;
