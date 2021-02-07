@@ -102,6 +102,30 @@ function createTableLine(submission) {
 	return element;
 }
 
+function getCookie(cookieName) {
+	let name = cookieName + "=";
+	let decodedCookie = decodeURIComponent(document.cookie);
+	let cookies = decodedCookie.split(";");
+	for (let i = 0; i < cookies.length; i++) {
+		let c = cookies[i];
+		while (c.charAt(0) == " ") {
+			c = c.substring(1);
+		}
+		if (c.indexOf(name) == 0) {
+			return c.substring(name.length, c.length);
+		}
+	}
+	return "";
+}
+
+function getLeaderboardPosition(userId, submissions) {
+	const submissionNames = Object.keys(submissions);
+	for (var i = 0; i < submissionNames.length; i++) {
+		console.log(submissions[submissionNames[i]]["userId"]);
+	}
+	return "for loop completed";
+}
+
 /* This is run at script load: */
 (async () => {
 	// Create leaderboard table
@@ -121,5 +145,6 @@ function createTableLine(submission) {
 
 	// Display user position:
 	const posText = document.getElementById("leaderboard-position");
-	posText.textContent = "script loaded";
+	const userId = getCookie("userId");
+	posText.textContent = getLeaderboardPosition(userId, sorted);
 })();
