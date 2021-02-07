@@ -51,7 +51,7 @@ async function parseTime(obj) {
 	if (submission.levelOpen && submission.submitTime) {
 		return await getDateDeltas(submission.levelOpen, submission.submitTime);
 	}
-	return getLevelDuration(submission.levelName);
+	return undefined;
 }
 
 async function fillInMissing(total, times) {

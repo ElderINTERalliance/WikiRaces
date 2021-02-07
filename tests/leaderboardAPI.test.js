@@ -35,11 +35,11 @@ describe("leaderboardAPI helper functions", () => {
 		expect(await leaderboardAPI.parseTime(levelObject)).toBe(largeNumber);
 	});
 
-	it("should get time change from objects without times", async () => {
+	it("should not get time change from objects without times", async () => {
 		const levelObject = {
 			levelName: "level1",
 		};
 
-		expect(await leaderboardAPI.parseTime(levelObject)).not.toBeNaN();
+		expect(await leaderboardAPI.parseTime(levelObject)).not.toBeDefined();
 	});
 });
