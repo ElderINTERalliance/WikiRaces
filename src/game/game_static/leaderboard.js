@@ -104,6 +104,7 @@ function createTableLine(submission) {
 
 /* This is run at script load: */
 (async () => {
+	// Create leaderboard table
 	const levelNames = await getLevelNames();
 	const data = await getLeaderboardData();
 	const sorted = await sortSubmissions([...data]);
@@ -117,4 +118,8 @@ function createTableLine(submission) {
 	}
 
 	levelsDiv.append(table);
+
+	// Display user position:
+	const posText = document.getElementById("leaderboard-position");
+	posText.textContent = "script loaded";
 })();
