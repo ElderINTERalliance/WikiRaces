@@ -31,25 +31,11 @@ describe("/wiki-races/game/level1", () => {
 		expect(buttonText).toBe("Restart");
 	});
 
-	it("should have only one iframe", async () => {
-		let numberOfIframes = await page.evaluate(
-			() => document.querySelectorAll("iframe").length
-		);
-		expect(numberOfIframes).toBe(1);
-	});
-
 	it("should have a history element", async () => {
 		let history = await page.evaluate(() =>
 			document.getElementById("history-frame")
 		);
 		expect(history).toBeDefined();
-	});
-
-	it("should have blank error text", async () => {
-		let errorText = await page.evaluate(
-			() => document.getElementById("error-text").textContent
-		);
-		expect(errorText).toEqual("");
 	});
 });
 
