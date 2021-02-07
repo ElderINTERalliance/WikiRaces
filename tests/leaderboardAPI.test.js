@@ -10,6 +10,13 @@ describe("leaderboardAPI", () => {
 
 	it("should be able to get a list of levels.", async () => {
 		const levelNames = await leaderboardAPI.getLevelNames();
-		expect(levelNames).toEqual(expect.arrayContaining("test1"));
+		expect(levelNames[0]).toEqual("level1");
+	});
+
+	it("should subtract dates correctly", async () => {
+		const largeNumber = 1000000000000;
+		const start = new Date(0);
+		const end = new Date(largeNumber);
+		expect(leaderboardAPI.getDateDeltas(start, end)).toBe(largeNumber);
 	});
 });
