@@ -176,4 +176,6 @@ async function getLevelsLeaderboard() {
 	return JSON.stringify(submissions);
 }
 
-module.exports = { getLeaderboard, getLevelData };
+// Only getLeaderboard() is actually used.
+// The rest are exported for testing.
+module.exports = { getLeaderboard, getLevelData, getLevelNames };
