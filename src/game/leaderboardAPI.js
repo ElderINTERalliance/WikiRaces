@@ -168,7 +168,8 @@ async function getLevelsByUser(userId) {
 	for (submission of submissions) {
 		delete submission._id;
 	}
-	return submissions;
+	const user = await getUserById(userId);
+	return { name: user.name, submissions: submissions };
 }
 
 async function getLevelsLeaderboard() {
