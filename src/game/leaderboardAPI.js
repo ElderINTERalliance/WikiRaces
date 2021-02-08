@@ -168,7 +168,7 @@ async function getLevelsByUser(userId) {
 	for (submission of submissions) {
 		delete submission._id;
 	}
-	const user = await getUserById(userId);
+	const user = await db.getUserById(userId);
 	return { name: user.name, submissions: submissions };
 }
 
