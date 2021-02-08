@@ -1,4 +1,5 @@
-/* This script is loaded when a user Id is requested */
+/* This script displays detailed information about a user. */
+
 document.getElementById("go-home").addEventListener("click", () => {
 	window.location.href = `${window.location.protocol}//${window.location.host}`;
 });
@@ -6,6 +7,8 @@ document.getElementById("go-home").addEventListener("click", () => {
 document.getElementById("go-leaderboard").addEventListener("click", () => {
 	window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
 });
+
+/* Helper functions: */
 
 function generateURL(path) {
 	return `${window.location.protocol}//${window.location.host}${path}`;
@@ -43,13 +46,15 @@ async function getUserData() {
 
 async function setUserName(name) {
 	const nameField = document.getElementById("display-name");
-	nameField.textContent = `Name: ${name}`;
+	nameField.textContent = name;
 }
 
 async function setNumCompleted(array) {
 	const numberField = document.getElementById("num-of-levels");
 	numberField.textContent = `Number of levels completed: ${array.length}`;
 }
+
+/* Start Here: */
 
 (async () => {
 	userData = await getUserData();
