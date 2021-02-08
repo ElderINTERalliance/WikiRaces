@@ -41,8 +41,18 @@ async function getUserData() {
 	return JSON.parse(resp);
 }
 
+async function setUserName(name) {
+	const nameField = document.getElementById("display-name");
+	nameField.textContent = `Name: ${name}`;
+}
+
+async function setNumCompleted(array) {
+	const numberField = document.getElementById("num-of-levels");
+	numberField.textContent = `Number of levels completed: ${array.length}`;
+}
+
 (async () => {
 	userData = await getUserData();
-	const nameField = document.getElementById("display-name");
-	nameField.textContent = `Name: ${userData.name}`;
+	setUserName(userData.name);
+	setNumCompleted(userData.submissions);
 })();
