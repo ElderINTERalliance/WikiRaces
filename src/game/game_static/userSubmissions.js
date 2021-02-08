@@ -54,10 +54,55 @@ async function setNumCompleted(array) {
 	numberField.textContent = `Number of levels completed: ${array.length}`;
 }
 
+// gets difference in milliseconds
+function getDateDeltas(open, close) {
+	const date = new Date(Date.parse(close) - Date.parse(open));
+	return date.getTime();
+}
+
+function formatMS(milliseconds) {
+	const date = new Date(Number(milliseconds));
+	const m = date.getMinutes();
+	const s = date.getSeconds();
+	const ms = date.getMilliseconds();
+	const plural = (x) => (x == 1 ? "" : "s");
+
+	return `${m} minute${plural(m)} ${s}.${ms} seconds`;
+}
+
+function createHeader(text) {
+	const h3 = document.createElement("h3");
+	h3.textContent = `${text}:`;
+	return h3;
+}
+
+function createTextObject(text) {
+	const p = document.createElement("p");
+	p.textContent = `${text}`;
+	return p;
+}
+
+function formatLevelStats(submission) {
+	const content = document.createElement("div");
+	content.className = "submission-content";
+
+	const duration = getDateDeltas(submission.levelOpen, submission.submitTime);
+	const durationText = formatMS(duration);
+
+	content.appendChild(createTextObject(durationText));
+	content.appendChild(
+		createTextObject(`${submission.totalLinks} links visited`)
+	);
+	return content;
+}
+
 async function generateDisplay(submission) {
 	const container = document.createElement("div");
 	container.className = "submission";
-	container.textContent = "test";
+
+	container.appendChild(createHeader(submission.levelName));
+	container.appendChild(formatLevelStats(submission));
+
 	return container;
 }
 
