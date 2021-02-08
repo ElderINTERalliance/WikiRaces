@@ -73,7 +73,6 @@ function createTableHeading(levelNames) {
 function createCell(content) {
 	let cell = document.createElement("td");
 	cell.textContent = content.toString();
-	// cell.className = "align-left";
 	return cell;
 }
 
@@ -86,13 +85,21 @@ function formatMS(milliseconds) {
 	return `${m}:${s}.${ms}`;
 }
 
-let number = 0;
+function createNameLink(name, userId) {
+	let cell = document.createElement("td");
+	let link = document.createElement("a");
+	link.href = generateURL(`/wiki-races/leaderboard/${userId}`);
+	link.textContent = name.toString();
+	cell.appendChild(link);
+	return cell;
+}
 
+let number = 0;
 function createTableLine(submission) {
 	let element = document.createElement("tr");
 	number++;
 	element.appendChild(createCell(number));
-	element.appendChild(createCell(submission.name));
+	element.appendChild(createNameLink(submission.name, submission.userId));
 	element.appendChild(createCell(formatMS(submission.totalTime)));
 
 	for (levelTime of Object.values(submission.times)) {
