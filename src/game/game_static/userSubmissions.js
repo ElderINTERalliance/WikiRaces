@@ -54,10 +54,26 @@ async function setNumCompleted(array) {
 	numberField.textContent = `Number of levels completed: ${array.length}`;
 }
 
+async function generateDisplay(submission) {
+	const container = document.createElement("div");
+	container.className = "submission";
+	container.textContent = "test";
+	return container;
+}
+
+async function setCompletedLevels(submissions) {
+	const subContainer = document.getElementById("submissions-container");
+	subContainer.innerHTML = "";
+	for (submission of submissions) {
+		subContainer.append(await generateDisplay(submission));
+	}
+}
+
 /* Start Here: */
 
 (async () => {
 	userData = await getUserData();
 	setUserName(userData.name);
 	setNumCompleted(userData.submissions);
+	setCompletedLevels(userData.submissions);
 })();
