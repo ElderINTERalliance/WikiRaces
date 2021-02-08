@@ -44,6 +44,12 @@ async function getUserData() {
 	return JSON.parse(resp);
 }
 
+async function getLevelData() {
+	const levelsURL = generateURL("/wiki-races/levels.json");
+	const resp = await getTextFrom(levelsURL);
+	return JSON.parse(resp);
+}
+
 async function setUserName(name) {
 	const nameField = document.getElementById("display-name");
 	nameField.textContent = name;
@@ -51,7 +57,13 @@ async function setUserName(name) {
 
 async function setNumCompleted(array) {
 	const numberField = document.getElementById("num-of-levels");
-	numberField.textContent = `Number of levels completed: ${array.length}`;
+	numberField.innerHTML = `<b>Number of levels completed:</b> ${array.length}`;
+}
+
+function titleField(title, content) {
+	const p = document.createElement("p");
+	p.innerHTML = `<b>${title}</b> ${content}`;
+	return p;
 }
 
 // gets difference in milliseconds
@@ -98,7 +110,7 @@ function visualizeHistory(array) {
 	return list;
 }
 
-function createHeader(text, level = 3) {
+function createHeader(text, level = 2) {
 	const header = document.createElement(`h${level}`);
 	header.textContent = `${text}:`;
 	return header;
@@ -110,25 +122,30 @@ function createTextObject(text) {
 	return p;
 }
 
-function formatLevelStats(submission) {
+function formatLevelStats(submission, levels) {
 	const content = document.createElement("div");
 	content.className = "submission-content";
 
 	const duration = getDateDeltas(submission.levelOpen, submission.submitTime);
 	const durationText = formatMS(duration);
+	content.appendChild(titleField("Time:", durationText));
 
-	content.appendChild(createTextObject(durationText));
 	content.appendChild(
-		createTextObject(`${submission.totalLinks} total links visited`)
+		titleField("Total Links Visited:", `${submission.totalLinks}`)
 	);
 	return content;
 }
 
-async function generateDisplay(submission) {
+async function generateDisplay(submission, levels) {
 	const container = document.createElement("div");
 	container.className = "submission";
 
-	container.appendChild(createHeader(submission.levelName));
+	const level = levels[submission.levelName];
+	const headerText = `${submission.levelName} (${serialize(
+		level.startPage
+	)} → ${serialize(level.endPage)})`;
+	container.appendChild(createHeader(headerText));
+
 	container.appendChild(formatLevelStats(submission));
 	container.appendChild(createHeader("Direct path", 4));
 	container.appendChild(visualizeHistory(submission.viewedPages));
@@ -141,8 +158,9 @@ async function generateDisplay(submission) {
 async function setCompletedLevels(submissions) {
 	const subContainer = document.getElementById("submissions-container");
 	subContainer.innerHTML = "";
+	const levels = await getLevelData();
 	for (submission of submissions) {
-		subContainer.append(await generateDisplay(submission));
+		subContainer.append(await generateDisplay(submission, levels));
 	}
 }
 
@@ -150,7 +168,9 @@ async function setCompletedLevels(submissions) {
 
 (async () => {
 	userData = await getUserData();
+	// The info in the heading (name, # levels completed):
 	setUserName(userData.name);
 	setNumCompleted(userData.submissions);
+	// The info in the rest of the page:
 	setCompletedLevels(userData.submissions);
 })();
