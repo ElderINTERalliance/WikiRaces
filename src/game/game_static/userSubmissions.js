@@ -70,10 +70,38 @@ function formatMS(milliseconds) {
 	return `${m} minute${plural(m)} ${s}.${ms} seconds`;
 }
 
-function createHeader(text) {
-	const h3 = document.createElement("h3");
-	h3.textContent = `${text}:`;
-	return h3;
+function serialize(name) {
+	return name.replace(/_/g, " ").replace(/%27/g, "'");
+}
+
+/** From ./client.js */
+// creates unordered list from array
+function visualizeHistory(array) {
+	// Create the list element:
+	var list = document.createElement("ul");
+
+	for (var i = 0; i < array.length; i++) {
+		// Create the list items:
+		var item = document.createElement("li");
+		item.className = "history-element";
+		let border = document.createElement("span");
+		border.className = "history-text";
+		let text = document.createTextNode(serialize(array[i]));
+
+		// append them
+		border.appendChild(text);
+		item.appendChild(border);
+		list.appendChild(item);
+	}
+
+	// Finally, return the constructed list:
+	return list;
+}
+
+function createHeader(text, level = 3) {
+	const header = document.createElement(`h${level}`);
+	header.textContent = `${text}:`;
+	return header;
 }
 
 function createTextObject(text) {
@@ -91,7 +119,7 @@ function formatLevelStats(submission) {
 
 	content.appendChild(createTextObject(durationText));
 	content.appendChild(
-		createTextObject(`${submission.totalLinks} links visited`)
+		createTextObject(`${submission.totalLinks} total links visited`)
 	);
 	return content;
 }
@@ -102,6 +130,10 @@ async function generateDisplay(submission) {
 
 	container.appendChild(createHeader(submission.levelName));
 	container.appendChild(formatLevelStats(submission));
+	container.appendChild(createHeader("Direct path", 4));
+	container.appendChild(visualizeHistory(submission.viewedPages));
+	container.appendChild(createHeader("All pages visited", 4));
+	container.appendChild(visualizeHistory(submission.fullHistory));
 
 	return container;
 }
