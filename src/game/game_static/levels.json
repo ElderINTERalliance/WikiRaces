@@ -4,28 +4,28 @@
         "startTime": "2021-02-10T19:06:05+00:00",
         "endTime": "2021-02-10T19:13:05+00:00",
         "startPage": "GameStop",
-        "endPage": "Moon"
+        "endPage": "Saturn"
     },
     "level2": {
         "name": "level2",
         "startTime": "2021-02-10T19:14:05+00:00",
         "endTime": "2021-02-10T19:21:05+00:00",
-        "startPage": "Nintendo",
-        "endPage": "Mathematics"
+        "startPage": "Alto_saxophone",
+        "endPage": "NASA"
     },
     "level3": {
         "name": "level3",
         "startTime": "2021-02-10T19:22:05+00:00",
         "endTime": "2021-02-10T19:29:05+00:00",
-        "startPage": "Secondary_school",
-        "endPage": "Meme"
+        "startPage": "Meme",
+        "endPage": "Australia"
     },
     "level4": {
         "name": "level4",
         "startTime": "2021-02-10T19:30:05+00:00",
         "endTime": "2021-02-10T19:37:05+00:00",
-        "startPage": "Pajamas",
-        "endPage": "Sibling"
+        "startPage": "Philosophy",
+        "endPage": "Unemployment"
     },
     "level5": {
         "name": "level5",
@@ -38,35 +38,21 @@
         "name": "level6",
         "startTime": "2021-02-10T19:46:05+00:00",
         "endTime": "2021-02-10T19:53:05+00:00",
-        "startPage": "Rock_music",
-        "endPage": "Assisted_living"
+        "startPage": "Stock_market_crash",
+        "endPage": "Comedy"
     },
     "level7": {
         "name": "level7",
         "startTime": "2021-02-10T19:54:05+00:00",
         "endTime": "2021-02-10T20:01:05+00:00",
-        "startPage": "Philosophy",
-        "endPage": "Unemployment"
+        "startPage": "Heather_(given_name)",
+        "endPage": "Organized_crime"
     },
     "level8": {
         "name": "level8",
         "startTime": "2021-02-10T20:02:05+00:00",
         "endTime": "2021-02-10T20:09:05+00:00",
-        "startPage": "Homer_Simpson",
-        "endPage": "Iceland"
-    },
-    "level9": {
-        "name": "level9",
-        "startTime": "2021-02-10T20:10:05+00:00",
-        "endTime": "2021-02-10T20:17:05+00:00",
         "startPage": "Olympic_Games",
         "endPage": "Technology"
-    },
-    "level10": {
-        "name": "level10",
-        "startTime": "2021-02-10T20:18:05+00:00",
-        "endTime": "2021-02-10T20:25:05+00:00",
-        "startPage": "Heather_(given_name)",
-        "endPage": "Organized_crime"
     }
 }
