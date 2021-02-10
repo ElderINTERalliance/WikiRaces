@@ -30,9 +30,12 @@ def get_time() -> str:
     return time.isoformat()
 
 
+i = 0
 def get_name() -> str:
-    print("Enter the level name. (e.g. level1, level2, level3...)")
-    return input(cursor)
+    global i
+    i += 1
+    print(f"Using 'level{i}'")
+    return f"level{i}"
 
 
 def start_time() -> str:
