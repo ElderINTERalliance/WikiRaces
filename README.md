@@ -1,44 +1,72 @@
 # WikiRaces2021
-This is the repository for the interalliance WikiRaces 2021 competition
+
+This is the repository for the Interalliance WikiRaces 2021 competition
 
 Run `npm install` in the project directory to install the dependencies.
 
-Run `npm run-script run` to host the site.
+Run `npm run-script test` to run the test suites.
+
+Run `npm run-script run` to host the site for testing.
+
+On the actual server, use pm2 to start the server with `pm2 start app.js --name wikiRaces`
 
 ---
 
-## Project Anatomy
+### About Wiki Races:
 
-```
-TODO - redo project anatomy
-```
+Wiki Races is a competition where players start on 
+a Wikipedia page, and have to get to another Wikipedia page
+by only clicking the links in the Wikipedia pages. 
 
 ---
 
-## Random notes, mainly for me
+### Website features:
 
-<!--- TODO -->
-### Order of development:
+- Homepage:
+  - Display levels (from `levels.json`)
+  - Submit usernames and userIds to server
+- Client:
+  - Loaded when links from the homepage are clicked.
+  - Tracks user history
+    - Visualises history at the bottom of the page
+    - Can click on a history element to go back to that page
+  - Submits user data (history, time, userId) to server when a level is completed.
+- Leaderboard:
+  - Orders all players by total time 
+  - Has links to show players individual submissions
+- Server:
+  - Dynamically generate Wikipedia pages
+  - Save user data
+  - Host various APIs for webpages
+- Admin tools:
+  - Rename users on the fly
+  - Set level times easily
 
-------
+---
+
+This is intended to be run on a linux system. 
+It has been proven to work on Ubuntu Server 20.04.2
+
+This does not have any of the NGINX settings needed to support the server. 
+You will need to do that yourself if you are setitng this up. 
+
+---
+
+### To do:
+
 - add informational text on homepage
 	- note a re-direct does not count
-------
 - click to view user's submission info on leaderboard
-------
 - Add message for Edge
-------
 - encode urls properly
-------
 - Reorder directory structure so pages are not jumbled together.
-------
-
-### Code maintenance / small changes
 - set up nojs and IE support
-
-This is intended to be run on a linux system.
+- set up Docker
 
 ----
+
+<details>
+  <summary>Completed tasks</summary>
 
 ## Completed:
 - Cache all loaded files -> Store as JSON or as Files?
@@ -95,3 +123,5 @@ This is intended to be run on a linux system.
 - make script to redact names
 - add css for `go to leaderboard` button on homepage
 - make database connection a property of a database object.
+
+</details>
