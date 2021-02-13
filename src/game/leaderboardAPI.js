@@ -185,7 +185,7 @@ async function getLevelsLeaderboard() {
 	return JSON.stringify(submissions);
 }
 
-// Only getLeaderboard() is actually used.
+// Only getLeaderboard() and getLevelsByUser() are actually used.
 // The rest are exported for testing.
 module.exports = {
 	getLeaderboard,
