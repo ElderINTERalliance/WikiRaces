@@ -54,10 +54,11 @@ You will need to do that yourself if you are setitng this up.
 
 ### To do:
 
+- clean up useless async/await
+- set up replica sets for mongodb
 - add informational text on homepage
 	- note a re-direct does not count
-- click to view user's submission info on leaderboard
-- Add message for Edge
+- Add message for Edge and weird browsers
 - encode urls properly
 - Reorder directory structure so pages are not jumbled together.
 - set up nojs and IE support
@@ -123,5 +124,6 @@ You will need to do that yourself if you are setitng this up.
 - make script to redact names
 - add css for `go to leaderboard` button on homepage
 - make database connection a property of a database object.
+- click to view user's submission info on leaderboard
 
 </details>
