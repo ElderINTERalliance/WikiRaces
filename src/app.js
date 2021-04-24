@@ -104,9 +104,14 @@ app.get(
 	}
 );
 
-// Display global leaderboard
+// Display leaderboard with fastest times cumulative by user
 app.get("/wiki-races/leaderboard", (req, res) => {
 	res.sendFile(path.join(__dirname + "/game/leaderboard.html"));
+});
+
+// Display leaderboard for fastest times out of any submission
+app.get("/wiki-races/leaderboard-all", (req, res) => {
+	res.sendFile(path.join(__dirname + "/game/leaderboardALL.html"));
 });
 
 // Display user submissions
