@@ -27,7 +27,7 @@
 		<div id="page">
 			<div id="header">
 				<h1>Wiki Races</h1>
-				<h2>TechOlympics 2021</h2>
+				<h2>Elderfest 2021</h2>
 			</div>
 			<div id="username-entry">
 				<div id="username-exists" class="has-username">
@@ -83,8 +83,13 @@
 			// TODO - REPLACE THIS
 			document
 				.getElementById("go-leaderboard")
+				/* Full Leaderboard: (TechOlympics) */
+				// .addEventListener("click", () => {
+				// 	window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
+				// })
+				/* Fastest time: (Elderfest) */
 				.addEventListener("click", () => {
-					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
+					window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard-all`;
 				});
 		</script>
 	</body>
