@@ -4,9 +4,16 @@ document.getElementById("go-home").addEventListener("click", () => {
 	window.location.href = `${window.location.protocol}//${window.location.host}`;
 });
 
-document.getElementById("go-leaderboard").addEventListener("click", () => {
-	window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
-});
+document
+	.getElementById("go-leaderboard")
+	/* Full Leaderboard: (TechOlympics) */
+	// .addEventListener("click", () => {
+	// 	window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard`;
+	// })
+	/* Fastest time: (Elderfest) */
+	.addEventListener("click", () => {
+		window.location.href = `${window.location.protocol}//${window.location.host}/wiki-races/leaderboard-all`;
+	});
 
 /* Helper functions: */
 
