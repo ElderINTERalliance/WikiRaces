@@ -54,7 +54,11 @@ You will need to do that yourself if you are setitng this up.
 
 ### To do:
 
+- set up Docker
+  - want bind mounts to local data -> we can edit from host and docker image.
+  - https://phoenixnap.com/kb/docker-mongodb
 - clean up useless async/await
+- set up jsDoc
 - set up replica sets for mongodb
 - add informational text on homepage
 	- note a re-direct does not count
@@ -62,7 +66,6 @@ You will need to do that yourself if you are setitng this up.
 - encode urls properly
 - Reorder directory structure so pages are not jumbled together.
 - set up nojs and IE support
-- set up Docker
 
 ----
 
