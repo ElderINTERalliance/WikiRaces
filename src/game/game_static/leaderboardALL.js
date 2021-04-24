@@ -90,13 +90,13 @@ function createTableHeading(levelNames) {
 	time.textContent = "Time:";
 	time.className = "align-left";
 
-	element.appendChild(numbers);
-	element.appendChild(links);
-	element.appendChild(time);
-
 	let level = document.createElement("th");
-	time.textContent = "Level:";
-	time.className = "align-left";
+	level.textContent = "Level:";
+	level.className = "align-left";
+
+	element.appendChild(numbers);
+	element.appendChild(time);
+	element.appendChild(links);
 	element.appendChild(level);
 
 	return element;
@@ -131,8 +131,8 @@ function createTableLine(submission) {
 	let element = document.createElement("tr");
 	number++;
 	element.appendChild(createCell(number));
-	element.appendChild(createNameLink(submission.name, submission.userId));
 	element.appendChild(createCell(formatMS(submission.time)));
+	element.appendChild(createNameLink(submission.name, submission.userId));
 	element.appendChild(createCell(submission.level));
 	return element;
 }
