@@ -154,10 +154,8 @@ function getCookie(cookieName) {
 }
 
 function getLeaderboardPosition(userId, submissions) {
-	const submissionNames = Object.keys(submissions);
-
-	for (var i = 0; i < submissionNames.length; i++) {
-		const leaderboardId = submissions[submissionNames[i]]["userId"];
+	for (var i = 0; i < submissions.length; i++) {
+		const leaderboardId = submissions[i]["userId"];
 
 		if (userId === leaderboardId) {
 			return i;
