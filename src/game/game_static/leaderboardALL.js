@@ -1,5 +1,6 @@
 /*
  * This file renders the information from the leaderboard api.
+ * This file is directly copied from `leaderboard.js`
  */
 
 document.getElementById("go-home").addEventListener("click", () => {
@@ -36,10 +37,43 @@ async function getLeaderboardData() {
 	return JSON.parse(resp);
 }
 
-async function sortSubmissions(submissions) {
+/**
+ * returns flattened array of user submissions
+ * @param {*} submissions
+ * @returns {Array}
+ * Array takes the form: [...
+ *  	{
+ *   		userId: string,
+ *   		name: string,
+ *   		level: string,
+ *   		time: number,
+ *  	},
+ *  ...]
+ */
+function flattenSubmissions(submissions) {
+	let allSubmissions = [];
+	for (user of submissions) {
+		let userId = user.userId;
+		let name = user.name;
+		for (level in user.times) {
+			allSubmissions.push({
+				userId: userId,
+				name: name,
+				level: level,
+				time: user.times[level],
+			});
+		}
+	}
+	return allSubmissions;
+}
+
+function sortSubmissions(submissions) {
 	if (submissions.length <= 0) return undefined;
+
+	submissions = flattenSubmissions(submissions);
+
 	return submissions.sort((a, b) => {
-		return a.totalTime - b.totalTime;
+		return a.time - b.time;
 	});
 }
 
@@ -53,19 +87,17 @@ function createTableHeading(levelNames) {
 	links.className = "align-left";
 
 	let time = document.createElement("th");
-	time.textContent = "Total:";
+	time.textContent = "Time:";
 	time.className = "align-left";
 
 	element.appendChild(numbers);
 	element.appendChild(links);
 	element.appendChild(time);
 
-	for (levelName of levelNames) {
-		let level = document.createElement("th");
-		level.textContent = `${levelName}:`;
-		level.className = "align-left";
-		element.appendChild(level);
-	}
+	let level = document.createElement("th");
+	time.textContent = "Level:";
+	time.className = "align-left";
+	element.appendChild(level);
 
 	return element;
 }
@@ -100,12 +132,8 @@ function createTableLine(submission) {
 	number++;
 	element.appendChild(createCell(number));
 	element.appendChild(createNameLink(submission.name, submission.userId));
-	element.appendChild(createCell(formatMS(submission.totalTime)));
-
-	for (levelTime of Object.values(submission.times)) {
-		element.appendChild(createCell(formatMS(levelTime)));
-	}
-
+	element.appendChild(createCell(formatMS(submission.time)));
+	element.appendChild(createCell(submission.level));
 	return element;
 }
 
@@ -125,7 +153,7 @@ function getCookie(cookieName) {
 	return "";
 }
 
-async function getLeaderboardPosition(userId, submissions) {
+function getLeaderboardPosition(userId, submissions) {
 	const submissionNames = Object.keys(submissions);
 
 	for (var i = 0; i < submissionNames.length; i++) {
@@ -160,7 +188,7 @@ function getEnding(number) {
 	}
 }
 
-async function getPlaceString(place, allUsers) {
+function getPlaceString(place, allUsers) {
 	const numberOfUsers = Object.keys(allUsers).length;
 	if (place === -1) {
 		return `You are not logged in.`;
@@ -177,8 +205,8 @@ async function getPlaceString(place, allUsers) {
 	// Create leaderboard table
 	const levelNames = await getLevelNames();
 	const data = await getLeaderboardData();
-	const sorted = await sortSubmissions([...data]);
-	console.log(sorted);
+	const sorted = sortSubmissions([...data]);
+	// console.log(sorted);
 	let levelsDiv = document.getElementById("levels-table");
 	let table = document.createElement("table");
 	table.append(createTableHeading(levelNames));
@@ -192,6 +220,6 @@ async function getPlaceString(place, allUsers) {
 	// Display user position:
 	const posText = document.getElementById("leaderboard-position");
 	const userId = getCookie("userId");
-	const position = await getLeaderboardPosition(userId, sorted);
-	posText.textContent = await getPlaceString(position, sorted);
+	const position = getLeaderboardPosition(userId, sorted);
+	posText.textContent = getPlaceString(position, sorted);
 })();
