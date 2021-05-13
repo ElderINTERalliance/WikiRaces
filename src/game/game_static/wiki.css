@@ -2690,3 +2690,13 @@ div.after-portlet-lang:after {
 	clear: both;
 	display: block;
 }
+
+/* ElderFest: */
+
+@media only screen and (max-width: 800px) {
+	#content, .mediawiki {
+		padding-left: 0.3em;
+		margin-left: 0.1em;
+		width: 95%;
+	}
+}
