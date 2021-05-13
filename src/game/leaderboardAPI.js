@@ -55,6 +55,9 @@ async function parseTime(obj) {
 }
 
 async function fillInMissing(total, times) {
+	// Patch for Elder Fest:
+	return [0, times]; // This is the only line changed
+
 	const levels = await getLevelData();
 	const levelNames = Object.keys(await levels);
 
