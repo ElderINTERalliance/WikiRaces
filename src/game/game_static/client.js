@@ -89,10 +89,7 @@ function sendData(data) {
 
 		request.open(method, url, true);
 
-		request.setRequestHeader(
-			"Content-Type",
-			"application/json;charset=UTF-8"
-		);
+		request.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 
 		// Actually sends the request to the server.
 		request.send(JSON.stringify(data));
@@ -116,9 +113,7 @@ async function endLevel() {
 			console.log(submitObject);
 		})
 		.then(() => {
-			window.location.href = generateURL(
-				"/wiki-races/levelComplete.html"
-			);
+			window.location.href = generateURL("/wiki-races/levelComplete.html");
 		});
 }
 
@@ -176,23 +171,31 @@ function setUpCountDown() {
 	const level = getLevelSettings();
 	const timer = document.getElementById("time-left");
 	const endDate = Date.parse(level.endTime);
+
 	if (endDate === undefined) return undefined;
+
 	let timeLeft = setInterval(function () {
-		const date = getTime();
-		let seconds = (endDate - date) / 1000;
-		let minutes = Math.floor(seconds / 60);
-		seconds = seconds - minutes * 60;
+		function getCountdownString() {
+			const date = getTime();
+			const diff = endDate - date;
+			const seconds = Math.floor(diff / 1000) % 60;
+			const minutes = Math.floor((diff / 1000) / 60);
+
+			if (minutes > 0) {
+				return `Time Left: ${minutes} minute${s(
+					minutes
+				)} ${Math.round(seconds)} second${s(seconds)}.`;
+			} else if (seconds >= 0) {
+				return `Time Left: ${Math.round(seconds)} second${s(
+					Math.round(seconds)
+				)}.`;
+			}
+		}
+
+		console.log(timer.textContent, "timer.textContent");
+		timer.textContent = getCountdownString();
 
 		// Update time on screen
-		if (minutes > 0) {
-			timer.textContent = `Time Left: ${minutes} minute${s(
-				minutes
-			)} ${Math.round(seconds)} second${s(seconds)}.`;
-		} else if (seconds >= 0) {
-			timer.textContent = `Time Left: ${Math.round(seconds)} second${s(
-				Math.round(seconds)
-			)}.`;
-		}
 
 		// clear interval when time passes
 		if (getTime() - endDate >= 0) {
@@ -200,7 +203,7 @@ function setUpCountDown() {
 			clearInterval(timeLeft);
 			window.location.href = generateURL("/wiki-races/levelOver.html");
 		}
-	}, 400);
+	}, 200);
 }
 
 function startGame(level) {
