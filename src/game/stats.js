@@ -6,6 +6,7 @@ class Average {
 		this.position = 0;
 		this.limit = 50;
 	}
+	// REVIEW - This does not need to be async
 	async add(data) {
 		if (this.position >= this.limit - 1) {
 			this.position = 0;
