@@ -262,6 +262,7 @@ function submit() {
 	endLevel();
 }
 
+// REVIEW - Rename these functions to something that makes more sense
 function serialize(name) {
 	return name.replace(/_/g, " ").replace(/%27/g, "'");
 }
