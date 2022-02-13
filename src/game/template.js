@@ -1,18 +1,18 @@
 const heading = `
 <div id="mw-head-base" class="noprint" style="height: 100px; display: flex; flex-direction: row;">
     <img src="../wiki-races/logo.png" height="95px">
-    <h1 style="border-bottom: 0; padding: 35px;">Wiki Races 2021</h1>
+    <h1 style="border-bottom: 0; padding: 35px;">Wiki Races 2022</h1>
 </div>
 `;
 
 async function addHeadingToContent(content) {
-	content = content.replace(/<div id="mw-head-base".*<\/div>/, heading);
-	return content;
+    content = content.replace(/<div id="mw-head-base".*<\/div>/, heading);
+    return content;
 }
 
 async function fillTemplate(content, id) {
-	content = await addHeadingToContent(content);
-	return `
+    content = await addHeadingToContent(content);
+    return `
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -49,5 +49,5 @@ async function fillTemplate(content, id) {
 }
 
 module.exports = {
-	fillTemplate,
+    fillTemplate,
 };
