@@ -72,6 +72,27 @@ def change_username_by_user_id(user_id=None):
     user["name"] = new_name
     db.users.find_one_and_replace({"userId": user_id}, user)
 
+def delete_username_by_id(user_id=None):
+    if not user_id:
+        print("What is the user id you want to delete?")
+        user_id = str(input("> "))
+
+    users_with_id = list(db.users.find({"userId": user_id}))
+
+    num_of_users_with_id = len(users_with_id)
+
+    if num_of_users_with_id != 1:
+        print(f"Error. {num_of_users_with_id} users have that id.")
+        exit(1)
+
+    db.users.delete_one({"userId": user_id})
+
+def delete_username_by_username():
+    username = take_and_confirm_input("What username do you want to DELETE?")
+    ids = get_ids_of_username(username)
+    ids = "".join(ids)
+    delete_username_by_id(ids)
+
 
 def change_username_by_username():
     username = take_and_confirm_input("What username do you want to modify?")
@@ -136,6 +157,7 @@ list_of_commands = [
     list_users_with_ids,
     get_ids_of_username,
     list_full_user_data,
+    delete_username_by_username,
     cancel,
 ]
 
