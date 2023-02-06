@@ -38,7 +38,7 @@ function parseLevelFromString(str) {
 // returns the settings for the level if the URL is valid
 // otherwise returns undefined
 function getLevelSettings() {
-	const levelName = parseLevelFromString(window.location.href);
+	const levelName = parseLevelFromString(window.location.pathname);
 
 	if (validLevel(levels[levelName])) {
 		return levels[levelName];
@@ -322,7 +322,7 @@ document.getElementById("restart").addEventListener("click", loadClient);
 
 // TODO - Run on Iframe start to load, not completion.
 frame.addEventListener("load", async () => {
-	const page = parseLevelFromString(frame.contentWindow.location.href);
+	const page = parseLevelFromString(frame.contentWindow.location.pathname);
 	if (page === settings.endPage) {
 		submit();
 	}
