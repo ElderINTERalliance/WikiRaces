@@ -40,7 +40,7 @@ const { fillTemplate } = require("./template");
 async function getWiki(id) {
 	try {
 		const response = await superagent.get(
-			`https://en.wikipedia.org/wiki/${id}`
+			`https://en.wikipedia.org/wiki/${id}?useskin=vector`
 		);
 		log.info(`Downloaded ${id}`);
 		return response.text;
