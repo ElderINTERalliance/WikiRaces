@@ -1,6 +1,9 @@
 # WikiRaces
 
-This is the repository for the Interalliance WikiRaces competition
+## This is not actively maintained.
+### See [github.com/INTERallianceGC/WikiRaces](https://github.com/INTERallianceGC/WikiRaces) instead.
+
+This is the repository for the INTERalliance WikiRaces competition
 
 Run `npm install` in the project directory to install the dependencies.
 
